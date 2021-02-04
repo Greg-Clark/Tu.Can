@@ -28,7 +28,6 @@ class SendMessageForm extends React.Component {
         return (
             <form
                 onSubmit={this.handleSubmit}
-                className="send-message-form"
             >
                 <input
                     onChange={this.handleChange}
