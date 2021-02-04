@@ -1,5 +1,2 @@
 # CS97Project
-
-
-
-MOOO
+Milk
