@@ -26,7 +26,19 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <div className="login_boxes">
+      <div style={
+        {
+          backgroundColor: "navy",
+          width: "500px",
+          height: "400px",
+          alignItems: "center",
+          justifyContent: "center",
+          position: 'absolute', left: '50%', top: '50%',
+        }
+      }>
+        <h1 style={{
+          color: "white"
+        }}>Yuh</h1>
         <form onSubmit={this.submitHandler}>
           {/*username*/}
           <p>username:</p>
@@ -35,7 +47,7 @@ class LoginPage extends React.Component {
           {/*password*/}
           <p>password:</p>
           <input type="text" name="password" onChange={this.myChangeHandler} />
-
+          <br></br>
           {/*input*/}
           <input type="submit" value="Login" />
 
