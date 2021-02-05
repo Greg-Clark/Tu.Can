@@ -1,47 +1,52 @@
-import React from 'react';
+import React from "react";
+//import ReactDOM from "react-dom";
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      username: "",
+      password: null
+    };
   }
+  myChangeHandler = (event) => {
+    let user = event.target.name;
+    let pass = event.target.value;
+    this.setState({ [user]: pass });
+  };
 
-  handleChange = (event) => {    
-    this.setState({value: event.target.value});  
-  }
-  handleSubmit = (event) => {
-    alert('A name was submitted: ' + this.state.value);
+  submitHandler = (event) => {
+    alert(
+      "a name was submitted: " + this.state.username +
+      "and a password was submitted: " +  this.state.password
+    );
+
     event.preventDefault();
-  }
+  };
 
   render() {
     return (
-      <div>
-      <form onSubmit={this.handleSubmit}>  
-        <h1>SAMPLETEXT</h1>      
-          <label>
-        
-          Enter a username:    
-          <input 
-          type="text" 
-          value={this.state.value} 
-          placeholder={'idk put something'}
-          onChange={this.handleChange} />  
+      <div className="login_boxes">
+        <form onSubmit={this.submitHandler}>
+          {/*username*/}
+          <p>username:</p>
+          <input type="text" name="username" onChange={this.myChangeHandler} />
 
-          Enter a password:
-          <input
-          type='text'
-          value={this.state.value}
-          placeholder={'passsword'}
-          onChange={this.handleChange}/>
+          {/*password*/}
+          <p>password:</p>
+          <input type="text" name="password" onChange={this.myChangeHandler} />
 
-        </label>
-        <input type="submit" value="send to paul" />
-      </form>
+          {/*input*/}
+          <input type="submit" value="Login" />
+
+          {/*button for switching between login/username*/}
+          <button>hello</button>
+        </form>
       </div>
-      
     );
   }
 }
 
-export default LoginPage;
+export default LoginPage
+
+//ReactDOM.render(<LoginPage />, document.getElementById("root"));
