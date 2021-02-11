@@ -48,7 +48,9 @@ class LoginPage extends React.Component {
         <input type="text" name="password" onChange={this.myChangeHandler} />
         <br></br>
         {/*input*/}
-        <input type="submit" value="Login"/>
+        <Link to="/messaging">
+          <input type="submit" value="Login"/>
+        </Link>
 
       </form>
       </div>
@@ -59,73 +61,4 @@ class LoginPage extends React.Component {
 
 
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users"><button>Users</button></Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
-}
-
-function Home() {
-  return (
-
-    <div className="LoginBox"> 
-    
-    <h1>Yung Milk</h1>
-  
-    <form onSubmit={this.submitHandler}>
-      {/*username*/}
-      <p>username:</p>
-      <input type="text" name="username" onChange={this.myChangeHandler} />
-
-      {/*password*/}
-      <p>password:</p>
-      <input type="text" name="password" onChange={this.myChangeHandler} />
-      <br></br>
-      {/*input*/}
-      <input type="submit" value="Login" />
-      </form>
-    </div>
-  );
-}
-
-function About() {
-  return <h2> about page placeholder </h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
-
 export default LoginPage;
-//ReactDOM.render(<App />, document.getElementById("root"));
-

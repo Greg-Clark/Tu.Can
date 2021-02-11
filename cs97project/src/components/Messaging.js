@@ -4,7 +4,7 @@ class Messaging extends React.Component {
     render() {
         return(
             <div>
-                Messaging page
+                In progress : Messaging 
             </div>
         );
     }

@@ -20,13 +20,3 @@ export default class App extends React.Component {
     }
 }
 
-const tempData = [
-    {
-      senderId: "Michelle",
-      text: "hello"
-    },
-    {
-      senderId: "Egg",
-      text: "emacs"
-    }
-  ]
