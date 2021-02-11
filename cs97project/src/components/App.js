@@ -15,7 +15,7 @@ firebase.initializeApp({
     appId: "1:932880062417:web:dc00eb9252e7dee95f32f0"
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
     constructor() {
         super()
         this.state = {}
@@ -24,8 +24,8 @@ export default class App extends React.Component {
     render() {
         return (
         <div>
-            <MessageList messages={this.state.messages}/>
-            <SendMessageForm />
+            {/* <MessageList messages={this.state.messages}/>
+            <SendMessageForm /> */}
          </div>
         );
     }
@@ -33,7 +33,8 @@ export default class App extends React.Component {
 
 function signIn() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider);
+  firebase.auth()
+  .signInWithPopup(provider);
   // https://firebase.google.com/docs/auth/web/google-signin
 
 }
@@ -47,3 +48,4 @@ function signOut() {
   //https://firebase.google.com/docs/auth/web/password-auth
 }
 
+export default App;
