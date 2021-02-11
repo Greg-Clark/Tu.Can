@@ -1,5 +1,5 @@
 import LoginPage from "../components/LoginPage";
-import Messaging from "../components/Messaging";
+import Messaging from "../components/MessagingPage";
 import Register from "../components/RegisterPage";
 import {
     BrowserRouter as Router,
