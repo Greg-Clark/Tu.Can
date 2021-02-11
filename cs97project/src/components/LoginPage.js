@@ -20,14 +20,14 @@ class LoginPage extends React.Component {
 
   //handler for Login Button
   submitHandler = (event) => {
-    // alert(
-    //   "a name was submitted: " +
-    //     this.state.username +
-    //     " and a password was submitted: " +
-    //     this.state.password
-    // );
+    alert(
+      "a name was submitted: " +
+        this.state.username +
+        " and a password was submitted: " +
+        this.state.password
+    );
     
-    //event.preventDefault();
+    event.preventDefault();
   };
 
   render() {
@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
       
       <h1>Yung Milk</h1>
     
-      <form onSubmit={this.submitHandler}>
+      <form>
         {/*username*/}
         <p>username:</p>
         <input type="text" name="username" onChange={this.myChangeHandler} />
@@ -49,7 +49,10 @@ class LoginPage extends React.Component {
         <br></br>
         {/*input*/}
         <Link to="/messaging">
-          <input type="submit" value="Login"/>
+          <input type="submit" value="Login" onSubmit={this.submitHandler}/>
+        </Link>
+        <Link to="/register">
+          <input type="submit" value="Register"/>
         </Link>
 
       </form>
