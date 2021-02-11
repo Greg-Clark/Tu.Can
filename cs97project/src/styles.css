@@ -7,14 +7,15 @@ body {background-color: whitesmoke;}
     margin-right: auto;
     width: 50%;
     border: 2px solid pink;
-    padding: 10px;
+    padding-left: 12%;
+    padding-bottom: 12%;
     
     
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     color: rgb(50, 132, 191); /*gives us bruin blue color */
     background-color: rgb(255, 232, 0); /*gives us bruin yellow color */
-    width: 200px;
-    height: 300px;
+    width: 20%;
+    height: 100%;
   }
   
   .RegisterBox {
@@ -24,13 +25,25 @@ body {background-color: whitesmoke;}
     margin-right: auto;
     width: 50%;
     border: 2px solid pink;
+    padding-left: 12%;
+    padding-bottom: 12%;
+    
+    
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color: rgb(255, 232, 0); /*gives us bruin yellow color */
+    background-color: rgb(50, 132, 191); /*gives us bruin blue color */
+    width: 20%;
+    height: 100%;
+  }
+  
+  .MessagingBox {
+    border: 2px solid pink;
     padding: 10px;
     
     
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     color: rgb(255, 232, 0); /*gives us bruin yellow color */
     background-color: rgb(50, 132, 191); /*gives us bruin blue color */
-    width: 200px;
-    height: 300px;
+    width: 99%;
+    height: 100%; /* will fit to the bottom most line of text */
   }
-  
