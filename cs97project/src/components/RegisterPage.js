@@ -3,7 +3,7 @@ import { BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./../styles.css";
 
-class Register extends React.Component {
+class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -61,4 +61,4 @@ class Register extends React.Component {
       }
 }
 
-export default Register;
+export default RegisterPage;

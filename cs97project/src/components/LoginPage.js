@@ -20,14 +20,14 @@ class LoginPage extends React.Component {
 
   //handler for Login Button
   submitHandler = (event) => {
-    // alert(
-    //   "a name was submitted: " +
-    //     this.state.username +
-    //     " and a password was submitted: " +
-    //     this.state.password
-    // );
+    alert(
+      "a name was submitted: " +
+        this.state.username +
+        " and a password was submitted: " +
+        this.state.password
+    );
     
-    //event.preventDefault();
+    event.preventDefault();
   };
 
   render() {
