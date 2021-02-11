@@ -51,6 +51,9 @@ class LoginPage extends React.Component {
         <Link to="/messaging">
           <input type="submit" value="Login"/>
         </Link>
+        <Link to="/register">
+          <input type="submit" value="Register"/>
+        </Link>
 
       </form>
       </div>
