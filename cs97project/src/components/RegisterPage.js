@@ -38,7 +38,7 @@ class RegisterPage extends React.Component {
           
           <h1>Register</h1>
         
-          <form onSubmit={this.submitHandler}>
+          <form>
             {/*username*/}
             <p>username:</p>
             <input type="text" name="username" onChange={this.myChangeHandler} />
@@ -49,7 +49,7 @@ class RegisterPage extends React.Component {
             <br></br>
             {/*input*/}
             <Link to="/">
-              <input type="submit" value="Register Account"/>
+              <input type="submit" value="Register Account" onChange={this.submitHandler}/>
             </Link>
             <Link to="/">
               <input type="submit" value="Cancel"/>
