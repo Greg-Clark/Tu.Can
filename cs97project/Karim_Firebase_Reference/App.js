@@ -11,12 +11,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 //config
 firebase.initializeApp({
-  apiKey: "AIzaSyD_1TUh9HzU_yCP71iz5A85Lsar_2N7MpA",
-  authDomain: "random-messaging.firebaseapp.com",
-  projectId: "random-messaging",
-  storageBucket: "random-messaging.appspot.com",
-  messagingSenderId: "870421271113",
-  appId: "1:870421271113:web:bad021fe40e2a9575e6598"
+
 })
 
 const auth = firebase.auth();

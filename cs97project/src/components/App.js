@@ -7,7 +7,7 @@ import axios from './axios'
 // import { render } from '@testing-library/react';
 
 
-function App1() {
+function App() {
   const [messages, setMessages] = useState([]);
 
   useEffect (() => {
@@ -42,21 +42,21 @@ function App1() {
         <Sidebar />
         <Chat 
           messages= {messages}
-          handleSendMessage={this.handleSendMessage}
+          // handleSendMessage={this.handleSendMessage}
         />
       </div>
     </div>
   );
 }
 
-class App extends React.Component {
+// class App extends React.Component {
  
 
-  state = {
-    contacts: [],
+//   state = {
+//     contacts: [],
 
-    messages: tempData,
-  };
+//     messages: tempData,
+//   };
 
 
 
@@ -64,57 +64,57 @@ class App extends React.Component {
 
 
 
-  handleSendMessage = (message) => {
+//   handleSendMessage = (message) => {
     
-  }; 
+//   }; 
 
-  componentDidMount() {
+//   componentDidMount() {
     
-  };
+//   };
 
-  componentDidUpdate(prevProps, prevState) {
+//   componentDidUpdate(prevProps, prevState) {
     
-  };
+//   };
 
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-  };
+//   componentWillUnmount() {
+//     console.log('componentWillUnmount');
+//   };
 
   
-  render() {
-    return (
-      <div className="app">
-        <div className="app_body">
-          <Sidebar />
-          <Chat 
-            messages={this.state.messages} 
-            handleSendMessage={this.handleSendMessage}
-          />
-        </div>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div className="app">
+//         <div className="app_body">
+//           <Sidebar />
+//           <Chat 
+//             messages={this.state.messages} 
+//             handleSendMessage={this.handleSendMessage}
+//           />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
 export default App;
 
-const tempData =    
-[
-    {
-        username: "",
-        text: "hello",
-        time: "12:03"
-    },
-    {
-        username: "Eggert",
-        text: "emacs",
-        time: "1:00",
-    },
-    {
-        username: "drink",
-        text: "milk",
-        time: "1:00",
-    },
-];
+// const tempData =    
+// [
+//     {
+//         username: "",
+//         text: "hello",
+//         time: "12:03"
+//     },
+//     {
+//         username: "Eggert",
+//         text: "emacs",
+//         time: "1:00",
+//     },
+//     {
+//         username: "drink",
+//         text: "milk",
+//         time: "1:00",
+//     },
+// ];
 
 
