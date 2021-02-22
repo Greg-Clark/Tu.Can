@@ -1,5 +1,4 @@
 // imports
-import { Message } from '@material-ui/icons';
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './databaseMessages.js';
