@@ -10,6 +10,7 @@ import axios from './axios'
 function App() {
   const [messages, setMessages] = useState([]);
 
+  // axios is just another way to handle get, post and so on
   useEffect (() => {
     axios.get('/messages/sync')
       .then(response => {
@@ -24,16 +25,20 @@ function App() {
     });
 
     const channel = pusher.subscribe('messages');
-    channel.bind('inserted', function(newMessage) {
+    channel.bind('inserted', (newMessage) => {
+      // just alerts the front end when a message is recieved
       // alert(JSON.stringify(newMessage));
+
+      //append new messages to current message array
       setMessages([...messages, newMessage]);
     });
 
+    // ensures there is only 1 subscriber(listener)
     return () => {
       channel.unbind_all();
       channel.unsubscribe();
     };
-  }, [messages]);
+  }, [messages]); // captures messages since it is a dependency
 
   console.log(messages);
   return (
