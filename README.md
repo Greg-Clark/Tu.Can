@@ -1,10 +1,26 @@
 # CS97Project
 Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
 
-Work Division
-Roy and Greg:
-creating the front end for the login page/registration page.
-Roy has to get his burrito before taco truck closes.
+Remainder: From greatest to least priority
 
-Karim, Michelle, and Terry:
-Routing and set up firebase and backend stuff.
+    * LoginPage/Firebase/Routing    - Everyone (by end of week 8)
+    * Format message sending        - Greg
+    * Searching content             - Greg
+    * Sending media                 - Terry and Karim
+        * Backup: EMOJIS
+    * Contacts(with MongoUpdate)    - Michelle + 1 someone else 
+        * Searching contancts
+    * General CSS                   - Roye, Greg, and Karim
+    * Sidebar collapse              - Terry and Karim
+
+    * Themes                        - Everyone does 1 theme
+                                        * For Inspiration : https://windowsterminalthemes.dev/
+
+    * Send Tic-Tac-Toe              - Greg
+
+
+    * General Mongo data update     - Karim 
+        - what information is GET
+          and POST
+
+          Including : timestamp, media, auth(method of sign-in)
