@@ -2,6 +2,8 @@
 Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
 
 Remainder: From greatest to least priority
+    * Run server and front          - Greg and Karim
+      end together
 
     * LoginPage/Firebase/Routing    - Everyone (by end of week 8)
     * Format message sending        - Greg
