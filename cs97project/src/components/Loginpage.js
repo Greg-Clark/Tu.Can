@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Loginpage() {
-    return (
-        <h1>HELLO</h1>
+function LoginPage() {
+    return(
+        <h1>In progress : Login Page</h1>
     );
 }
 
-export default Loginpage;
+export default LoginPage;
+

@@ -10,7 +10,7 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import Loginpage from './Loginpage';
+import LoginPage from './LoginPage';
 // import { render } from '@testing-library/react';
 
 
@@ -49,7 +49,6 @@ function App() {
 
 	// console.log(messages);
 	return (
-		<Router>
 			<div className="app">
 				<div className="app_body">
 					<Sidebar />
@@ -58,84 +57,52 @@ function App() {
 					// handleSendMessage={this.handleSendMessage}
 					/>
 
-					<Link to="/loginpage">Sign Out</Link>
-					<Switch>
-						<Route path="/loginpage">
-							<Loginpage />
-						</Route>
-					</Switch>
+					<Link to="/">Sign Out</Link>
 				</div>
 			</div>
-		</Router>
 	);
 }
 
-// class App extends React.Component {
 
-
-//   state = {
-//     contacts: [],
-
-//     messages: tempData,
-//   };
-
-
-
-
-
-
-
-//   handleSendMessage = (message) => {
-
-//   }; 
-
-//   componentDidMount() {
-
-//   };
-
-//   componentDidUpdate(prevProps, prevState) {
-
-//   };
-
-//   componentWillUnmount() {
-//     console.log('componentWillUnmount');
-//   };
-
-
-//   render() {
-//     return (
-//       <div className="app">
-//         <div className="app_body">
-//           <Sidebar />
-//           <Chat 
-//             messages={this.state.messages} 
-//             handleSendMessage={this.handleSendMessage}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 
 export default App;
 
-// const tempData =    
-// [
-//     {
-//         username: "",
-//         text: "hello",
-//         time: "12:03"
-//     },
-//     {
-//         username: "Eggert",
-//         text: "emacs",
-//         time: "1:00",
-//     },
-//     {
-//         username: "drink",
-//         text: "milk",
-//         time: "1:00",
-//     },
-// ];
 
+////////////////////////
 
+// function App() {
+// 	return (
+// 	  <Router>
+// 		<div>
+// 		  <nav>
+// 			<ul>
+// 			  <li>
+// 				<Link to="/hub">Home</Link>
+// 			  </li>
+// 			  <li>
+// 				<Link to="/loginpage">About</Link>
+// 			  </li>
+// 			  <li>
+// 				<Link to="/users"><button>Users</button></Link>
+// 			  </li>
+// 			</ul>
+// 		  </nav>
+  
+// 		  {/* A <Switch> looks through its children <Route>s and
+// 			  renders the first one that matches the current URL. */}
+// 		  <Switch>
+// 			<Route path="/about">
+// 			  <About />
+// 			</Route>
+// 			<Route path="/users">
+// 			  <Users />
+// 			</Route>
+// 			<Route path="/">
+// 			  <Home />
+// 			</Route>
+// 		  </Switch>
+// 		</div>
+// 	  </Router>
+// 	);
+//   }
+  
