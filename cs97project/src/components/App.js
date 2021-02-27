@@ -4,19 +4,17 @@ import Sidebar from './Sidebar';
 import '../styles/App.css';
 import Pusher from 'pusher-js';
 import axios from './axios'
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Link
-} from "react-router-dom";
+import { useAuth } from '../services/Auth';
+import { useHistory } from 'react-router-dom';
 
 // import { render } from '@testing-library/react';
 
 
 function App() {
 	const [messages, setMessages] = useState([]);
-
+	const [error, setError] = useState("");
+	const history = useHistory();
+	const { signOut, currentUser } = useAuth();
 	// axios is just another way to handle get, post and so on
 	useEffect(() => {
 		axios.get('/messages/sync')
@@ -47,19 +45,32 @@ function App() {
 		};
 	}, [messages]); // captures messages since it is a dependency
 
+
+	async function handleSignOut() {
+		setError("");
+
+		try {
+			await signOut();
+			history.push("/");
+		} 
+		catch {
+			setError("Cannot log out");
+		}
+	}
+
 	// console.log(messages);
 	return (
-			<div className="app">
-				<div className="app_body">
-					<Sidebar />
-					<Chat
-						messages={messages}
-					// handleSendMessage={this.handleSendMessage}
-					/>
+		<div className="app">
+			<div className="app_body">
+				<Sidebar />
+				<Chat
+					messages={messages}
+				// handleSendMessage={this.handleSendMessage}
+				/>
 
-					<Link to="/">Sign Out</Link>
-				</div>
+				{currentUser && <button onClick={handleSignOut}>SignOut</button>}
 			</div>
+		</div>
 	);
 }
 
@@ -87,7 +98,7 @@ export default App;
 // 			  </li>
 // 			</ul>
 // 		  </nav>
-  
+
 // 		  {/* A <Switch> looks through its children <Route>s and
 // 			  renders the first one that matches the current URL. */}
 // 		  <Switch>
@@ -105,4 +116,3 @@ export default App;
 // 	  </Router>
 // 	);
 //   }
-  

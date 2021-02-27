@@ -5,25 +5,19 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useRouteMatch,
-    useParams
 } from "react-router-dom";
+import { AuthProvider } from "../services/Auth";
 
 const AppRouter = () => (
     <Router>
         <div>
-            <Switch>
-                <Route exact path="/" >
-                    <LoginPage />
-                </Route>
-                <Route path="/messaging" >
-                    <App />
-                </Route>
-                <Route path="/register">
-                    <RegisterPage />
-                </Route>
-            </Switch>
+            <AuthProvider>
+                <Switch>
+                    <Route exact path="/" component={LoginPage} />
+                    <Route path="/messaging" component={App} />
+                    <Route path="/register" component={RegisterPage} />
+                </Switch>
+            </AuthProvider>
         </div>
     </Router>
 );
