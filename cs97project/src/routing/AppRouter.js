@@ -8,21 +8,24 @@ import {
     Link,
     useRouteMatch,
     useParams
-  } from "react-router-dom";
+} from "react-router-dom";
 
 const AppRouter = () => (
     <Router>
-      <div>
-        <Switch>
-          <Route path="/" exact={true}/>
-            <LoginPage />
-          <Route path="/messaging" />
-            <App />
-          <Route path='/register' />
-            <RegisterPage />
-        </Switch>
-      </div>
+        <div>
+            <Switch>
+                <Route exact path="/" >
+                    <LoginPage />
+                </Route>
+                <Route path="/messaging" >
+                    <App />
+                </Route>
+                <Route path="/register">
+                    <RegisterPage />
+                </Route>
+            </Switch>
+        </div>
     </Router>
-  );
+);
 
-  export default AppRouter;
+export default AppRouter;
