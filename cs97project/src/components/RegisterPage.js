@@ -51,7 +51,7 @@ export default function Signup() {
                     /><br />
                     <label>Confirm Password</label><br />
                     <input
-                        type="passwrod"
+                        type="password"
                         data-test="password"
                         ref={passwordConfirmRef}
                     />

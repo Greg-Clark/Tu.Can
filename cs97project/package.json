@@ -11,6 +11,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
     "axios": "^0.21.1",
+    "concurrently": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase": "^8.2.9",
@@ -31,7 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "nodemon server.js"
+    "serve": "nodemon ./src/Backend_Files/server.js",
+    "dev": "concurrently \"npm run serve\" \"npm start\""
   },
   "eslintConfig": {
     "extends": [
