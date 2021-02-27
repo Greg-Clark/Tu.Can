@@ -10,7 +10,7 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import LoginPage from './LoginPage';
+
 // import { render } from '@testing-library/react';
 
 
