@@ -3,6 +3,7 @@ import { useAuth } from '../services/Auth';
 import { Link, useHistory } from 'react-router-dom';
 import axios from './axios';
 import Pusher from 'pusher-js';
+import tucanOnEgg from '../images/tucanOnEgg.png';
 
 export default function Signup() {
     
@@ -75,7 +76,7 @@ export default function Signup() {
     return (
         <div class="grid">
             <div class = "box1">
-                <div className="Logo"><img src={process.env.PUBLIC_URL + '/toucanOnEgg.png'} /></div>
+                <div className="Logo"><img src={tucanOnEgg} alt={"tucanOnEgg"}/></div>
             </div>
             <div class = "box2">
                 <div className="VerticalBlackLine"></div>

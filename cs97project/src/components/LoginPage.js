@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../services/Auth';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/LoginPage.css';
+import tucanInFront from '../images/tucanInFront.png';
+
 export default function LoginPage() {
 
   const emailRef = useRef();
@@ -31,7 +33,7 @@ export default function LoginPage() {
   return (
     <div class="grid">
       <div class = "box1">
-        <div className="Logo"><img src={process.env.PUBLIC_URL + '/toucanOnEgg.png'} /></div>
+        <div className="Logo"><img src={tucanInFront} alt={"tucanInFront"} /></div>
       </div>
       <div class = "box2">
         <div className="VerticalBlackLine"></div>
