@@ -3,7 +3,7 @@ import Chat from './Chat';
 import Sidebar from './Sidebar';
 import '../styles/App.css';
 import Pusher from 'pusher-js';
-import axios from './axios'
+import axios from './axios';
 import { useAuth } from '../services/Auth';
 import { useHistory } from 'react-router-dom';
 
@@ -24,6 +24,7 @@ function App() {
 			})
 	}, []);
 
+	// ==================makes messages in mongo real time======================
 	useEffect(() => {
 		const pusher = new Pusher('8cdc3d1a07077d29caf4', {
 			cluster: 'us3'
@@ -41,6 +42,8 @@ function App() {
 			channel.unsubscribe();
 		};
 	}, [messages]); // captures messages since it is a dependency
+
+
 
 
 	async function handleSignOut() {

@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../services/Auth';
 import { Link, useHistory } from 'react-router-dom';
+import axios from './axios';
+import Pusher from 'pusher-js';
 
 export default function Signup() {
     
@@ -11,26 +13,65 @@ export default function Signup() {
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
     const history = useHistory();
+    const [users, setUsers] = useState([]);
 
-    async function handleFormSubmit(e) {
+    const [input, setInput] = useState("");
+    const createUser = async (e) => {
         e.preventDefault();
         if (passwordRef.current.value !== passwordConfirmRef.current.value) // Checks if passwords and password confirmation matches
         {
             return setError('Passwords do not match');
         }
+        
+        await axios.post("/users/new", {
+            username: emailRef.current.value,
+            password: passwordRef.current.value,
+        });
 
-        try {
-            setError('');
-            setLoading(true); // If in loading state, register button cannot be pressed
-            await signup(emailRef.current.value, passwordRef.current.value);
-            history.push("/messaging"); // Redirect to messaging state
-        }
-        catch {
-            setError('Failed to create an account');
-        }
-        setLoading(false);
-    }
+        // try {
+        //     setError('');
+        //     setLoading(true); // If in loading state, register button cannot be pressed
+        //     await signup(emailRef.current.value, passwordRef.current.value);
+        //     history.push("/register"); // Redirect to messaging state
+        // }
+        // catch {
+        //     setError('Failed to create an account');
+        // }
+        // setLoading(false);
+        
+        setInput('');
+    };
 
+
+
+	// ==================makes users in mongo real time========================
+	useEffect(() => {
+		axios.get('/users/sync')
+			.then(response => {
+				console.log(response.data);
+				setUsers(response.data);
+			})
+	}, []);
+
+	useEffect(() => {
+		const pusher = new Pusher('8cdc3d1a07077d29caf4', {
+			cluster: 'us3'
+		});
+
+		const channel = pusher.subscribe('users');
+		channel.bind('inserted', (newUser) => {
+			//append new messages to current message array
+			setUsers([...users, newUser]);
+		});
+
+		// ensures there is only 1 subscriber(listener)
+		return () => {
+			channel.unbind_all();
+			channel.unsubscribe();
+		};
+	}, [users]); // captures messages since it is a dependency
+
+    
     return (
         <div class="grid">
             <div class = "box1">
@@ -44,9 +85,9 @@ export default function Signup() {
                     <h2>Register</h2>
                     <br></br>
                     <div>
-                        <form onSubmit={handleFormSubmit}>
+                        <form onSubmit={createUser}>
                             {error && <p>{error}</p>}
-                            <label>Email</label><br />
+                            <label>Username</label><br />
                             <input
                                 className="input"
                                 type="text"
@@ -70,6 +111,7 @@ export default function Signup() {
                             <br></br>
                             <br></br>
                             <button
+                                onClick = {createUser}
                                 className="buttons"
                                 disabled={loading}
                                 type="submit"

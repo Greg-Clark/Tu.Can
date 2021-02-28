@@ -2,6 +2,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './databaseMessages.js';
+import Users from './databaseUsers.js'
 import Pusher from 'pusher';
 import cors from 'cors';
 
@@ -60,6 +61,7 @@ db.once('open', () => {
 
         if (change.operationType === 'insert') {
             const messageDetails = change.fullDocument;
+            const userDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted',
                 {
                     name: messageDetails.name,
@@ -67,6 +69,12 @@ db.once('open', () => {
                     timestamp: messageDetails.timestamp,
                     received: messageDetails.received,
                 }
+            );
+            pusher.trigger('users', 'inserted', 
+            {
+                username: userDetails.username,
+                password: userDetails.password,
+            }
             );
         }
         else {
@@ -99,6 +107,33 @@ app.post("/messages/new", (req,res) => { // post(send) data to server
         }
         else {
             res.status(201).send(data);
+        }
+    });
+
+});
+
+app.post("/users/new", (req,res) => { // post(send) data to server
+    const user = req.body;
+
+    Users.create(user, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(201).send(data);
+        }
+    });
+
+});
+
+app.get("/users/sync", (req,res) => { // post(send) data to server
+
+    Users.find((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
         }
     });
 
