@@ -19,7 +19,7 @@ export default function LoginPage() {
     try {
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
       history.push("/messaging");
     }
     catch {

@@ -29,7 +29,15 @@ export default function Signup() {
         //     username: emailRef.current.value,
         //     password: passwordRef.current.value,
         // });
-        
+        // try {
+        //     setError('');
+        //     setLoading(true); // If in loading state, register button cannot be pressed
+        //     // store in firebase
+        //     await signup(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
+        // }
+        // catch {
+        //     setError('Failed to create an account');
+        // }
 
         try {
             setError('');
@@ -41,6 +49,7 @@ export default function Signup() {
             });
             // store in firebase
             // await signup(emailRef.current.value, passwordRef.current.value);
+            await signup(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
             history.push("/messaging"); // Redirect to messaging state
         }
         catch (error) {
