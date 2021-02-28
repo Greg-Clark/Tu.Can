@@ -38,7 +38,8 @@ export default function LoginPage() {
       </div>
       <div class = "box3">
         <div className="LoginBox">
-          
+         <h2>Login</h2>
+         <br></br>
           <div>
             <form onSubmit={handleFormSubmit}>
               {error && <p>{error}</p>}
@@ -52,10 +53,11 @@ export default function LoginPage() {
               <label>Password</label><br />
               <input
                 className="input"
-                type="text"
+                type="password"
                 data-test="password"
                 ref={passwordRef}
               /><br />
+              <br></br>
               <button
                 className="buttons"
                 disabled={loading}

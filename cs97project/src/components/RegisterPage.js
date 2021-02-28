@@ -32,42 +32,60 @@ export default function Signup() {
     }
 
     return (
-        <div>
-            <h2>Register</h2>
-            <div>
-                <form onSubmit={handleFormSubmit}>
-                    {error && <p>{error}</p>}
-                    <label>Email</label><br />
-                    <input
-                        type="text"
-                        data-test="username"
-                        ref={emailRef}
-                    /><br />
-                    <label>Password</label><br />
-                    <input
-                        type="password"
-                        data-test="password"
-                        ref={passwordRef}
-                    /><br />
-                    <label>Confirm Password</label><br />
-                    <input
-                        type="password"
-                        data-test="password"
-                        ref={passwordConfirmRef}
-                    />
-                    <button
-                        disabled={loading}
-                        type="submit"
-                    >
-                        Register
-                    </button>
-                </form>
+        <div class="grid">
+            <div class = "box1">
+                <div className="Logo"><img src={process.env.PUBLIC_URL + '/toucanOnEgg.png'} /></div>
             </div>
-            <div>
-                Already have an account?
-            <Link to="/">
-                    Login Here
-            </Link>
+            <div class = "box2">
+                <div className="VerticalBlackLine"></div>
+            </div>
+            <div class = "box3">
+                <div className="RegisterBox">
+                    <h2>Register</h2>
+                    <br></br>
+                    <div>
+                        <form onSubmit={handleFormSubmit}>
+                            {error && <p>{error}</p>}
+                            <label>Email</label><br />
+                            <input
+                                className="input"
+                                type="text"
+                                data-test="username"
+                                ref={emailRef}
+                            /><br />
+                            <label>Password</label><br />
+                            <input
+                                className="input"
+                                type="password"
+                                data-test="password"
+                                ref={passwordRef}
+                            /><br />
+                            <label>Confirm Password</label><br />
+                            <input
+                                className="input"
+                                type="password"
+                                data-test="password"
+                                ref={passwordConfirmRef}
+                            />
+                            <br></br>
+                            <br></br>
+                            <button
+                                className="buttons"
+                                disabled={loading}
+                                type="submit"
+                            >
+                                Register
+                            </button>
+                        </form>
+                    </div>
+                    <br></br>
+                    <div>
+                        Already have an account?&nbsp;
+                        <Link to="/">
+                             Login Here
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );
