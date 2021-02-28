@@ -49,6 +49,8 @@ db.once('open', () => {
     
     // variable representing collection in mongoDB
     const messageCollection = db.collection("messagecontents");
+    // user collection in mongoDB
+    const userCollection = db.collection("users");
     // monitors changes
     const changeStream = messageCollection.watch();
     // console.log(changeStream);
