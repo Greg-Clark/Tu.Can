@@ -17,28 +17,36 @@ export default function Signup() {
     const [users, setUsers] = useState([]);
 
     const [input, setInput] = useState("");
+
     const createUser = async (e) => {
         e.preventDefault();
         if (passwordRef.current.value !== passwordConfirmRef.current.value) // Checks if passwords and password confirmation matches
         {
             return setError('Passwords do not match');
         }
-        
-        await axios.post("/users/new", {
-            username: emailRef.current.value,
-            password: passwordRef.current.value,
-        });
 
-        // try {
-        //     setError('');
-        //     setLoading(true); // If in loading state, register button cannot be pressed
-        //     await signup(emailRef.current.value, passwordRef.current.value);
-        //     history.push("/register"); // Redirect to messaging state
-        // }
-        // catch {
-        //     setError('Failed to create an account');
-        // }
-        // setLoading(false);
+        // await axios.post("/users/new", {
+        //     username: emailRef.current.value,
+        //     password: passwordRef.current.value,
+        // });
+        
+
+        try {
+            setError('');
+            setLoading(true); // If in loading state, register button cannot be pressed
+            // post to mongo
+            await axios.post("/users/new", {
+                username: emailRef.current.value,
+                password: passwordRef.current.value,
+            });
+            // store in firebase
+            // await signup(emailRef.current.value, passwordRef.current.value);
+            history.push("/messaging"); // Redirect to messaging state
+        }
+        catch (error) {
+            setError('Failed to create an account');
+        }
+        setLoading(false);
         
         setInput('');
     };
@@ -112,7 +120,6 @@ export default function Signup() {
                             <br></br>
                             <br></br>
                             <button
-                                onClick = {createUser}
                                 className="buttons"
                                 disabled={loading}
                                 type="submit"
