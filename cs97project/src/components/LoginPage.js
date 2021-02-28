@@ -31,7 +31,7 @@ export default function LoginPage() {
   return (
     <div class="grid">
       <div class = "box1">
-        <div className="Logo">um put image here</div>
+        <div className="Logo"><img src={process.env.PUBLIC_URL + '/toucanOnEgg.png'} /></div>
       </div>
       <div class = "box2">
         <div className="VerticalBlackLine"></div>
