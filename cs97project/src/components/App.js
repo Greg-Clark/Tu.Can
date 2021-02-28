@@ -31,9 +31,6 @@ function App() {
 
 		const channel = pusher.subscribe('messages');
 		channel.bind('inserted', (newMessage) => {
-			// just alerts the front end when a message is recieved
-			// alert(JSON.stringify(newMessage));
-
 			//append new messages to current message array
 			setMessages([...messages, newMessage]);
 		});
@@ -65,7 +62,6 @@ function App() {
 				<Sidebar />
 				<Chat
 					messages={messages}
-				// handleSendMessage={this.handleSendMessage}
 				/>
 
 				{currentUser && <button onClick={handleSignOut}>SignOut</button>}
@@ -78,41 +74,3 @@ function App() {
 
 export default App;
 
-
-////////////////////////
-
-// function App() {
-// 	return (
-// 	  <Router>
-// 		<div>
-// 		  <nav>
-// 			<ul>
-// 			  <li>
-// 				<Link to="/hub">Home</Link>
-// 			  </li>
-// 			  <li>
-// 				<Link to="/loginpage">About</Link>
-// 			  </li>
-// 			  <li>
-// 				<Link to="/users"><button>Users</button></Link>
-// 			  </li>
-// 			</ul>
-// 		  </nav>
-
-// 		  {/* A <Switch> looks through its children <Route>s and
-// 			  renders the first one that matches the current URL. */}
-// 		  <Switch>
-// 			<Route path="/about">
-// 			  <About />
-// 			</Route>
-// 			<Route path="/users">
-// 			  <Users />
-// 			</Route>
-// 			<Route path="/">
-// 			  <Home />
-// 			</Route>
-// 		  </Switch>
-// 		</div>
-// 	  </Router>
-// 	);
-//   }

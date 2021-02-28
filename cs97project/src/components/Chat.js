@@ -13,10 +13,10 @@ function Chat({ messages }) {
     const sendMessage = async (e) => {
         e.preventDefault();
         await axios.post("/messages/new", {
-            message : input,
+            message: input,
             name: "FILL WITH AUTH",
             timestamp: "JUST NOW",
-            received : false
+            received: false
         });
 
         setInput('');
@@ -42,59 +42,26 @@ function Chat({ messages }) {
                 </div>
             </div>
 
-            <div className="chat__full">
-                {/* first three messages uses Message component */}
-                {/* {this.props.messages.map(message => {
-                    return (
-                        <div className="chat__body">
-                            <Message sender={message.username} text={message.text} time={message.time} />
-                        </div>
-                    );
-                })} */}
 
+
+            <div className="chat__full">
 
                 <div className="chat__body">
-                    {messages.map((message) =>
-                        // think about updating this with authentication
-                        <p className={`chat_message ${message.received && "chat__receiver"}`}>
+                    {messages.map((message) => (
+                        <p className={`chat__message ${message.received && "chat__receiver"}`}>
                             <span className="chat__name">{message.name}</span>
                             {message.message}
                             <span className="chat__timestamp">{message.timestamp}</span>
                         </p>
-                    )}
-                </div>
 
-                {/*last three messages do not use Message component */}
-                <div className="chat__body">
-                    <p className="chat__message">
-                        <span className="chat__name">Username</span>
-                    This is a message
-                    <span className="chat__timestamp">
-                            {new Date().toUTCString()}
-                        </span>
-                    </p>
-                </div>
-
-                <div className="chat__body">
-                    <p className="chat__message chat__reciever">
-                        <span className="chat__name">Username</span>
-                    This is a message
-                    <span className="chat__timestamp">
-                            {new Date().toUTCString()}
-                        </span>
-                    </p>
-                </div>
-
-                <div className="chat__body">
-                    <p className="chat__message chat__reciever">
-                        <span className="chat__name">Username</span>
-                    This is a message
-                    <span className="chat__timestamp">
-                            {new Date().toUTCString()}
-                        </span>
-                    </p>
+                    ))}
+                    {/* think about updating this with authentication */}
                 </div>
             </div>
+
+    
+
+
 
             {/* chat footer includes text input form, emoji icon, and media icon for sending media */}
             <div className="chat__footer">
@@ -106,8 +73,8 @@ function Chat({ messages }) {
                 </IconButton>
                 <form>
                     <input
-                        value = {input}
-                        onChange={e =>setInput(e.target.value)}
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
                         placeholder="Type a message"
                         type="text"
                     />
