@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { auth } from '../Backend_Files/firebase';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import '../styles/LoginPage.css';
 
 const AuthContext = React.createContext();
 
@@ -29,7 +30,7 @@ export function AuthProvider({ children }) {
         }
 
         return (
-            <button onClick={signInWithGoogle}>Sign In With Google</button>
+            <button className="buttons" onClick={signInWithGoogle}>Sign In With Google</button>
         )
     }
 
