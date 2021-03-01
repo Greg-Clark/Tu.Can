@@ -2,7 +2,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './databaseMessages.js';
-import Users from './databaseUsers.js'
+import Users from './databaseUsers.js';
+import Rooms from './databaseRooms.js';
 import Pusher from 'pusher';
 import cors from 'cors';
 
@@ -52,16 +53,21 @@ db.once('open', () => {
     const messageCollection = db.collection("msgcollections");
     // user collection in mongoDB
     const userCollection = db.collection("users");
+    // room collection in mongoDB
+    const roomCollection = db.collection("rooms");
     // monitors changes
-    const changeStream = messageCollection.watch();
+
+    const changeStream_messages = messageCollection.watch();
+    const changeStream_users = userCollection.watch();
+    const changeStream_rooms = roomCollection.watch();
     // console.log(changeStream);
 
-    changeStream.on('change', (change) => {
+    //==============change stream for messages============
+    changeStream_messages.on('change', (change) => {
         console.log('Change Happened:', change);
 
         if (change.operationType === 'insert') {
             const messageDetails = change.fullDocument;
-            const userDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted',
                 {
                     sender: messageDetails.sender,
@@ -71,10 +77,40 @@ db.once('open', () => {
                     chatroomID: messageDetails.chatroomID,
                 }
             );
+        }
+        else {
+            console.log('Error triggering Pusher');
+        }
+    });
+    //==============change stream for users============
+    changeStream_users.on('change', (change) => {
+        console.log('Change Happened:', change);
+
+        if (change.operationType === 'insert') {
+            const userDetails = change.fullDocument;
             pusher.trigger('users', 'inserted', 
                 {
                     username: userDetails.username,
                     password: userDetails.password,
+                }
+            );
+
+        }
+        else {
+            console.log('Error triggering Pusher');
+        }
+    });
+    
+    //==============change stream for rooms============
+    changeStream_rooms.on('change', (change) => {
+        console.log('Change Happened:', change);
+
+        if (change.operationType === 'insert') {
+            const roomDetails = change.fullDocument;
+            pusher.trigger('rooms', 'inserted', 
+                {
+                    chatroomID: roomDetails.chatroomID,
+                    users: roomDetails.users,
                 }
             );
         }
@@ -139,6 +175,53 @@ app.get("/users/sync", (req,res) => { // post(send) data to server
     });
 
 });
+
+// app.get("/users/search", async (req, res) => {
+//     const target = req.query.target;
+//     target === username;
+//     const matches = Users.findOne({
+//         username : req.query.target
+//     });
+    
+// })
+
+// useEffect(() => {
+//     axios.get('/users/sync')
+//         .then(response => {
+//             console.log(response.data);
+//             setMessages(response.data);
+//         })
+// }, []);
+
+
+app.post("/rooms/new", (req,res) => { // post(send) data to server
+    const user = req.body;
+
+    Rooms.create(user, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(201).send(data);
+        }
+    });
+
+});
+
+app.get("/rooms/sync", (req,res) => { // post(send) data to server
+
+    Rooms.find((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+
+});
+
+
 
 // listen
 app.listen(port, ()=>console.log(`Listening on localhost:${port}`));

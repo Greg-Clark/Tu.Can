@@ -10,7 +10,4 @@ const roomSchema = mongoose.Schema ({
 });
 
 
-export default mongoose.model('chatrooms', roomSchema);
-
-
-
+export default mongoose.model('rooms', roomSchema);
