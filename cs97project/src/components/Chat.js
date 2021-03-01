@@ -13,10 +13,11 @@ function Chat({ messages }) {
     const sendMessage = async (e) => {
         e.preventDefault();
         await axios.post("/messages/new", {
-            message: input,
-            name: "FILL WITH AUTH",
-            timestamp: "JUST NOW",
-            received: false
+            content: input,
+            sender: "test",
+            timestamp: "now",
+            received: true,
+            chatroomID: "test123"
         });
 
         setInput('');
@@ -49,8 +50,9 @@ function Chat({ messages }) {
                 <div className="chat__body">
                     {messages.map((message) => (
                         <p className={`chat__message ${message.received && "chat__receiver"}`}>
-                            <span className="chat__name">{message.name}</span>
-                            {message.message}
+                        {/* change to comparing who's logged in to who sent the message*/}
+                            <span className="chat__name">{message.sender}</span>
+                            {message.content}
                             <span className="chat__timestamp">{message.timestamp}</span>
                         </p>
 

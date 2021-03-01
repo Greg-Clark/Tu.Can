@@ -49,7 +49,7 @@ db.once('open', () => {
     console.log("Database Connected");
     
     // variable representing collection in mongoDB
-    const messageCollection = db.collection("messagecontents");
+    const messageCollection = db.collection("msgcollections");
     // user collection in mongoDB
     const userCollection = db.collection("users");
     // monitors changes
@@ -64,17 +64,18 @@ db.once('open', () => {
             const userDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted',
                 {
-                    name: messageDetails.name,
-                    message: messageDetails.message,
+                    sender: messageDetails.sender,
+                    content: messageDetails.content,
                     timestamp: messageDetails.timestamp,
                     received: messageDetails.received,
+                    chatroomID: messageDetails.chatroomID,
                 }
             );
             pusher.trigger('users', 'inserted', 
-            {
-                username: userDetails.username,
-                password: userDetails.password,
-            }
+                {
+                    username: userDetails.username,
+                    password: userDetails.password,
+                }
             );
         }
         else {
