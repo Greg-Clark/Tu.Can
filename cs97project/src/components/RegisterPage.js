@@ -25,10 +25,13 @@ export default function Signup() {
             return setError('Passwords do not match');
         }
 
-        // await axios.post("/users/new", {
-        //     username: emailRef.current.value,
-        //     password: passwordRef.current.value,
-        // });
+        setError('');
+        setLoading(true);
+        await axios.post("/users/new", {
+            username: emailRef.current.value,
+            password: passwordRef.current.value,
+        });
+        history.push("/messaging"); 
         // try {
         //     setError('');
         //     setLoading(true); // If in loading state, register button cannot be pressed
@@ -39,22 +42,22 @@ export default function Signup() {
         //     setError('Failed to create an account');
         // }
 
-        try {
-            setError('');
-            setLoading(true); // If in loading state, register button cannot be pressed
-            // post to mongo
-            await axios.post("/users/new", {
-                username: emailRef.current.value,
-                password: passwordRef.current.value,
-            });
-            // store in firebase
-            // await signup(emailRef.current.value, passwordRef.current.value);
-            await signup(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
-            history.push("/messaging"); // Redirect to messaging state
-        }
-        catch (error) {
-            setError('Failed to create an account');
-        }
+        // try {
+        //     setError('');
+        //     setLoading(true); // If in loading state, register button cannot be pressed
+        //     // post to mongo
+        //     // await axios.post("/users/new", {
+        //     //     username: emailRef.current.value,
+        //     //     password: passwordRef.current.value,
+        //     // });
+        //     // store in firebase
+        //     // await signup(emailRef.current.value, passwordRef.current.value);
+        //     // await signup(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
+        //     history.push("/messaging"); // Redirect to messaging state
+        // }
+        // catch (error) {
+        //     setError('Failed to create an account');
+        // }
         setLoading(false);
         
         setInput('');
@@ -129,6 +132,7 @@ export default function Signup() {
                             <br></br>
                             <br></br>
                             <button
+                                onClick={createUser}
                                 className="buttons"
                                 disabled={loading}
                                 type="submit"
