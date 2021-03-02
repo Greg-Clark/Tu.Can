@@ -20,8 +20,33 @@ Remainder: From greatest to least priority
 
     * Sending media                 - Terry and Karim
         * Backup: EMOJIS
+        Idea: Create a div of a specific size that will contain a snapshot of what the media will look like
+        Whether you send a youtube video or an image, It'll send a message of the same size snap shot
+        (like a youtube thumbnail)
+                    //////////////////////////
+                    //                      //
+                    //                      //
+                    //                      //
+                    //                      //      visual done by T.A.U.
+                    //        media         //
+                    //                      //
+                    //                      //
+                    //                      //
+                    //                      //
+                    //////////////////////////
 
     * General CSS                   - Roye, Greg, and Karim
+        * Update 3/01: Karim and Greg did major styling updates
+          to the messaging page. Some bugs that are persisting:
+            when first loading into the chat, you load into the
+            top part of a message thread, i.e. the oldest messages
+            come first, and you have to scroll down to see the newest
+            messages being sent. Also when clicking the 'paper 
+            airplane' icon to send a message, if the message field
+            is blank, then it will send a blank message. We don't 
+            want this behavior to be happening.
+          File, emoji button do nothing currently as well, but should
+          be fairly easy to implement when we get to that point. 
 
     * Themes                        - Everyone does 1 theme
         * For Inspiration : https://windowsterminalthemes.dev/

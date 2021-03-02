@@ -31,7 +31,7 @@ export default function Sidebar( {rooms} ) {
 
     return (
         <div className="sidebar">
-            <div className="sidebar__header">
+            {/* <div className="sidebar__header">
                 <div className="sidebar__headerRight">
                     <IconButton onClick={() => { alert('clicked') }}>
                         <ChatIcon />
@@ -40,7 +40,7 @@ export default function Sidebar( {rooms} ) {
                         <MoreVertIcon />
                     </IconButton>
                 </div>
-            </div>
+            </div> */}
 
             <div className="sidebar__search">
                 <div className="sidebar__searchContainer">

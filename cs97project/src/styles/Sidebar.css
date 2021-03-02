@@ -2,13 +2,15 @@
     display: flex;
     flex-direction: column;
     flex: 0.25;
+    background-color: rgb(235, 238, 240);
 }
 
 .sidebar__header {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    border-right: 1px solid lightgray;
+    border-bottom: 3px solid lightgray;
+    border-right: 3px solid lightgray;
 }
 
 .sidebar__headerRight {
@@ -25,18 +27,20 @@
 }
 
 .sidebar__search {
+    padding-top: 7px;
     display: flex;
     align-items: center;
-    background-color: #f6f6f6;
+    /* background-color: #f6f6f6; */
     height: 39px;
-    border-radius: 20px;
+    /* border-radius: 20px; */
+    border-right: 3px solid lightgray;
 }
 
 .sidebar__searchContainer {
     display: flex;
     align-items: center;
-    background-color: #f6f6f6;
-    width: 100%;
+    background-color: white;
+    width: 99%;
     height: 35px;
     border-radius: 20px;
 }
@@ -60,6 +64,7 @@
 
 .sidebar__chats {
     flex: 1;
-    background-color: white;
-    overflow-y: scroll;
+    /* background-color: white; */
+    border-right: 3px solid lightgray;
+    overflow-y: auto;
 }

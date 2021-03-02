@@ -35,9 +35,6 @@ function Chat({ messages }) {
                         <SearchOutlined />
                     </IconButton>
                     <IconButton>
-                        <AttachFile />
-                    </IconButton>
-                    <IconButton>
                         <MoreVert />
                     </IconButton>
                 </div>
@@ -51,7 +48,7 @@ function Chat({ messages }) {
                     {messages.map((message) => (
                         <p className={`chat__message ${message.received && "chat__receiver"}`}>
                         {/* change to comparing who's logged in to who sent the message*/}
-                            <span className="chat__name">{message.sender}</span>
+                            <span style={{color: "black"}}className="chat__name">{message.sender}</span>
                             {message.content}
                             <span className="chat__timestamp">{message.timestamp}</span>
                         </p>
@@ -71,7 +68,7 @@ function Chat({ messages }) {
                     <InsertEmoticonIcon />
                 </IconButton>
                 <IconButton>
-                    <CameraAltIcon />
+                    <AttachFile />
                 </IconButton>
                 <form>
                     <input
@@ -80,11 +77,11 @@ function Chat({ messages }) {
                         placeholder="Type a message"
                         type="text"
                     />
-                    <button type="submit" onClick={sendMessage}>
+                    {/* <button type="submit" onClick={sendMessage}>
                         Send a message
-                    </button>
+                    </button> */}
                     <IconButton>
-                        <SendIcon />
+                        <SendIcon type="submit" onClick={sendMessage}/>
                     </IconButton>
                 </form>
 
