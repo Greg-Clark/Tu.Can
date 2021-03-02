@@ -53,6 +53,7 @@ html,body {
 .Logo {
     grid-row: 1;
     grid-column: 1;
+    padding-left: 35%;
     /* background-image: url(../images/tucanOnEgg.png); */
     /* position: relative;
     padding-top: 50%;
@@ -93,4 +94,12 @@ html,body {
 .box3 {
     align-self: center;
     justify-items: start stretch;
+}
+
+.aboutButton{
+    position: absolute;
+    margin-top: 10px;
+    margin-right: 10px;
+    top: 0;
+    right: 0;
 }

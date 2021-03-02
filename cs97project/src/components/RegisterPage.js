@@ -148,6 +148,13 @@ export default function Signup() {
                              Login Here
                         </Link>
                     </div>
+                    <div className="aboutButton">
+                        <div className="buttons">                  
+                            <Link to="/about">
+                                About
+                            </Link> 
+                        </div>
+                    </div>  
                 </div>
             </div>
         </div>
