@@ -42,6 +42,7 @@
     background-repeat: repeat;
     background-position: center;
     padding: 7px;
+    padding-top: 25px;
 }
 
 .chat__message {
