@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import axios from './axios';
 import { useAuth } from '../services/Auth';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/LoginPage.css';
@@ -13,26 +14,58 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
+  // async function handleFormSubmit(e) {
+  //   e.preventDefault()
+
+  //   try {
+  //     setError("");
+  //     setLoading(true);
+  //     await login(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
+  //     history.push("/messaging");
+  //   }
+  //   catch {
+  //     setError("Failed to log in");
+  //   }
+
+  //   setLoading(false);
+  // }
+
   async function handleFormSubmit(e) {
     e.preventDefault()
 
-    try {
-      setError("");
-      setLoading(true);
-      await login(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
-      history.push("/messaging");
-    }
-    catch {
-      setError("Failed to log in");
-    }
+    // try {
+    //   setError("");
+    //   setLoading(true);
+    //   await login(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
+    //   history.push("/messaging");
+    // }
+    // catch {
+    //   setError("Failed to log in");
+    // }
 
+    setError("");
+    setLoading(true);
+    e.preventDefault();
+    // console.log(searchQuery);
+    axios.get(`/login?username=${emailRef.current.value}&password=${passwordRef.current.value}`)
+      .then(response => {
+        console.log(response.data);
+        if(response.data === 0)
+        {
+          history.push("/messaging");
+        }
+        else if(response.data === 1)
+        {
+          setError("Failed to login");
+        }
+      });
     setLoading(false);
   }
 
 
   return (
-    <div class="grid">
-      <div class = "box1">
+    <div className="grid">
+      <div className = "box1">
         <div className="Logo"><img src={tucanInFront} alt={"tucanInFront"} /></div>
       </div>
       <div class = "box2">
