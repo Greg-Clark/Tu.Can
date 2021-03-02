@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     flex: 0.75;
+    background-color: rgb(235, 238, 240);
 }
 
 .chat__header {
     padding: 20px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 3px solid lightgray;
 }
 
 .chat__headerInfo {
@@ -78,7 +79,6 @@
     justify-content: space-between;
     align-items: center;
     height: 62px;
-    /* border-top: 1px solid lightgrey; */
 }
 
 .chat__footer > form {
