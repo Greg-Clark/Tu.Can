@@ -80,11 +80,11 @@ function Chat({ messages }) {
                         placeholder="Type a message"
                         type="text"
                     />
-                    <button type="submit" onClick={sendMessage}>
+                    {/* <button type="submit" onClick={sendMessage}>
                         Send a message
-                    </button>
+                    </button> */}
                     <IconButton>
-                        <SendIcon />
+                        <SendIcon type="submit" onClick={sendMessage}/>
                     </IconButton>
                 </form>
 
