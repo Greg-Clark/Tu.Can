@@ -1,6 +1,7 @@
 import LoginPage from "../components/LoginPage";
 import App from "../components/App";
 import RegisterPage from "../components/RegisterPage";
+import NotFoundPage from "../components/NotFoundPage";
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,6 +17,7 @@ const AppRouter = () => (
                     <Route exact path="/" component={LoginPage} />
                     <Route path="/messaging" component={App} />
                     <Route path="/register" component={RegisterPage} />
+                    <Route path="*" component={NotFoundPage} />
                 </Switch>
             </AuthProvider>
         </div>

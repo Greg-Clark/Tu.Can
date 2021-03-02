@@ -11,6 +11,7 @@ import cors from 'cors';
 const app = express();
 const port = process.env.PORT || 9000;
 
+
 // pusher is a middleware technology that makes mongoDB realtime
 // it is connected to both front and back end
 const pusher = new Pusher({
@@ -176,23 +177,44 @@ app.get("/users/sync", (req,res) => { // post(send) data to server
 
 });
 
-// app.get("/users/search", async (req, res) => {
-//     const target = req.query.target;
-//     target === username;
-//     const matches = Users.findOne({
-//         username : req.query.target
-//     });
-    
-// })
+app.get("/users/search", async (req, res) => {
+    const target = req.query.target;
+    Users.findOne({
+        username : target
+    }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+});
 
-// useEffect(() => {
-//     axios.get('/users/sync')
-//         .then(response => {
-//             console.log(response.data);
-//             setMessages(response.data);
-//         })
-// }, []);
-
+app.get("/login", async (req, res) => {
+    const userlogin = req.query.username;
+    const userpw = req.query.password;
+    await Users.findOne({
+        username: userlogin
+    }, (err, data) => {
+        if(err) {
+            res.status(500).send("1");
+        }
+        else if(!data) {
+            res.status(200).send("1");
+        }
+        else {
+            if(userpw !== data.password)
+            {
+                res.status(200).send("1");
+            }
+            else
+            {
+                res.status(200).send("0");
+            }
+        }
+    });
+});
 
 app.post("/rooms/new", (req,res) => { // post(send) data to server
     const user = req.body;
