@@ -7,7 +7,7 @@ import { SearchOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import '../styles/Sidebar.css';
 
-export default function Sidebar( {rooms}) {
+export default function Sidebar( {rooms} ) {
     const [searchQuery, setSearchQuery] = useState("");
     const [foundUser, setFoundUser] = useState("");
     const url = "http://localhost:9000";
@@ -60,8 +60,8 @@ export default function Sidebar( {rooms}) {
                 <Contact /> */}
                 
                 {rooms.map((room) => (
-                    // rooms.users.splice((foundUser,1))
-                    <Contact users={rooms.users}/>
+                    // room.users.splice(room.users.indexOf(foundUser),1)
+                    <Contact users={room.users} />
                 ))}
             </div>
 
