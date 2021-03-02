@@ -35,9 +35,6 @@ function Chat({ messages }) {
                         <SearchOutlined />
                     </IconButton>
                     <IconButton>
-                        <AttachFile />
-                    </IconButton>
-                    <IconButton>
                         <MoreVert />
                     </IconButton>
                 </div>
@@ -71,7 +68,7 @@ function Chat({ messages }) {
                     <InsertEmoticonIcon />
                 </IconButton>
                 <IconButton>
-                    <CameraAltIcon />
+                    <AttachFile />
                 </IconButton>
                 <form>
                     <input
