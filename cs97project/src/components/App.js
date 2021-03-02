@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 
 function App() {
 	const [messages, setMessages] = useState([]);
+	const [rooms,setRooms] = useState([]);
 	const [error, setError] = useState("");
 	const history = useHistory();
 	const { signOut, currentUser } = useAuth();
@@ -43,6 +44,34 @@ function App() {
 		};
 	}, [messages]); // captures messages since it is a dependency
 
+	// axios is just another way to handle get, post and so on
+	useEffect(() => {
+		axios.get('/rooms/sync')
+			.then(response => {
+				console.log(response.data);
+				setRooms(response.data);
+			})
+	}, []);
+
+	// ==================makes rooms in mongo real time======================
+	useEffect(() => {
+		const pusher = new Pusher('8cdc3d1a07077d29caf4', {
+			cluster: 'us3'
+		});
+
+		const channel = pusher.subscribe('rooms');
+		channel.bind('inserted', (newRoom) => {
+			//append new rooms to current message array
+			setRooms([...rooms, newRoom]);
+		});
+
+		// ensures there is only 1 subscriber(listener)
+		return () => {
+			channel.unbind_all();
+			channel.unsubscribe();
+		};
+	}, [rooms]); // captures rooms since it is a dependency
+
 
 
 
@@ -62,7 +91,9 @@ function App() {
 	return (
 		<div className="app">
 			<div className="app_body">
-				<Sidebar />
+				<Sidebar 
+					rooms = {rooms}
+				/>
 				<Chat
 					messages={messages}
 				/>
