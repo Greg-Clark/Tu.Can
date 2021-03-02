@@ -66,5 +66,5 @@
     flex: 1;
     /* background-color: white; */
     border-right: 3px solid lightgray;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
