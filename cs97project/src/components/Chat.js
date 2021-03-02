@@ -51,7 +51,7 @@ function Chat({ messages }) {
                     {messages.map((message) => (
                         <p className={`chat__message ${message.received && "chat__receiver"}`}>
                         {/* change to comparing who's logged in to who sent the message*/}
-                            <span className="chat__name">{message.sender}</span>
+                            <span style={{color: "black"}}className="chat__name">{message.sender}</span>
                             {message.content}
                             <span className="chat__timestamp">{message.timestamp}</span>
                         </p>
