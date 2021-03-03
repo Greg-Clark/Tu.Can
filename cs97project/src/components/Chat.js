@@ -41,12 +41,9 @@ function Chat({ messages }) {
                 </div>
             </div>
 
-
-
             <div className="chat__full">
-
-                <div className="chat__body">
-                    <ScollableFeed>
+                <ScrollableFeed>
+                    <div className="chat__body">
                         {messages.map((message) => (
                             <p className={`chat__message ${message.received && "chat__receiver"}`}>
                             {/* change to comparing who's logged in to who sent the message*/}
@@ -55,14 +52,10 @@ function Chat({ messages }) {
                                 <span className="chat__timestamp">{message.timestamp}</span>
                             </p>
                         ))}
-                    </ScollableFeed>
-                    {/* think about updating this with authentication */}
-                </div>
+                        {/* think about updating this with authentication */}
+                    </div>
+                </ScrollableFeed>
             </div>
-
-    
-
-
 
             {/* chat footer includes text input form, emoji icon, and media icon for sending media */}
             <div className="chat__footer">
