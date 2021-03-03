@@ -70,7 +70,7 @@ function Chat({ messages }) {
                 <IconButton>
                     <AttachFile />
                 </IconButton>
-                <form>
+                <form onSubmit={sendMessage}>
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
