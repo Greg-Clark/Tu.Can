@@ -97,7 +97,7 @@ function App() {
 				<Chat
 					messages={messages}
 				/>
-				{currentUser && <button onClick={handleSignOut}>SignOut</button>}
+				{/* {currentUser && <button onClick={handleSignOut}>SignOut</button>} */}
 			</div>
 		</div>
 	);
