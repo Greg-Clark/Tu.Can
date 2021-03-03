@@ -9,11 +9,12 @@ import {
     Route,
 } from "react-router-dom";
 import { AuthProvider } from "../services/Auth";
+import { UserProvider } from "../contexts/UserProvider";
 
 const AppRouter = () => (
     <Router>
         <div>
-            <AuthProvider>
+            <UserProvider>
                 <Switch>
                     <Route exact path="/" component={LoginPage} />
                     <Route path="/messaging" component={App} />
@@ -21,7 +22,7 @@ const AppRouter = () => (
                     <Route path="/about" component={About} />
                     <Route path="*" component={NotFoundPage} />
                 </Switch>
-            </AuthProvider>
+            </UserProvider>
         </div>
     </Router>
 );

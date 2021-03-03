@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from './axios';
 import { useAuth } from '../services/Auth';
+import { useUserContext } from '../contexts/UserProvider';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/LoginPage.css';
 import tucanInFront from '../images/tucanInFront.png';
@@ -9,7 +10,8 @@ export default function LoginPage() {
 
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, SignInWithGoogle } = useAuth();
+  // const { login, SignInWithGoogle } = useAuth();
+  const { login } = useUserContext();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -52,13 +54,16 @@ export default function LoginPage() {
         console.log(response.data);
         if(response.data === 0)
         {
+          login(emailRef.current.value);
           history.push("/messaging");
         }
         else if(response.data === 1)
         {
+          login("");
           setError("Failed to login");
         }
       });
+
     setLoading(false);
   }
 
@@ -100,7 +105,6 @@ export default function LoginPage() {
               >
                 Log In
               </button>
-              <SignInWithGoogle />
               <button className = "buttons">
                 <Link to="/register">Register </Link>
               </button>

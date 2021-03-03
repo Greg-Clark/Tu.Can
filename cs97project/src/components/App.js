@@ -5,6 +5,7 @@ import '../styles/App.css';
 import Pusher from 'pusher-js';
 import axios from './axios';
 import { useAuth } from '../services/Auth';
+import { useUserContext } from '../contexts/UserProvider';
 import { useHistory } from 'react-router-dom';
 
 // import { render } from '@testing-library/react';
@@ -12,10 +13,11 @@ import { useHistory } from 'react-router-dom';
 
 function App() {
 	const [messages, setMessages] = useState([]);
-	const [rooms,setRooms] = useState([]);
+	const [rooms, setRooms] = useState([]);
 	const [error, setError] = useState("");
 	const history = useHistory();
-	const { signOut, currentUser } = useAuth();
+	const { signout, currentUser } = useUserContext();
+	// const { signOut, currentUser } = useAuth();
 	// axios is just another way to handle get, post and so on
 	useEffect(() => {
 		axios.get('/messages/sync')
@@ -79,7 +81,7 @@ function App() {
 		setError("");
 
 		try {
-			await signOut();
+			await signout();
 			history.push("/");
 		} 
 		catch {
@@ -97,7 +99,6 @@ function App() {
 				<Chat
 					messages={messages}
 				/>
-
 				{currentUser && <button onClick={handleSignOut}>SignOut</button>}
 			</div>
 		</div>

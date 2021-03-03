@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../services/Auth';
+import { useUserContext } from '../contexts/UserProvider';
 import { Link, useHistory } from 'react-router-dom';
 import axios from './axios';
 import Pusher from 'pusher-js';
@@ -10,7 +11,7 @@ export default function Signup() {
     const emailRef = useRef(); // ref for email captures form input
     const passwordRef = useRef(); // captures password form input
     const passwordConfirmRef = useRef();
-    const { signup } = useAuth();
+    const { login, currentUser } = useUserContext();
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
     const history = useHistory();
@@ -27,10 +28,12 @@ export default function Signup() {
 
         setError('');
         setLoading(true);
+        // need to check if user already exists
         await axios.post("/users/new", {
             username: emailRef.current.value,
             password: passwordRef.current.value,
         });
+        login(emailRef.current.value);
         history.push("/messaging"); 
         // try {
         //     setError('');
