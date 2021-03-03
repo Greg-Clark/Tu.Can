@@ -55,6 +55,7 @@
     border-radius: 90px;
     background-color: #ffffff;
     margin-bottom: 20px;
+    word-wrap: normal;
 }
 
 .chat__name {
