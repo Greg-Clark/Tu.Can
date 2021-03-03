@@ -16,6 +16,7 @@ export default function Signup() {
     const [ loading, setLoading ] = useState(false);
     const history = useHistory();
     const [users, setUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const [input, setInput] = useState("");
 
@@ -25,6 +26,21 @@ export default function Signup() {
         {
             return setError('Passwords do not match');
         }
+
+        if (passwordRef.current.value.length < 4 || passwordRef.current.value.length > 50) // Checks if passwords and password confirmation matches
+        {
+            return setError('Password must between 4 and 50 characters');
+        }
+
+        // need to check if user already exists (needs to be fixed)
+        // axios.get(`/users/search?target=${searchQuery}`)
+        //     .then(response => {
+        //         if(response.data.username !== null)
+        //         {
+        //             return setError('Username is already taken');
+        //         }
+        //     }
+        // )
 
         setError('');
         setLoading(true);
@@ -142,6 +158,12 @@ export default function Signup() {
                             >
                                 Register
                             </button>
+                            
+                            <div className="buttons">                  
+                                <Link to="/about">
+                                About
+                                </Link> 
+                            </div>
                         </form>
                     </div>
                     <br></br>
@@ -151,13 +173,6 @@ export default function Signup() {
                              Login Here
                         </Link>
                     </div>
-                    <div className="aboutButton">
-                        <div className="buttons">                  
-                            <Link to="/about">
-                                About
-                            </Link> 
-                        </div>
-                    </div>  
                 </div>
             </div>
         </div>

@@ -95,10 +95,3 @@ html,body {
     justify-items: start stretch;
 }
 
-.aboutButton{
-    position: absolute;
-    margin-top: 10px;
-    margin-right: 10px;
-    top: 0;
-    right: 0;
-}

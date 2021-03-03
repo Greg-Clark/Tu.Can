@@ -28,7 +28,8 @@ export default function Sidebar( {rooms} ) {
                 {
                     setFoundUser(response.data.username);
                 }
-            })
+            }
+        )
     };
 
     return (
