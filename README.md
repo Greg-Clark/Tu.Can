@@ -8,7 +8,12 @@ Remainder: From greatest to least priority
         a collection in mongoDB. We should update the login   
         page to authenticate users. The plan is have the search 
         bar search through the entire database, instead of a 
-        "contacts" system.                                    
+        "contacts" system.     
+
+        * unique usernames are implemented, so if you try to 
+          register someone else's username you can't. but if you
+          use a valid username, it doesn't take you anywhere either 
+          and you remain on the register page. need to fix this                               
 
     * Sidebar functionality
         * We need the sidebar to actually work
@@ -52,7 +57,7 @@ Remainder: From greatest to least priority
         * For Inspiration : https://windowsterminalthemes.dev/
 
     * Things to consider/low priority tasks: 
-     <s>* Private routing</s>
+        * Private routing
         * Animations with CSS (fading, etc.)
         * Profile management (deleting account, changing username, etc.)
         * Searching content          
