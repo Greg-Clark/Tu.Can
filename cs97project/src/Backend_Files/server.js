@@ -4,8 +4,10 @@ import mongoose from 'mongoose';
 import Messages from './databaseMessages.js';
 import Users from './databaseUsers.js';
 import Rooms from './databaseRooms.js';
+import Files from './databaseFiles.js';
 import Pusher from 'pusher';
 import cors from 'cors';
+import multer from 'multer';
 
 // app config
 const app = express();
@@ -244,6 +246,53 @@ app.get("/rooms/sync", (req,res) => { // post(send) data to server
 });
 
 
+app.get('/getAllFiles', async (req, res) => {
+    try {
+      const files = await Files.find({});
+      const sortedByCreationDate = files.sort(
+        (a, b) => b.createdAt - a.createdAt
+      );
+      res.send(sortedByCreationDate);
+    } catch (error) {
+      res.status(400).send('Error while getting list of files. Try again later.');
+    }
+});
 
+app.get('/download/:id', async (req, res) => {
+    try {
+      const file = await Files.findById(req.params.id);
+      res.set({
+        'Content-Type': file.file_mimetype
+      });
+      res.sendFile(path.join(__dirname, '..', file.file_path));
+    } catch (error) {
+      res.status(400).send('Error while downloading file. Try again later.');
+    }
+});
+
+
+const upload = multer({
+    storage: multer.diskStorage({
+      destination(req, file, cb) {
+        cb(null, './files');
+      },
+      filename(req, file, cb) {
+        cb(null, `${new Date().getTime()}_${file.originalname}`);
+      }
+    }),
+    limits: {
+      fileSize: 1000000 // max file size 1MB = 1000000 bytes
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls)$/)) {
+        return cb(
+          new Error(
+            'only upload files with jpg, jpeg, png, pdf, doc, docx, xslx, xls format.'
+          )
+        );
+      }
+      cb(undefined, true); // continue with upload
+    }
+  });
 // listen
 app.listen(port, ()=>console.log(`Listening on localhost:${port}`));
