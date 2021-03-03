@@ -12,8 +12,8 @@ class About extends React.Component {
                     <div className="About">
                     <h2>About Tu.can</h2>
                     <br></br>
-                        <p>Tu.can is a simple messaging app designed to amplify communication. 
-                            Built admist the COVID-19 pandemic, we recognized the lack of human contact 
+                        <p>Tu.Can is a simple messaging app designed to amplify communication. 
+                            Built amid the COVID-19 pandemic, we recognized the lack of human contact 
                             and face-to-face interaction with remote learning. Therefore, we decided 
                             to help people settle for the next best thing: messaging.
                         </p>
