@@ -52,7 +52,7 @@ Remainder: From greatest to least priority
         * For Inspiration : https://windowsterminalthemes.dev/
 
     * Things to consider/low priority tasks: 
-        * Private routing 
+     <s>* Private routing</s>
         * Animations with CSS (fading, etc.)
         * Profile management (deleting account, changing username, etc.)
         * Searching content          
@@ -61,3 +61,4 @@ Remainder: From greatest to least priority
     * Things not to consider:
         * tic-tac-toe
         * wet burritos
+        * dropdown menus
