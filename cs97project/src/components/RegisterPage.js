@@ -16,7 +16,7 @@ export default function Signup() {
     const [ loading, setLoading ] = useState(false);
     const history = useHistory();
     const [users, setUsers] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
+    //const [searchQuery, setSearchQuery] = useState("");
 
     const [input, setInput] = useState("");
 
@@ -30,17 +30,7 @@ export default function Signup() {
         if (passwordRef.current.value.length < 4 || passwordRef.current.value.length > 50) // Checks if passwords and password confirmation matches
         {
             return setError('Password must between 4 and 50 characters');
-        }
-
-        // need to check if user already exists (needs to be fixed)
-        // axios.get(`/users/search?target=${searchQuery}`)
-        //     .then(response => {
-        //         if(response.data.username !== null)
-        //         {
-        //             return setError('Username is already taken');
-        //         }
-        //     }
-        // )
+        }  
 
         setError('');
         setLoading(true);
@@ -51,32 +41,7 @@ export default function Signup() {
         });
         login(emailRef.current.value);
         history.push("/messaging"); 
-        // try {
-        //     setError('');
-        //     setLoading(true); // If in loading state, register button cannot be pressed
-        //     // store in firebase
-        //     await signup(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
-        // }
-        // catch {
-        //     setError('Failed to create an account');
-        // }
 
-        // try {
-        //     setError('');
-        //     setLoading(true); // If in loading state, register button cannot be pressed
-        //     // post to mongo
-        //     // await axios.post("/users/new", {
-        //     //     username: emailRef.current.value,
-        //     //     password: passwordRef.current.value,
-        //     // });
-        //     // store in firebase
-        //     // await signup(emailRef.current.value, passwordRef.current.value);
-        //     // await signup(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
-        //     history.push("/messaging"); // Redirect to messaging state
-        // }
-        // catch (error) {
-        //     setError('Failed to create an account');
-        // }
         setLoading(false);
         
         setInput('');

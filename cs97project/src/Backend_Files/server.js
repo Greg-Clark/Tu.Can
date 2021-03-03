@@ -150,11 +150,11 @@ app.post("/messages/new", (req,res) => { // post(send) data to server
 
 });
 
-app.post("/users/new", (req,res) => { // post(send) data to server
+app.post("/users/new", async (req,res) => { // post(send) data to server
     const user = req.body;
-
+    const existing = Users.findOne({username : user.username});
     Users.create(user, (err, data) => {
-        if (err) {
+        if (err || existing) {
             res.status(500).send(err);
         }
         else {
