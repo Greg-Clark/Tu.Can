@@ -13,11 +13,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import {useHistory} from 'react-router-dom';
-
+import { useUserContext } from '../contexts/UserProvider';
 
 
 function Chat({ messages }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const { signout } = useUserContext();
   
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -31,6 +32,7 @@ function Chat({ messages }) {
     
     const handleLogout = () => {
         history.push('/');
+        signout();
 
     };
 
