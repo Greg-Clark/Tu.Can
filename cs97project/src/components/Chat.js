@@ -7,6 +7,7 @@ import { AttachFile, MoreVert, SearchOutlined } from '@material-ui/icons';
 import { Avatar, IconButton } from '@material-ui/core';
 import '../styles/Chat.css';
 import axios from './axios'
+import ScrollableFeed from 'react-scrollable-feed'
 
 function Chat({ messages }) {
     const [input, setInput] = useState("");
@@ -45,15 +46,16 @@ function Chat({ messages }) {
             <div className="chat__full">
 
                 <div className="chat__body">
-                    {messages.map((message) => (
-                        <p className={`chat__message ${message.received && "chat__receiver"}`}>
-                        {/* change to comparing who's logged in to who sent the message*/}
-                            <span style={{color: "black"}}className="chat__name">{message.sender}</span>
-                            {message.content}
-                            <span className="chat__timestamp">{message.timestamp}</span>
-                        </p>
-
-                    ))}
+                    <ScollableFeed>
+                        {messages.map((message) => (
+                            <p className={`chat__message ${message.received && "chat__receiver"}`}>
+                            {/* change to comparing who's logged in to who sent the message*/}
+                                <span style={{color: "black"}}className="chat__name">{message.sender}</span>
+                                {message.content}
+                                <span className="chat__timestamp">{message.timestamp}</span>
+                            </p>
+                        ))}
+                    </ScollableFeed>
                     {/* think about updating this with authentication */}
                 </div>
             </div>
