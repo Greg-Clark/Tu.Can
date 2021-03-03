@@ -12,6 +12,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import {useHistory} from 'react-router-dom';
+
 
 
 function Chat({ messages }) {
@@ -23,6 +25,13 @@ function Chat({ messages }) {
   
     const handleClose = () => {
       setAnchorEl(null);
+    };
+
+    const history = useHistory();
+    
+    const handleLogout = () => {
+        history.push('/');
+
     };
 
     const [input, setInput] = useState("");
@@ -66,7 +75,7 @@ function Chat({ messages }) {
                             onClose={handleClose}
                         >
                             <MenuItem onClick={handleClose}>Themes</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>
                         </div>
                 </div>
