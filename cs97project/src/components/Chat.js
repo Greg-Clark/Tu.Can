@@ -11,18 +11,11 @@ import ScrollableFeed from 'react-scrollable-feed'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
 
-
-const options = [
-    'Themes',
-    'Sign Out',
-  ];
-
-const ITEM_HEIGHT = 48;
 
 function Chat({ messages }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
   
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -56,11 +49,7 @@ function Chat({ messages }) {
                     <IconButton>
                         <SearchOutlined />
                     </IconButton>
-                    {/* <IconButton>
-                        <MoreVert />
-                    </IconButton> */}
-                </div>
-                <div>
+                    <div>
                     <IconButton
                         aria-label="more"
                         aria-controls="long-menu"
@@ -69,26 +58,19 @@ function Chat({ messages }) {
                     >
                         <MoreVertIcon />
                     </IconButton>
-                    <Menu
-                        id="long-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={open}
-                        onClose={handleClose}
-                        PaperProps={{
-                        style: {
-                            maxHeight: ITEM_HEIGHT * 4.5,
-                            width: '20ch',
-                        },
-                        }}
-                    >
-                        {options.map((option) => (
-                        <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                            {option}
-                        </MenuItem>
-                        ))}
-                    </Menu>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>Themes</MenuItem>
+                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        </Menu>
+                        </div>
                 </div>
+
             </div>
 
             <div className="chat__full">
