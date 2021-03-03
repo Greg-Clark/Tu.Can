@@ -15,8 +15,7 @@ class About extends React.Component {
                         <p>Tu.can is a simple messaging app designed to amplify communication. 
                             Built admist the COVID-19 pandemic, we recognized the lack of human contact 
                             and face-to-face interaction with remote learning. Therefore, we decided 
-                            to help people settle for the next best thing: messaging. they did surgery on a grape
-                            doo you know the monky man? pogers roflcopter
+                            to help people settle for the next best thing: messaging.
                         </p>
                         <br></br>
                         <p>Created by Terry Chen, Gregory Clark, 
