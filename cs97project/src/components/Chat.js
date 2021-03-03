@@ -8,8 +8,30 @@ import { Avatar, IconButton } from '@material-ui/core';
 import '../styles/Chat.css';
 import axios from './axios'
 import ScrollableFeed from 'react-scrollable-feed'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
+const options = [
+    'Themes',
+    'Sign Out',
+  ];
+
+const ITEM_HEIGHT = 48;
 
 function Chat({ messages }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
     const [input, setInput] = useState("");
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -34,9 +56,38 @@ function Chat({ messages }) {
                     <IconButton>
                         <SearchOutlined />
                     </IconButton>
-                    <IconButton>
+                    {/* <IconButton>
                         <MoreVert />
+                    </IconButton> */}
+                </div>
+                <div>
+                    <IconButton
+                        aria-label="more"
+                        aria-controls="long-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                    >
+                        <MoreVertIcon />
                     </IconButton>
+                    <Menu
+                        id="long-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={open}
+                        onClose={handleClose}
+                        PaperProps={{
+                        style: {
+                            maxHeight: ITEM_HEIGHT * 4.5,
+                            width: '20ch',
+                        },
+                        }}
+                    >
+                        {options.map((option) => (
+                        <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                            {option}
+                        </MenuItem>
+                        ))}
+                    </Menu>
                 </div>
             </div>
 
