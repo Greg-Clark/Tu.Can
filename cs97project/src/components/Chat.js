@@ -8,8 +8,32 @@ import { Avatar, IconButton } from '@material-ui/core';
 import '../styles/Chat.css';
 import axios from './axios'
 import ScrollableFeed from 'react-scrollable-feed'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
+import {useHistory} from 'react-router-dom';
+
+
 
 function Chat({ messages }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const history = useHistory();
+    
+    const handleLogout = () => {
+        history.push('/');
+
+    };
+
     const [input, setInput] = useState("");
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -34,10 +58,28 @@ function Chat({ messages }) {
                     <IconButton>
                         <SearchOutlined />
                     </IconButton>
-                    <IconButton>
-                        <MoreVert />
+                    <div>
+                    <IconButton
+                        aria-label="more"
+                        aria-controls="long-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                    >
+                        <MoreVertIcon />
                     </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>Themes</MenuItem>
+                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        </Menu>
+                        </div>
                 </div>
+
             </div>
 
             <div className="chat__full">
