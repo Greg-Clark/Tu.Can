@@ -28,8 +28,7 @@ function Chat({ messages }) {
             <div className="chat__header">
                 <Avatar />
                 <div className="chat__headerInfo">
-                    <h3>Username</h3>
-                    <p>Last seen at ...</p>
+                    <h3>&nbsp;Username</h3> {/*place chat name here? */}
                 </div>
                 <div className="chat__headerRight">
                     <IconButton>
