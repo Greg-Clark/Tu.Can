@@ -88,6 +88,7 @@ function App() {
 
 	// console.log(messages);
 	return (
+	
 		<div className="app">
 			<div className="app_body">
 				<Sidebar 

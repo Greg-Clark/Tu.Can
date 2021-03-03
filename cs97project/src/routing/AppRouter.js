@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "../services/Auth";
 import { UserProvider } from "../contexts/UserProvider";
+import PrivateRoute from "../components/PrivateRoute";
 
 const AppRouter = () => (
     <Router>
@@ -17,7 +18,7 @@ const AppRouter = () => (
             <UserProvider>
                 <Switch>
                     <Route exact path="/" component={LoginPage} />
-                    <Route path="/messaging" component={App} />
+                    <PrivateRoute path="/messaging" component={App} />
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/about" component={About} />
                     <Route path="*" component={NotFoundPage} />

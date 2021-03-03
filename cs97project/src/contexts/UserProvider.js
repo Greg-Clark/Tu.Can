@@ -1,4 +1,4 @@
- import React, { createContext, useContext, useState } from 'react';
+ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 
 const UserContext = createContext();
@@ -12,14 +12,17 @@ export function UserProvider({ children }) {
 
     function signup(username) {
         setCurrentUser(username);
+        localStorage.setItem("user", username);
     };
 
     function login(username) {
         setCurrentUser(username);
+        localStorage.setItem("user", username);
     };
 
     function signout() {
         setCurrentUser(null);
+        localStorage.clear();
     };
 
     const value = {
@@ -28,6 +31,7 @@ export function UserProvider({ children }) {
         signup,
         signout,
     };
+
 
     return (
         <UserContext.Provider value={value}>
