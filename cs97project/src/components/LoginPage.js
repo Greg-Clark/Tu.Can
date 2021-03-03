@@ -108,13 +108,11 @@ export default function LoginPage() {
               <button className = "buttons">
                 <Link to="/register">Register </Link>
               </button>
-                <div className="aboutButton">
                   <div className="buttons">                  
                     <Link to="/about">
                       About
                     </Link> 
-                  </div>
-                </div>              
+                  </div>             
             </form>
           </div>
 

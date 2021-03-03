@@ -6,8 +6,10 @@ import  MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import '../styles/Sidebar.css';
+import { useUserContext } from '../contexts/UserProvider';
 
 export default function Sidebar( {rooms} ) {
+    const { currentUser } = useUserContext();
     const [searchQuery, setSearchQuery] = useState("");
     const [foundUser, setFoundUser] = useState("");
     const url = "http://localhost:9000";
@@ -60,8 +62,7 @@ export default function Sidebar( {rooms} ) {
                 <Contact /> */}
                 
                 {rooms.map((room) => (
-                    // room.users.splice(room.users.indexOf(foundUser),1)
-                    <Contact users={room.users} />
+                    <Contact users={room.users.filter((user) => user !== currentUser)}/>
                 ))}
             </div>
 

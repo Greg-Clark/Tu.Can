@@ -74,9 +74,6 @@ function App() {
 		};
 	}, [rooms]); // captures rooms since it is a dependency
 
-
-
-
 	async function handleSignOut() {
 		setError("");
 
