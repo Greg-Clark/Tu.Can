@@ -256,6 +256,19 @@ app.get("/rooms/sync", (req,res) => { // post(send) data to server
 
 });
 
+app.get("/rooms/id", (req,res) => { // post(send) data to server
+    const id = req.query.target;
+    Rooms.findOne((err, data) => {
+        chatroomID : id
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+
+});
 
 
 // listen

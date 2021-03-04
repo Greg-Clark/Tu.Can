@@ -15,13 +15,14 @@ function App() {
 	const [messages, setMessages] = useState([]);
 	const [rooms, setRooms] = useState([]);
 	const [error, setError] = useState("");
+	const [currentRoom, setCurrentRoom] = useState("");
 	const history = useHistory();
 	const { signout, currentUser } = useUserContext();
 	// const { signOut, currentUser } = useAuth();
 	// axios is just another way to handle get, post and so on
 	useEffect(() => {
 		//room?target=${Sidebar.currentRoom}`
-		axios.get("/messages/sync")
+		axios.get(`/messages/room?target=${currentRoom}`)
 			.then(response => {
 				console.log(response.data);
 				setMessages(response.data);
@@ -87,6 +88,16 @@ function App() {
 		}
 	}
 
+	const searchRoom = (users, x) => {
+		if (x == true) {			
+			axios.get(`/rooms/id?id=${users}`)
+				.then(response => {
+					setCurrentRoom(response.data.chatroomID);
+					alert(response.data.chatroomID);
+				})
+		}
+	};
+	
 	// console.log(messages);
 	return (
 	
@@ -94,6 +105,7 @@ function App() {
 			<div className="app_body">
 				<Sidebar 
 					rooms = {rooms}
+					searchRoom = {searchRoom}
 				/>
 				<Chat
 					messages={messages}

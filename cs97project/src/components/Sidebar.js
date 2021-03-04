@@ -7,7 +7,7 @@ import { SearchOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import '../styles/Sidebar.css';
 import { useUserContext } from '../contexts/UserProvider';
-export default function Sidebar( {rooms} ) {
+export default function Sidebar(props) {
     const roomRef = useRef();
     const { currentUser } = useUserContext();
     const [searchQuery, setSearchQuery] = useState("");
@@ -62,10 +62,9 @@ export default function Sidebar( {rooms} ) {
 
             <div className="sidebar__chats">
 
-                {rooms.map((room) => (
+                {props.rooms.map((room) => (
                     <Contact 
-                        onClick={e => switchRoom(e.target.value)}
-                        roomRef = {room.chatroomID}
+                        onClick={props.searchRoom(room.users,true)}
                         users={room.users.filter((user) => user !== currentUser)}
                     />
                 ))}
