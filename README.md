@@ -56,6 +56,12 @@ Remainder: From greatest to least priority
     * Themes                        - Everyone does 1 theme
         * For Inspiration : https://windowsterminalthemes.dev/
 
+    * 404NotFoundPage
+        * current the 404PageNotFound only pops up in the case that the inputted url is just a single slash.
+          meaning that if the user types in something like '/invalidLink' then the user will be given the
+          404 Page Not Found but if the user types in '/messaging/invalidLink' then the user will not be shown
+          the 404 Page Not Found page. This needs to be updated and fixed.
+
     * Things to consider/low priority tasks: 
         * Private routing
         * Animations with CSS (fading, etc.)
