@@ -9,6 +9,8 @@ import Images from './databaseImages.js';
 import Pusher from 'pusher';
 import cors from 'cors';
 import multer from 'multer';
+const GridFsStorage = require('multer-gridfs-storage');
+const crypto = require('crypto');
 
 // app config
 const app = express();
@@ -48,6 +50,32 @@ mongoose.connect(url_connection, {
 });
 
 const db = mongoose.connection;
+
+
+// create storage engine
+const storage = new GridFsStorage({
+    url: url_connection,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'uploads'
+                };
+                resolve(fileInfo);
+            });
+        });
+    }
+});
+
+const upload = multer({ storage });
+
+
+
 
 // once database is open, start doing stuff
 db.once('open', () => {
@@ -270,14 +298,37 @@ app.get("/rooms/sync", (req, res) => { // post(send) data to server
 
 });
 
-/*
-        POST: Upload a single image/file to Image collection
-    */
+
+const upload = multer({ storage });
+
+
+app.use('/', imageRouter(upload));
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
+
+//POST: Upload a single image/file to Image collection
+
 
 app.post("/upload", (req, res, next) => {
     console.log(req.body);
     // check for existing images
-    /*
+
+    /* Keep commented out
     Image.findOne({ caption: req.body.caption })
         .then((image) => {
             console.log(image);
@@ -319,9 +370,7 @@ app.post("/upload", (req, res, next) => {
     });
 
 
-/*
-       GET: Fetch most recently added file
-   */
+//GET: Fetch most recently added file
 app.get("/recent", (req, res, next) => {
     Image.findOne({}, {}, { sort: { '_id': -1 } })
         .then((image) => {
@@ -334,9 +383,9 @@ app.get("/recent", (req, res, next) => {
 });
 
 
-/*
-        GET: Fetches a particular file by filename
-    */
+
+//GET: Fetches a particular file by filename
+
 app.get('/file/:filename', (req, res, next) => {
     gfs.find({ filename: req.params.filename }).toArray((err, files) => {
         if (!files[0] || files.length === 0) {
@@ -353,9 +402,8 @@ app.get('/file/:filename', (req, res, next) => {
     });
 });
 
-/* 
-        GET: Fetches a particular image and render on browser
-    */
+//GET: Fetches a particular image and render on browser
+
 app.get('/image/:filename', (req, res, next) => {
     gfs.find({ filename: req.params.filename }).toArray((err, files) => {
         if (!files[0] || files.length === 0) {
@@ -379,3 +427,5 @@ app.get('/image/:filename', (req, res, next) => {
 
 // listen
 app.listen(port, () => console.log(`Listening on localhost:${port}`));
+
+//module.exports = app;
