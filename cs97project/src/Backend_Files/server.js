@@ -5,6 +5,7 @@ import Messages from './databaseMessages.js';
 import Users from './databaseUsers.js';
 import Rooms from './databaseRooms.js';
 import Files from './databaseFiles.js';
+import Images from './databaseImages.js';
 import Pusher from 'pusher';
 import cors from 'cors';
 import multer from 'multer';
@@ -51,18 +52,23 @@ const db = mongoose.connection;
 // once database is open, start doing stuff
 db.once('open', () => {
     console.log("Database Connected");
-    
+
     // variable representing collection in mongoDB
     const messageCollection = db.collection("msgcollections");
     // user collection in mongoDB
     const userCollection = db.collection("users");
     // room collection in mongoDB
     const roomCollection = db.collection("rooms");
-    // monitors changes
 
+    // upload collection in mongoDB
+    const uploadCollection = db.collection("uploads");
+
+
+    // monitors changes
     const changeStream_messages = messageCollection.watch();
     const changeStream_users = userCollection.watch();
     const changeStream_rooms = roomCollection.watch();
+    const changeStream_uploads = uploadCollection.watch();
     // console.log(changeStream);
 
     //==============change stream for messages============
@@ -91,7 +97,7 @@ db.once('open', () => {
 
         if (change.operationType === 'insert') {
             const userDetails = change.fullDocument;
-            pusher.trigger('users', 'inserted', 
+            pusher.trigger('users', 'inserted',
                 {
                     username: userDetails.username,
                     password: userDetails.password,
@@ -103,17 +109,38 @@ db.once('open', () => {
             console.log('Error triggering Pusher');
         }
     });
-    
+
     //==============change stream for rooms============
     changeStream_rooms.on('change', (change) => {
         console.log('Change Happened:', change);
 
         if (change.operationType === 'insert') {
             const roomDetails = change.fullDocument;
-            pusher.trigger('rooms', 'inserted', 
+            pusher.trigger('rooms', 'inserted',
                 {
                     chatroomID: roomDetails.chatroomID,
                     users: roomDetails.users,
+                }
+            );
+        }
+        else {
+            console.log('Error triggering Pusher');
+        }
+    });
+
+    changeStream_uploads.on('change', (change) => {
+        console.log('Change Happened:', change);
+
+        if (change.operationType === 'insert') {
+            const uploadDetails = change.fullDocument;
+            pusher.trigger('uploads', 'inserted',
+                {
+                    sender: messageDetails.sender,
+                    filename: messageDetails.filename,
+                    fileId: messageDetails.fileId,
+                    timestamp: messageDetails.timestamp,
+                    received: messageDetails.received,
+                    chatroomID: messageDetails.chatroomID,
                 }
             );
         }
@@ -126,7 +153,7 @@ db.once('open', () => {
 // api routes
 app.get("/", (req, res) => res.status(200).send('Hello World!!')); // get data from server
 
-app.get("/messages/sync", (req,res) => { // post(send) data to server
+app.get("/messages/sync", (req, res) => { // post(send) data to server
 
     Messages.find((err, data) => {
         if (err) {
@@ -138,7 +165,7 @@ app.get("/messages/sync", (req,res) => { // post(send) data to server
     });
 
 });
-app.post("/messages/new", (req,res) => { // post(send) data to server
+app.post("/messages/new", (req, res) => { // post(send) data to server
     const databaseMessage = req.body;
 
     Messages.create(databaseMessage, (err, data) => {
@@ -152,7 +179,7 @@ app.post("/messages/new", (req,res) => { // post(send) data to server
 
 });
 
-app.post("/users/new", (req,res) => { // post(send) data to server
+app.post("/users/new", (req, res) => { // post(send) data to server
     const user = req.body;
 
     Users.create(user, (err, data) => {
@@ -166,7 +193,7 @@ app.post("/users/new", (req,res) => { // post(send) data to server
 
 });
 
-app.get("/users/sync", (req,res) => { // post(send) data to server
+app.get("/users/sync", (req, res) => { // post(send) data to server
 
     Users.find((err, data) => {
         if (err) {
@@ -182,7 +209,7 @@ app.get("/users/sync", (req,res) => { // post(send) data to server
 app.get("/users/search", async (req, res) => {
     const target = req.query.target;
     Users.findOne({
-        username : target
+        username: target
     }, (err, data) => {
         if (err) {
             res.status(500).send(err);
@@ -199,26 +226,24 @@ app.get("/login", async (req, res) => {
     await Users.findOne({
         username: userlogin
     }, (err, data) => {
-        if(err) {
+        if (err) {
             res.status(500).send("1");
         }
-        else if(!data) {
+        else if (!data) {
             res.status(200).send("1");
         }
         else {
-            if(userpw !== data.password)
-            {
+            if (userpw !== data.password) {
                 res.status(200).send("1");
             }
-            else
-            {
+            else {
                 res.status(200).send("0");
             }
         }
     });
 });
 
-app.post("/rooms/new", (req,res) => { // post(send) data to server
+app.post("/rooms/new", (req, res) => { // post(send) data to server
     const user = req.body;
 
     Rooms.create(user, (err, data) => {
@@ -232,7 +257,7 @@ app.post("/rooms/new", (req,res) => { // post(send) data to server
 
 });
 
-app.get("/rooms/sync", (req,res) => { // post(send) data to server
+app.get("/rooms/sync", (req, res) => { // post(send) data to server
 
     Rooms.find((err, data) => {
         if (err) {
@@ -245,54 +270,112 @@ app.get("/rooms/sync", (req,res) => { // post(send) data to server
 
 });
 
+/*
+        POST: Upload a single image/file to Image collection
+    */
 
-app.get('/getAllFiles', async (req, res) => {
-    try {
-      const files = await Files.find({});
-      const sortedByCreationDate = files.sort(
-        (a, b) => b.createdAt - a.createdAt
-      );
-      res.send(sortedByCreationDate);
-    } catch (error) {
-      res.status(400).send('Error while getting list of files. Try again later.');
-    }
+app.post("/upload", (req, res, next) => {
+    console.log(req.body);
+    // check for existing images
+    /*
+    Image.findOne({ caption: req.body.caption })
+        .then((image) => {
+            console.log(image);
+            if (image) {
+                return res.status(200).json({
+                    success: false,
+                    message: 'Image already exists',
+                });
+            }
+            */
+
+    let newImage = new Image({
+        caption: req.body.caption,
+        filename: req.file.filename,
+        fileId: req.file.id,
+    });
+
+    newImage.save()
+        .then((image) => {
+
+            res.status(200).json({
+                success: true,
+                image,
+            });
+        })
+        .catch(err => res.status(500).json(err));
+
+    //.catch(err => res.status(500).json(err));
+})
+    .get((req, res, next) => {
+        Image.find({})
+            .then(images => {
+                res.status(200).json({
+                    success: true,
+                    images,
+                });
+            })
+            .catch(err => res.status(500).json(err));
+    });
+
+
+/*
+       GET: Fetch most recently added file
+   */
+app.get("/recent", (req, res, next) => {
+    Image.findOne({}, {}, { sort: { '_id': -1 } })
+        .then((image) => {
+            res.status(200).json({
+                success: true,
+                image,
+            });
+        })
+        .catch(err => res.status(500).json(err));
 });
 
-app.get('/download/:id', async (req, res) => {
-    try {
-      const file = await Files.findById(req.params.id);
-      res.set({
-        'Content-Type': file.file_mimetype
-      });
-      res.sendFile(path.join(__dirname, '..', file.file_path));
-    } catch (error) {
-      res.status(400).send('Error while downloading file. Try again later.');
-    }
+
+/*
+        GET: Fetches a particular file by filename
+    */
+app.get('/file/:filename', (req, res, next) => {
+    gfs.find({ filename: req.params.filename }).toArray((err, files) => {
+        if (!files[0] || files.length === 0) {
+            return res.status(200).json({
+                success: false,
+                message: 'No files available',
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            file: files[0],
+        });
+    });
+});
+
+/* 
+        GET: Fetches a particular image and render on browser
+    */
+app.get('/image/:filename', (req, res, next) => {
+    gfs.find({ filename: req.params.filename }).toArray((err, files) => {
+        if (!files[0] || files.length === 0) {
+            return res.status(200).json({
+                success: false,
+                message: 'No files available',
+            });
+        }
+
+        if (files[0].contentType === 'image/jpeg' || files[0].contentType === 'image/png' || files[0].contentType === 'image/svg+xml') {
+            // render image to browser
+            gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+        } else {
+            res.status(404).json({
+                err: 'Not an image',
+            });
+        }
+    });
 });
 
 
-const upload = multer({
-    storage: multer.diskStorage({
-      destination(req, file, cb) {
-        cb(null, './files');
-      },
-      filename(req, file, cb) {
-        cb(null, `${new Date().getTime()}_${file.originalname}`);
-      }
-    }),
-    limits: {
-      fileSize: 1000000 // max file size 1MB = 1000000 bytes
-    },
-    fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls)$/)) {
-        return cb(
-          new Error(
-            'only upload files with jpg, jpeg, png, pdf, doc, docx, xslx, xls format.'
-          )
-        );
-      }
-      cb(undefined, true); // continue with upload
-    }
-  });
 // listen
-app.listen(port, ()=>console.log(`Listening on localhost:${port}`));
+app.listen(port, () => console.log(`Listening on localhost:${port}`));
