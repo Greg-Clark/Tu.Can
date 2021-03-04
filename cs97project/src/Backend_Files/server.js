@@ -136,6 +136,19 @@ app.get("/messages/sync", (req,res) => { // post(send) data to server
     });
 
 });
+app.get("/messages/room", async (req,res) => {
+    const room = req.query.target;
+
+    Messages.find( {chatroomID: room}, (err,data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+});
+
 app.post("/messages/new", (req,res) => { // post(send) data to server
     const databaseMessage = req.body;
 

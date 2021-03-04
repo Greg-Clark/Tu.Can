@@ -44,7 +44,7 @@ function Chat({ messages }) {
             sender: "test",
             timestamp: "now",
             received: true,
-            chatroomID: "test123"
+            chatroomID: "test1234"
         });
 
         setInput('');
@@ -89,13 +89,11 @@ function Chat({ messages }) {
                     <div className="chat__body">
                         {messages.map((message) => (
                             <p className={`chat__message ${message.received && "chat__receiver"}`}>
-                            {/* change to comparing who's logged in to who sent the message*/}
                                 <span style={{color: "black"}}className="chat__name">{message.sender}</span>
                                 {message.content}
                                 <span className="chat__timestamp">{message.timestamp}</span>
                             </p>
                         ))}
-                        {/* think about updating this with authentication */}
                     </div>
                 </ScrollableFeed>
             </div>

@@ -20,7 +20,8 @@ function App() {
 	// const { signOut, currentUser } = useAuth();
 	// axios is just another way to handle get, post and so on
 	useEffect(() => {
-		axios.get('/messages/sync')
+		//room?target=${Sidebar.currentRoom}`
+		axios.get("/messages/sync")
 			.then(response => {
 				console.log(response.data);
 				setMessages(response.data);
@@ -97,7 +98,6 @@ function App() {
 				<Chat
 					messages={messages}
 				/>
-				{/* {currentUser && <button onClick={handleSignOut}>SignOut</button>} */}
 			</div>
 		</div>
 	);

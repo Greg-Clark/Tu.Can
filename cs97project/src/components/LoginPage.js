@@ -16,34 +16,11 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  // async function handleFormSubmit(e) {
-  //   e.preventDefault()
-
-  //   try {
-  //     setError("");
-  //     setLoading(true);
-  //     await login(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
-  //     history.push("/messaging");
-  //   }
-  //   catch {
-  //     setError("Failed to log in");
-  //   }
-
-  //   setLoading(false);
-  // }
 
   async function handleFormSubmit(e) {
     e.preventDefault()
 
-    // try {
-    //   setError("");
-    //   setLoading(true);
-    //   await login(`${emailRef.current.value}@gmail.com`, passwordRef.current.value);
-    //   history.push("/messaging");
-    // }
-    // catch {
-    //   setError("Failed to log in");
-    // }
+
 
     setError("");
     setLoading(true);
