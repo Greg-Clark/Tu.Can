@@ -15,18 +15,19 @@ function App() {
 	const [messages, setMessages] = useState([]);
 	const [rooms, setRooms] = useState([]);
 	const [error, setError] = useState("");
+	const [currentRoom, setCurrentRoom] = useState("");
 	const history = useHistory();
 	const { signout, currentUser } = useUserContext();
 	// const { signOut, currentUser } = useAuth();
 	// axios is just another way to handle get, post and so on
 	useEffect(() => {
 		//room?target=${Sidebar.currentRoom}`
-		axios.get("/messages/sync")
+		axios.get(`/messages/room?target=${currentRoom}`)
 			.then(response => {
 				console.log(response.data);
 				setMessages(response.data);
 			})
-	}, []);
+	}, [messages]);
 
 	// ==================makes messages in mongo real time======================
 	useEffect(() => {
@@ -87,6 +88,11 @@ function App() {
 		}
 	}
 
+	const switchRoom = (newRoomID) => {
+		setCurrentRoom(newRoomID);
+		console.log(currentRoom);
+	}
+
 	// console.log(messages);
 	return (
 	
@@ -94,6 +100,7 @@ function App() {
 			<div className="app_body">
 				<Sidebar 
 					rooms = {rooms}
+					switchRoom={switchRoom}
 				/>
 				<Chat
 					messages={messages}
@@ -102,8 +109,6 @@ function App() {
 		</div>
 	);
 }
-
-
 
 export default App;
 
