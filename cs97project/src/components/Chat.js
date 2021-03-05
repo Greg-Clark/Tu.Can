@@ -33,7 +33,7 @@ function Chat({ messages }) {
     const handleLogout = () => {
         history.push('/');
         signout();
-
+        window.alert("You have been successfully logged out")
     };
 
     const [input, setInput] = useState("");
