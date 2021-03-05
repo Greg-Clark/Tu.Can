@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const Image = require('../models/image');
 const config = require('../config');
 
+
+
 module.exports = (upload) => {
     const url = config.mongoURI;
     const connect = mongoose.createConnection(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
     let gfs;
-
-
     connect.once('open', () => {
         // initialize stream
         gfs = new mongoose.mongo.GridFSBucket(connect.db, {
@@ -25,6 +25,7 @@ module.exports = (upload) => {
         .post(upload.single('file'), (req, res, next) => {
             console.log(req.body);
             // check for existing images
+            /*
             Image.findOne({ caption: req.body.caption })
                 .then((image) => {
                     console.log(image);
@@ -34,24 +35,25 @@ module.exports = (upload) => {
                             message: 'Image already exists',
                         });
                     }
+                    */
 
-                    let newImage = new Image({
-                        caption: req.body.caption,
-                        filename: req.file.filename,
-                        fileId: req.file.id,
+            let newImage = new Image({
+                //caption: req.body.caption,
+                filename: req.file.filename,
+                fileId: req.file.id,
+            });
+
+            newImage.save()
+                .then((image) => {
+
+                    res.status(200).json({
+                        success: true,
+                        image,
                     });
-
-                    newImage.save()
-                        .then((image) => {
-
-                            res.status(200).json({
-                                success: true,
-                                image,
-                            });
-                        })
-                        .catch(err => res.status(500).json(err));
                 })
                 .catch(err => res.status(500).json(err));
+
+            //.catch(err => res.status(500).json(err));
         })
         .get((req, res, next) => {
             Image.find({})

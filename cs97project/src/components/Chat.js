@@ -30,7 +30,7 @@ function Chat({ messages }) {
 
         this.state = {
             recentImage: {},
-            caption: '',
+            //caption: '',
             uploadedImageUrl: '',
             uploadedImage: {},
         };

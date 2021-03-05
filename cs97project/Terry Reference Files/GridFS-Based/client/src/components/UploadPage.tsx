@@ -5,7 +5,7 @@ import Upload from '../assets/images/upload.png';
 
 interface UploadState {
     recentImage: any;
-    caption: string;
+    //caption: string;
     uploadedImageUrl: string;
     uploadedImage: any;
 };
@@ -16,7 +16,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
 
         this.state = {
             recentImage: {},
-            caption: '',
+            //caption: '',
             uploadedImageUrl: '',
             uploadedImage: {},
         };
@@ -35,12 +35,14 @@ class UploadPage extends PureComponent<{}, UploadState> {
     }
 
     uploadImage = () => {
+        /*
         if (!this.state.caption.trim() || !this.state.uploadedImage.name) {
             return alert('Caption or file is missing');
         }
+        */
 
         let formData = new FormData();
-        formData.append('caption', this.state.caption);
+        //formData.append('caption', this.state.caption);
         formData.append('file', this.state.uploadedImage);
 
         axios.post('http://localhost:9890/', formData)
@@ -57,11 +59,12 @@ class UploadPage extends PureComponent<{}, UploadState> {
                 <div className="Recent">
                     <p className="Recent__Title">Recently uploaded file</p>
                     <div className="ImageBox">
+                        {/*
                         <div className="CaptionBox">
                             <p className="ImageBox__Caption">Caption</p>
                             <span className="ImageBox__CaptionValue">{this.state.recentImage.caption}</span>
                         </div>
-
+                        */}
                         <img
                             src={'http://localhost:9890/image/' + this.state.recentImage.filename}
                             alt="recent-image"
@@ -73,6 +76,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
                 <div className="Upload">
                     <p className="Upload__Title">Upload File</p>
                     <div className="Upload__InputSection">
+                        {/*
                         <input
                             type="text"
                             className="Upload__Caption"
@@ -80,6 +84,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
                             onChange={event => this.setState({ caption: event.target.value })}
                             value={this.state.caption}
                         />
+                        */}
                         <input
                             type="file"
                             className="Upload__Input"
