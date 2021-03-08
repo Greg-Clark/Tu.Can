@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserProvider';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
+import { green } from '@material-ui/core/colors';
 
 
 function Chat(props) {
@@ -84,7 +85,7 @@ function Chat(props) {
                             aria-haspopup="true"
                             onClick={handleClick}
                         >
-                            <PaletteIcon />
+                            <PaletteIcon style={{ color: green[500] }} />
                         </IconButton>
                         <Menu
                             id="simple-menu"
