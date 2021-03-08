@@ -55,6 +55,7 @@ export default function Sidebar(props) {
                             placeholder="Find chat"
                             type="text"
                             onChange={e => setSearchQuery(e.target.value)}
+                            className="sidebar_searchContainerInput"
                         />
                     </form>
                 </div>

@@ -120,8 +120,11 @@
 
 .chat__footer > form > .MuiSvgIcon-root {
     padding: 10px;
-    color: var(--chat-footer-form-icon);
     margin: 20px;
+}
+
+.chat_footerInput {
+    color: var(--chat-footer-input-field);
 }
 
 .chat_footerInsertEmojiIcon {

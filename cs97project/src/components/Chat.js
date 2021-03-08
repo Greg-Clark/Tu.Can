@@ -146,6 +146,7 @@ function Chat(props) {
                         onChange={e => setInput(e.target.value)}
                         placeholder="Type a message"
                         type="text"
+                        className="chat_footerInput"
                     />
                     {/* <button type="submit" onClick={sendMessage}>
                         Send a message
