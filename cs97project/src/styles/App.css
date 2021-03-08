@@ -22,8 +22,33 @@ html, body {
 }
 
 .theme-default {
+  /* 
+    To make your own theme copy these values into a new theme class
+    follow our convention of .theme-your_Initials
+    simply change the values afterwards
+      -Greg and Karim
+  */
   --color-background: rgb(235, 238, 240);
+  
   --chat-footer-form-input: white;
+
+  /* borders are in multiple components: chat and sidebar */
+  --border-colors: solid lightgray;
+  
+  --sidebar-search-container: white;
+  --sidebar-search-icon: gray;
+
+  --contact-hover-color: #ebebeb;
+  --contact-border-bottom: solid #f6f6f6;
+
+  --chat-header-info-color: black;
+  --chat-message-color: white;
+  --chat-receiver-text-color: white;
+  --chat-receiver-background-color: #147efb;
+  --chat-footer-form-icon: red;
+
+
+
 }
 
 .theme-gc {

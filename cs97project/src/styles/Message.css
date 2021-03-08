@@ -12,7 +12,7 @@
     padding: 10px;
     width: fit-content;
     border-radius: 10px;
-    background-color: #ffffff;
+    /* background-color: #640e0e; */
     margin-bottom: 30px;
 }
 
@@ -30,5 +30,5 @@
 
 .message__reciever {
     margin-left: auto;
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
 }
