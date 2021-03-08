@@ -59,7 +59,7 @@ function Chat(props) {
             <div className="chat__header">
                 <Avatar />
                 <div className="chat__headerInfo">
-                    <h3>&nbsp;Username</h3> {/*place chat name here? */}
+                    <h3>&nbsp; {props.currentRoom} </h3> {/*place chat name here? */}
                 </div>
                 <div className="chat__headerRight">
                     <IconButton>
