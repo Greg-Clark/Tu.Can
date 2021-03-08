@@ -1,20 +1,47 @@
 html, body {
   height: 98%;
   width: 98%;
+  /* --color-background: rgb(235, 238, 240);
+  --chat-footer-form-input: white; */
 }
 
 .app {
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: #dadbd3;
 }
 
 .app_body {
   display: flex;
-  background-color: #ededed;
+  background-color: var(--color-background);
   /* margin-top: -50px; */
   height: 100vh;
   width: 100vw;
+  
   /* box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75); */
+}
+
+.theme-default {
+  --color-background: rgb(235, 238, 240);
+  --chat-footer-form-input: white;
+}
+
+.theme-gc {
+  --color-background: green
+}
+
+.theme-ks {
+  --color-background: #dadbd3
+}
+
+.theme-mx {
+  --color-background: #dadbd3
+}
+
+.theme-rf {
+  --color-background: #dadbd3
+}
+
+.theme-tc {
+  --color-background: #dadbd3
 }

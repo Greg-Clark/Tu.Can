@@ -12,6 +12,8 @@ import { useHistory } from 'react-router-dom';
 
 
 function App() {
+	// document.documentElement.style.setProperty("--color-background", "red");
+	document.documentElement.setAttribute('class',"theme-default");
 	const [messages, setMessages] = useState([]);
 	const [rooms, setRooms] = useState([]);
 	const [error, setError] = useState("");

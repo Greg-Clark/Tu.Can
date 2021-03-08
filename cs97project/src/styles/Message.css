@@ -1,6 +1,6 @@
 .message_body {
     flex: 1;
-    background-color: #d9d9d9;
+    /* background-color: #d9d9d9; */
     background-repeat: repeat;
     background-position: center;
     padding: 30px;

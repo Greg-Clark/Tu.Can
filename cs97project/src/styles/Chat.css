@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     flex: 0.75;
-    background-color: rgb(235, 238, 240);
+    /* background-color: rgb(235, 238, 240); */
 }
 
 .chat__header {
@@ -40,7 +40,7 @@
 
 .chat__body {
     flex: 1;
-    background-color: rgb(235, 238, 240);
+    /* background-color: rgb(235, 238, 240); */
     background-repeat: repeat;
     background-position: center;
     padding: 7px;
@@ -92,6 +92,7 @@
 }
 
 .chat__footer > form > input {
+    background-color: var(--chat-footer-form-input);
     flex: 1;
     border-radius: 30px;
     padding: 10px;

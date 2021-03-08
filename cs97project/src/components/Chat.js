@@ -23,7 +23,6 @@ function Chat(props) {
     const { signout, currentUser } = useUserContext();
     const currentDate = new Date().toLocaleString();
 
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -32,6 +31,16 @@ function Chat(props) {
         setAnchorEl(null);
     };
 
+    const setTheme = (themeName) => {
+        localStorage.setItem('theme',themeName);
+        document.documentElement.className = themeName;
+    };
+
+    const toggleTheme = () => {
+        
+    };
+
+    
 
     const history = useHistory();
 
@@ -77,7 +86,7 @@ function Chat(props) {
                             aria-haspopup="true"
                             onClick={handleClick}
                         >
-                            <PaletteIcon /> {/* Convert this to a button and not a drop down later*/}
+                            <PaletteIcon />
                         </IconButton>
                         <Menu
                             id="simple-menu"
@@ -87,11 +96,11 @@ function Chat(props) {
                             onClose={handleClose}
                         >
                             <MenuItem onClick={handleClose}>Default Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Greg Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Karim Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Michelle Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Roye Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Terry Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Greg's Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Karim's Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Michelle's Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Roye's Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Terry's Theme</MenuItem>
                         </Menu>
                     </div>
 
