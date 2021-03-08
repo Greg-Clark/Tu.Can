@@ -94,7 +94,7 @@ function Chat(props) {
                             onClose={handleClose}
                         >
                             <MenuItem onClick={e => setTheme(e,'theme-default')}>Default Theme</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-gs')}>Greg's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-gc')}>Greg's Theme</MenuItem>
                             <MenuItem onClick={e => setTheme(e,'theme-ks')}>Karim's Theme</MenuItem>
                             <MenuItem onClick={e => setTheme(e,'theme-mx')}>Michelle's Theme</MenuItem>
                             <MenuItem onClick={e => setTheme(e,'theme-rf')}>Roye's Theme</MenuItem>
@@ -123,7 +123,7 @@ function Chat(props) {
                     <div className="chat__body">
                         {props.messages.map((message) => (
                             <p className={`chat__message ${message.received && "chat__receiver"}`}>
-                                <span style={{ color: "black" }} className="chat__name">{message.sender}</span>
+                                <span className="chat__name">{message.sender}</span>
                                 {message.content}
                                 <span className="chat__timestamp">{message.timestamp}</span>
                             </p>

@@ -59,6 +59,7 @@
 
 .sidebar__searchContainer > form > input {
     flex: 1;
+    background-color: var(--sidebar-search-container-field);
     border-radius: 30px;
     padding: 10px;
     border: none;
