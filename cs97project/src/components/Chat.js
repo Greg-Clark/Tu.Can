@@ -12,8 +12,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserProvider';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PaletteIcon from '@material-ui/icons/Palette';
 
 
 function Chat(props) {
@@ -21,17 +23,18 @@ function Chat(props) {
     const { signout, currentUser } = useUserContext();
     const currentDate = new Date().toLocaleString();
 
-  
+
     const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
+        setAnchorEl(event.currentTarget);
     };
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+
     const history = useHistory();
-    
+
     const handleLogout = () => {
         history.push('/');
         signout();
@@ -44,7 +47,7 @@ function Chat(props) {
         await axios.post("/messages/new", {
             content: input,
             // get current user
-            sender: currentUser, 
+            sender: currentUser,
             // get timestamp
             timestamp: currentDate,
             received: true,
@@ -65,15 +68,17 @@ function Chat(props) {
                     <IconButton>
                         <SearchOutlined />
                     </IconButton>
+
+
                     <div>
-                    <IconButton
-                        aria-label="more"
-                        aria-controls="long-menu"
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                    >
-                        <MoreVertIcon />
-                    </IconButton>
+                        <IconButton
+                            aria-label="more"
+                            aria-controls="long-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                        >
+                            <PaletteIcon /> {/* Convert this to a button and not a drop down later*/}
+                        </IconButton>
                         <Menu
                             id="simple-menu"
                             anchorEl={anchorEl}
@@ -81,10 +86,27 @@ function Chat(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>Themes</MenuItem>
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            <MenuItem onClick={handleClose}>Default Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Greg Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Karim Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Michelle Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Roye Theme</MenuItem>
+                            <MenuItem onClick={handleClose}>Terry Theme</MenuItem>
                         </Menu>
-                        </div>
+                    </div>
+
+
+
+                    <div>
+                        <IconButton
+                            aria-label="more"
+                            aria-controls="long-menu"
+                            aria-haspopup="true"
+                            onClick={handleLogout}
+                        >
+                            <ExitToAppIcon /> 
+                        </IconButton>
+                    </div>
                 </div>
 
             </div>
@@ -94,7 +116,7 @@ function Chat(props) {
                     <div className="chat__body">
                         {props.messages.map((message) => (
                             <p className={`chat__message ${message.received && "chat__receiver"}`}>
-                                <span style={{color: "black"}}className="chat__name">{message.sender}</span>
+                                <span style={{ color: "black" }} className="chat__name">{message.sender}</span>
                                 {message.content}
                                 <span className="chat__timestamp">{message.timestamp}</span>
                             </p>
@@ -122,7 +144,7 @@ function Chat(props) {
                         Send a message
                     </button> */}
                     <IconButton>
-                        <SendIcon type="submit" onClick={sendMessage}/>
+                        <SendIcon type="submit" onClick={sendMessage} />
                     </IconButton>
                 </form>
 
