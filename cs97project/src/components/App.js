@@ -50,7 +50,7 @@ function App() {
 
 	// axios is just another way to handle get, post and so on
 	useEffect(() => {
-		axios.get('/rooms/sync')
+		axios.get(`/rooms/userrooms?target=${currentUser}`)
 			.then(response => {
 				console.log(response.data);
 				setRooms(response.data);

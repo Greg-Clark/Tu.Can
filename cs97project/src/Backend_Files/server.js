@@ -257,6 +257,21 @@ app.get("/rooms/sync", (req,res) => { // post(send) data to server
 });
 
 
+app.get("/rooms/userrooms", (req,res) => { // post(send) data to server
+    const user = req.query.target
+
+    Rooms.find( {users: user}, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+
+});
+
+
 
 // listen
 app.listen(port, ()=>console.log(`Listening on localhost:${port}`));
