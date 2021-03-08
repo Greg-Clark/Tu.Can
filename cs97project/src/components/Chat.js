@@ -16,9 +16,11 @@ import {useHistory} from 'react-router-dom';
 import { useUserContext } from '../contexts/UserProvider';
 
 
-function Chat({ messages }) {
+function Chat(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { signout } = useUserContext();
+    const { signout, currentUser } = useUserContext();
+    const currentDate = new Date().toLocaleString();
+
   
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -41,10 +43,13 @@ function Chat({ messages }) {
         e.preventDefault();
         await axios.post("/messages/new", {
             content: input,
-            sender: "test",
-            timestamp: "now",
+            // get current user
+            sender: currentUser, 
+            // get timestamp
+            timestamp: currentDate,
             received: true,
-            chatroomID: "test1234"
+            // get current room
+            chatroomID: props.currentRoom
         });
 
         setInput('');
@@ -87,7 +92,7 @@ function Chat({ messages }) {
             <div className="chat__full">
                 <ScrollableFeed>
                     <div className="chat__body">
-                        {messages.map((message) => (
+                        {props.messages.map((message) => (
                             <p className={`chat__message ${message.received && "chat__receiver"}`}>
                                 <span style={{color: "black"}}className="chat__name">{message.sender}</span>
                                 {message.content}

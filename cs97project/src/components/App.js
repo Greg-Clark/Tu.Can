@@ -104,6 +104,7 @@ function App() {
 				/>
 				<Chat
 					messages={messages}
+					currentRoom={currentRoom}
 				/>
 			</div>
 		</div>
