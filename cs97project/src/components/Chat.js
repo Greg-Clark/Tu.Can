@@ -31,13 +31,11 @@ function Chat(props) {
         setAnchorEl(null);
     };
 
-    const setTheme = (themeName) => {
+    const setTheme = (event, themeName) => {
+        setAnchorEl(event.currentTarget);
         localStorage.setItem('theme',themeName);
-        document.documentElement.className = themeName;
-    };
-
-    const toggleTheme = () => {
-        
+        props.parent.setAttribute('class',themeName);
+        setAnchorEl(null);
     };
 
     
@@ -95,12 +93,12 @@ function Chat(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>Default Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Greg's Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Karim's Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Michelle's Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Roye's Theme</MenuItem>
-                            <MenuItem onClick={handleClose}>Terry's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-default')}>Default Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-gs')}>Greg's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-ks')}>Karim's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-mx')}>Michelle's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-rf')}>Roye's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-tc')}>Terry's Theme</MenuItem>
                         </Menu>
                     </div>
 

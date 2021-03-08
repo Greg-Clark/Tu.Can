@@ -56,17 +56,34 @@ html, body {
 }
 
 .theme-ks {
-  --color-background: #dadbd3
+  --color-background: rgba(19, 51, 71, 0.849);
+  
+  --chat-footer-form-input: white;
+
+  /* borders are in multiple components: chat and sidebar */
+  --border-colors: solid lightgray;
+  
+  --sidebar-search-container: white;
+  --sidebar-search-icon: gray;
+
+  --contact-hover-color: #ebebeb;
+  --contact-border-bottom: solid #f6f6f6;
+
+  --chat-header-info-color: black;
+  --chat-message-color: white;
+  --chat-receiver-text-color: white;
+  --chat-receiver-background-color: #147efb;
+  --chat-footer-form-icon: red;
 }
 
 .theme-mx {
-  --color-background: #dadbd3
+  
 }
 
 .theme-rf {
-  --color-background: #dadbd3
+  
 }
 
 .theme-tc {
-  --color-background: #dadbd3
+  
 }

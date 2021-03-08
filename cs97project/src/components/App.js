@@ -13,7 +13,10 @@ import { useHistory } from 'react-router-dom';
 
 function App() {
 	// document.documentElement.style.setProperty("--color-background", "red");
-	document.documentElement.setAttribute('class',"theme-default");
+	if (localStorage.getItem('theme') === null) {
+		localStorage.setItem('theme', 'theme-default');
+	}
+	document.documentElement.setAttribute('class',localStorage.getItem('theme'));
 	const [messages, setMessages] = useState([]);
 	const [rooms, setRooms] = useState([]);
 	const [error, setError] = useState("");
@@ -107,6 +110,7 @@ function App() {
 				<Chat
 					messages={messages}
 					currentRoom={currentRoom}
+					parent={document.documentElement}
 				/>
 			</div>
 		</div>
