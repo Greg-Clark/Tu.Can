@@ -29,6 +29,12 @@ html, body {
       -Greg and Karim
   */
   --color-background: rgb(235, 238, 240);
+
+  /* This can be used to easily changethe color of all
+     the icons at once. If you want to change the icon
+     colors indivually then replace where this is assigned
+     to the desired color that you want */
+  --icon-colors: gray;
   
   --chat-footer-form-input: white;
 
@@ -36,16 +42,26 @@ html, body {
   --border-colors: solid lightgray;
   
   --sidebar-search-container: white;
-  --sidebar-search-icon: gray;
+  --sidebar-search-icon: var(--icon-colors);
 
   --contact-hover-color: #ebebeb;
   --contact-border-bottom: solid #f6f6f6;
 
   --chat-header-info-color: black;
+
+  --chat-header-search-outlined: var(--icon-colors);
+  --chat-header-palete-icon: var(--icon-colors);
+  --chat-header-exit-to-app: var(--icon-colors);
+
   --chat-message-color: white;
   --chat-receiver-text-color: white;
   --chat-receiver-background-color: #147efb;
+
   --chat-footer-form-icon: red;
+
+  --chat-footer-insert-emoji-icon: var(--icon-colors);
+  --chat-footer-attach-file: var(--icon-colors);
+  --chat-footer-send-icon: var(--icon-colors);
 
 
 

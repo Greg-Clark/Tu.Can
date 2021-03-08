@@ -23,6 +23,18 @@
     color: var(--chat-header-info-color);
 }
 
+.chat_headerSearchOutlined {
+    color: var(--chat-header-search-outlined);
+}
+
+.chat_headerPalete {
+    color: var(--chat-header-palete-icon);
+}
+
+.chat_headerExitToApp {
+    color: var(--chat-header-exit-to-app);
+}
+
 /* .chat__headerInfo > p {
     color: gray;
 } */
@@ -108,4 +120,16 @@
     padding: 10px;
     color: var(--chat-footer-form-icon);
     margin: 20px;
+}
+
+.chat_footerInsertEmojiIcon {
+    color: var(--chat-footer-insert-emoji-icon);
+}
+
+.chat_footerAttachFile {
+    color: var(--chat-footer-attach-file);
+}
+
+.chat_footerSendIcon {
+    color: var(--chat-footer-send-icon);
 }

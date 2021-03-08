@@ -16,7 +16,6 @@ import { useHistory } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserProvider';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
-import { green } from '@material-ui/core/colors';
 
 
 function Chat(props) {
@@ -74,7 +73,7 @@ function Chat(props) {
                 </div>
                 <div className="chat__headerRight">
                     <IconButton>
-                        <SearchOutlined />
+                        <SearchOutlined className='chat_headerSearchOutlined'/>
                     </IconButton>
 
 
@@ -85,7 +84,7 @@ function Chat(props) {
                             aria-haspopup="true"
                             onClick={handleClick}
                         >
-                            <PaletteIcon style={{ color: green[500] }} />
+                            <PaletteIcon className='chat_headerPalete' />
                         </IconButton>
                         <Menu
                             id="simple-menu"
@@ -112,7 +111,7 @@ function Chat(props) {
                             aria-haspopup="true"
                             onClick={handleLogout}
                         >
-                            <ExitToAppIcon /> 
+                            <ExitToAppIcon className='chat_headerExitToApp'/> 
                         </IconButton>
                     </div>
                 </div>
@@ -136,10 +135,10 @@ function Chat(props) {
             {/* chat footer includes text input form, emoji icon, and media icon for sending media */}
             <div className="chat__footer">
                 <IconButton>
-                    <InsertEmoticonIcon />
+                    <InsertEmoticonIcon className='chat_footerInsertEmojiIcon'/>
                 </IconButton>
                 <IconButton>
-                    <AttachFile />
+                    <AttachFile className='chat_footerAttachFile'/>
                 </IconButton>
                 <form onSubmit={sendMessage}>
                     <input
@@ -152,7 +151,9 @@ function Chat(props) {
                         Send a message
                     </button> */}
                     <IconButton>
-                        <SendIcon type="submit" onClick={sendMessage} />
+                        <SendIcon type="submit" onClick={sendMessage} 
+                            className='chat_footerSendIcon'
+                        />
                     </IconButton>
                 </form>
 
