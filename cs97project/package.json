@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "concurrently": "^6.0.0",
     "cors": "^2.8.5",
+    "emoji-mart": "^3.0.1",
     "express": "^4.17.1",
     "firebase": "^8.2.9",
     "mongoose": "^5.11.17",

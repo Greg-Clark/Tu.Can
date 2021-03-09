@@ -18,11 +18,32 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+
 
 function Chat(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [emojiPickerState, SetEmojiPicker] = useState(false);
     const { signout, currentUser } = useUserContext();
     const currentDate = new Date().toLocaleString();
+    const [input, setInput] = useState("");
+
+    const handleEmojis = (event) => {
+        event.preventDefault();
+        SetEmojiPicker(!emojiPickerState);
+    }
+
+    let emojis;
+    if (emojiPickerState) {
+        emojis = (
+            <Picker
+                emoji="100"
+                title="Pick Emojis"
+                onSelect={emoji => setInput(input + emoji.native)}
+            />
+        );
+    }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -34,12 +55,12 @@ function Chat(props) {
 
     const setTheme = (event, themeName) => {
         setAnchorEl(event.currentTarget);
-        localStorage.setItem('theme',themeName);
-        props.parent.setAttribute('class',themeName);
+        localStorage.setItem('theme', themeName);
+        props.parent.setAttribute('class', themeName);
         setAnchorEl(null);
     };
 
-    
+
 
     const history = useHistory();
 
@@ -49,7 +70,6 @@ function Chat(props) {
         window.alert("You have been successfully logged out")
     };
 
-    const [input, setInput] = useState("");
     const sendMessage = async (e) => {
         e.preventDefault();
         await axios.post("/messages/new", {
@@ -64,6 +84,7 @@ function Chat(props) {
         });
 
         setInput('');
+
     };
     return (
         <div className="chat">
@@ -75,7 +96,7 @@ function Chat(props) {
                 <div className="chat__headerRight">
                     <Tooltip title="Search Messages">
                         <IconButton>
-                            <SearchOutlined className='chat_headerSearchOutlined'/>
+                            <SearchOutlined className='chat_headerSearchOutlined' />
                         </IconButton>
                     </Tooltip>
 
@@ -98,12 +119,12 @@ function Chat(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={e => setTheme(e,'theme-default')}>Default</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-gc')}>Greg</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-ks')}>Karim</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-mx')}>Michelle</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-rf')}>Roye</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-tc')}>Terry</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-default')}>Default</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-gc')}>Greg</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-ks')}>Karim</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-mx')}>Michelle</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-rf')}>Roye</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-tc')}>Terry</MenuItem>
                         </Menu>
                     </div>
 
@@ -117,7 +138,7 @@ function Chat(props) {
                                 aria-haspopup="true"
                                 onClick={handleLogout}
                             >
-                                <ExitToAppIcon className='chat_headerExitToApp'/> 
+                                <ExitToAppIcon className='chat_headerExitToApp' />
                             </IconButton>
                         </Tooltip>
                     </div>
@@ -140,12 +161,20 @@ function Chat(props) {
             </div>
 
             {/* chat footer includes text input form, emoji icon, and media icon for sending media */}
+            <div className="chat_emoji">
+                {emojis}
+            </div>
+            
             <div className="chat__footer">
                 <IconButton>
-                    <InsertEmoticonIcon className='chat_footerInsertEmojiIcon'/>
+                    <InsertEmoticonIcon
+                        onClick={handleEmojis}
+                        className='chat_footerInsertEmojiIcon'
+                    />
                 </IconButton>
+
                 <IconButton>
-                    <AttachFile className='chat_footerAttachFile'/>
+                    <AttachFile className='chat_footerAttachFile' />
                 </IconButton>
                 <form onSubmit={sendMessage}>
                     <input
@@ -159,7 +188,7 @@ function Chat(props) {
                         Send a message
                     </button> */}
                     <IconButton>
-                        <SendIcon type="submit" onClick={sendMessage} 
+                        <SendIcon type="submit" onClick={sendMessage}
                             className='chat_footerSendIcon'
                         />
                     </IconButton>
@@ -172,15 +201,3 @@ function Chat(props) {
 }
 
 export default Chat;
-// export default class Chat extends React.Component{
-//     handleSendMessage = (e) => {
-//         e.preventDefault();
-//         const message = e.target.value;
-
-//         // handle adding message to DB and adding message to messageList here
-//     }
-
-//     render() {
-
-//     }
-// }

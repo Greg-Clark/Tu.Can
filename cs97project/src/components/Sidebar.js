@@ -92,7 +92,7 @@ export default function Sidebar(props) {
 
             <div className="sidebar__search">
                 <div>
-                    <Tooltip title="Add a user">
+                    <Tooltip title="Add a User or Group">
                         <IconButton>
                             <AddIcon
                                 onClick={handleClickOpen}

@@ -145,3 +145,10 @@
 .chat_footerSendIcon {
     color: var(--chat-footer-send-icon);
 }
+
+.chat_emoji {
+    margin-left: 1%;
+    position: relative;
+    /* margin-bottom: 31%; */
+
+}
