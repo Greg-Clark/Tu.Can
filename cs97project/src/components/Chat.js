@@ -58,7 +58,7 @@ function Chat(props) {
             sender: currentUser,
             // get timestamp
             timestamp: currentDate,
-            received: true,
+            received: false,
             // get current room
             chatroomID: props.currentRoom
         });
@@ -129,7 +129,7 @@ function Chat(props) {
                 <ScrollableFeed>
                     <div className="chat__body">
                         {props.messages.map((message) => (
-                            <p className={`chat__message ${message.received && "chat__receiver"}`}>
+                            <p className={`chat__message ${message.sender === currentUser && "chat__receiver"}`}>
                                 <span className="chat__name">{message.sender}</span>
                                 {message.content}
                                 <span className="chat__timestamp">{message.timestamp}</span>
