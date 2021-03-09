@@ -1,6 +1,6 @@
 html, body {
   height: 98%;
-  width: 98%;
+  max-width: 98%;
   /* --color-background: rgb(235, 238, 240);
   --chat-footer-form-input: white; */
 }
