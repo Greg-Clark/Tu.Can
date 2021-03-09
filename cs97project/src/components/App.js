@@ -29,7 +29,7 @@ function App() {
 		//room?target=${Sidebar.currentRoom}`
 		axios.get(`/messages/room?target=${currentRoom}`)
 			.then(response => {
-				console.log(response.data);
+				// console.log(response.data);
 				setMessages(response.data);
 			})
 	}, [messages]);

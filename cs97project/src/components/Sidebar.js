@@ -39,12 +39,18 @@ export default function Sidebar(props) {
     };
     const handleCreatingRoom = (event,values) => {
         event.preventDefault();
+        // console.log(values.roomsusers.split(" "))
         axios.post("rooms/new", {
             chatroomID: values.roomname,
             users: values.roomusers,
         });
         setOpen(false);
     };
+
+    const handleTextFieldInput = (event) => {
+        event.preventDefault();
+        setValues({...values, [event.target.id]:event.target.value});
+    }
 
     const onSearchUsers = (e) => {
         e.preventDefault();
@@ -88,9 +94,10 @@ export default function Sidebar(props) {
                         </IconButton>
                     </Tooltip>
 
-                    <Dialog className='sidebar_dialogPopup' open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Create a new room</DialogTitle>
-                        <DialogContent>
+                        <DialogContent >
+                        
                             <DialogContentText>
                                 To create a room, simply give a room name and specify what users you want include in this chat room
                             </DialogContentText>
@@ -99,8 +106,9 @@ export default function Sidebar(props) {
                                 margin="dense"
                                 id="roomname"
                                 label="Room Name"
+                                type="text"
                                 value = {values.roomname}
-                                // type="email"
+                                onChange = {e=> handleTextFieldInput(e)}
                                 fullWidth
                             />
                             <TextField
@@ -109,7 +117,7 @@ export default function Sidebar(props) {
                                 id="roomusers"
                                 label="Users"
                                 value = {values.roomusers}
-                                // type="email"
+                                onChange = {e => handleTextFieldInput(e)}
                                 fullWidth
                             />
                     </DialogContent>

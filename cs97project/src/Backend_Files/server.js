@@ -230,10 +230,11 @@ app.get("/login", async (req, res) => {
 });
 
 app.post("/rooms/new", (req,res) => { // post(send) data to server
-    const user = req.body;
-
-    Rooms.create(user, (err, data) => {
-        if (err) {
+    const room = req.body;
+    const existingRoom = Rooms.findOne({users : room.users});
+    // const existingUser = Users.findOne({username: { $in: room.users }})
+    Rooms.create(room, (err, data) => {
+        if (err || existingRoom) {
             res.status(500).send(err);
         }
         else {
@@ -242,6 +243,18 @@ app.post("/rooms/new", (req,res) => { // post(send) data to server
     });
 
 });
+
+// app.post("/rooms/new", (req,res) => { // post(send) data to server
+//     const user = req.body;
+//     Rooms.create(user, (err, data) => {
+//         if (err) {
+//             res.status(500).send(err);
+//         }
+//         else {
+//             res.status(201).send(data);
+//         }
+//     });
+// });
 
 app.get("/rooms/sync", (req,res) => { // post(send) data to server
 
