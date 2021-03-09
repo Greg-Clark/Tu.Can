@@ -231,8 +231,8 @@ app.get("/login", async (req, res) => {
 
 app.post("/rooms/new", (req,res) => { // post(send) data to server
     const room = req.body;
-    const existingRoom = Rooms.findOne({users : room.users});
-    const existingUser = Users.findOne({username: { $in: room.users }})
+    const existingRoom = Rooms.find({chatroomID : room.chatroomID});
+    const existingUser = Users.find({username: { $in: [room.users] }});
     Rooms.create(room, (err, data) => {
         if (err || existingRoom || existingUser) {
             res.status(500).send(err);
@@ -241,7 +241,6 @@ app.post("/rooms/new", (req,res) => { // post(send) data to server
             res.status(201).send(data);
         }
     });
-
 });
 
 // app.post("/rooms/new", (req,res) => { // post(send) data to server

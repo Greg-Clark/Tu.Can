@@ -29,19 +29,18 @@ export default function Sidebar(props) {
     const [open, setOpen] = useState(false);
     const [ roomName, setRoomName ] = useState("");
     const [ roomUsers, setRoomUsers ] = useState([]);
-    const [values, setValues] = useState({
-        roomname: '',
-        roomusers: [],
-    })
+
     const handleClickOpen = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
+
     const handleCreatingRoom = (event) => {
         event.preventDefault();
-        console.log(roomUsers);
+        // console.log(roomUsers);
         axios.post("rooms/new", {
             chatroomID: roomName,
             users: roomUsers,
@@ -49,20 +48,16 @@ export default function Sidebar(props) {
         setOpen(false);
     };
 
-    const handleNameTextFieldInput = (event) => {
-        event.preventDefault();
-        setRoomName(event.target.value);
+    const handleRoomName = () => {
+        setRoomName(roomUsers.sort((a, b) => (a.localeCompare(b))).map((name) => name).join(""));
     }
 
-    const handleUsersTextFieldInput = (event) => {
+    const handleTextFieldInput = (event) => {
         event.preventDefault();
-        setRoomUsers(event.target.value.split(" "));
+        setRoomUsers(event.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
+        handleRoomName();
     }
 
-    // const handleTextFieldInput = (event) => {
-    //     event.preventDefault();
-    //     setValues({...values, [event.target.id]:event.target.value});
-    // }
 
     const onSearchUsers = (e) => {
         e.preventDefault();
@@ -111,25 +106,14 @@ export default function Sidebar(props) {
                         <DialogContent >
                         
                             <DialogContentText>
-                                To create a room, simply give a room name and specify what users you want include in this chat room
+                                To create a room, simply give a room name and specify what users (excluding yourself) you want include in this chat room
                             </DialogContentText>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="roomname"
-                                label="Room Name"
-                                type="text"
-                                // value = {roomName}
-                                onChange = {e => handleNameTextFieldInput(e)}
-                                fullWidth
-                            />
                             <TextField
                                 autoFocus
                                 margin="dense"
                                 id="roomusers"
                                 label="Users"
-                                // value = {roomUsers}
-                                onChange = {e => handleUsersTextFieldInput(e)}
+                                onChange = {e => handleTextFieldInput(e)}
                                 fullWidth
                             />
                     </DialogContent>
