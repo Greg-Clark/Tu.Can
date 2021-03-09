@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserProvider';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 function Chat(props) {
@@ -72,20 +73,24 @@ function Chat(props) {
                     <h3>&nbsp; {props.currentRoom} </h3> {/*place chat name here? */}
                 </div>
                 <div className="chat__headerRight">
-                    <IconButton>
-                        <SearchOutlined className='chat_headerSearchOutlined'/>
-                    </IconButton>
+                    <Tooltip title="Search Messages">
+                        <IconButton>
+                            <SearchOutlined className='chat_headerSearchOutlined'/>
+                        </IconButton>
+                    </Tooltip>
 
 
                     <div>
-                        <IconButton
-                            aria-label="more"
-                            aria-controls="long-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                        >
-                            <PaletteIcon className='chat_headerPalete' />
-                        </IconButton>
+                        <Tooltip title="Theme">
+                            <IconButton
+                                aria-label="more"
+                                aria-controls="long-menu"
+                                aria-haspopup="true"
+                                onClick={handleClick}
+                            >
+                                <PaletteIcon className='chat_headerPalete' />
+                            </IconButton>
+                        </Tooltip>
                         <Menu
                             id="simple-menu"
                             anchorEl={anchorEl}
@@ -93,26 +98,28 @@ function Chat(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={e => setTheme(e,'theme-default')}>Default Theme</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-gc')}>Greg's Theme</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-ks')}>Karim's Theme</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-mx')}>Michelle's Theme</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-rf')}>Roye's Theme</MenuItem>
-                            <MenuItem onClick={e => setTheme(e,'theme-tc')}>Terry's Theme</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-default')}>Default</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-gc')}>Greg</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-ks')}>Karim</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-mx')}>Michelle</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-rf')}>Roye</MenuItem>
+                            <MenuItem onClick={e => setTheme(e,'theme-tc')}>Terry</MenuItem>
                         </Menu>
                     </div>
 
 
 
                     <div>
-                        <IconButton
-                            aria-label="more"
-                            aria-controls="long-menu"
-                            aria-haspopup="true"
-                            onClick={handleLogout}
-                        >
-                            <ExitToAppIcon className='chat_headerExitToApp'/> 
-                        </IconButton>
+                        <Tooltip title="Logout">
+                            <IconButton
+                                aria-label="more"
+                                aria-controls="long-menu"
+                                aria-haspopup="true"
+                                onClick={handleLogout}
+                            >
+                                <ExitToAppIcon className='chat_headerExitToApp'/> 
+                            </IconButton>
+                        </Tooltip>
                     </div>
                 </div>
 

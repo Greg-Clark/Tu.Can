@@ -2,35 +2,64 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from './axios';
 import Contact from './Contact';
 import ChatIcon from "@material-ui/icons/Chat";
-import  MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import '../styles/Sidebar.css';
 import { useUserContext } from '../contexts/UserProvider';
+import AddIcon from '@material-ui/icons/Add';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+
+
 export default function Sidebar(props) {
     const roomRef = useRef();
     const { currentUser } = useUserContext();
     const [searchQuery, setSearchQuery] = useState("");
     // const [currentRoom, switchRoom] = useState("");
     const [foundUser, setFoundUser] = useState("");
-    const url = "http://localhost:9000";
+    // form dialog
+    const [open, setOpen] = useState(false);
+    const [values, setValues] = useState({
+        roomname: '',
+        roomusers: [],
+    })
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleCreatingRoom = (event,values) => {
+        event.preventDefault();
+        axios.post("rooms/new", {
+            chatroomID: values.roomname,
+            users: values.roomusers,
+        });
+        setOpen(false);
+    };
 
     const onSearchUsers = (e) => {
         e.preventDefault();
         // console.log(searchQuery);
         axios.get(`/users/search?target=${searchQuery}`)
             .then(response => {
-                if(response.data.username == null)
-                {
+                if (response.data.username == null) {
                     setFoundUser(null);
                     alert('User does not exist');
                 }
-                else
-                {
+                else {
                     setFoundUser(response.data.username);
                 }
             }
-        )
+            )
     };
 
 
@@ -47,7 +76,56 @@ export default function Sidebar(props) {
                 </div>
             </div> */}
 
+
             <div className="sidebar__search">
+                <div>
+                    <Tooltip title="Add a user">
+                        <IconButton>
+                            <AddIcon
+                                onClick={handleClickOpen}
+                                className="sidebar_addIcon"
+                            />
+                        </IconButton>
+                    </Tooltip>
+
+                    <Dialog className='sidebar_dialogPopup' open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Create a new room</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                To create a room, simply give a room name and specify what users you want include in this chat room
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="roomname"
+                                label="Room Name"
+                                value = {values.roomname}
+                                // type="email"
+                                fullWidth
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="roomusers"
+                                label="Users"
+                                value = {values.roomusers}
+                                // type="email"
+                                fullWidth
+                            />
+                    </DialogContent>
+
+                        <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                                Cancel
+                            </Button>
+
+                            <Button onClick={e => handleCreatingRoom(e,values)} color="primary">
+                                Create Room
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+
                 <div className="sidebar__searchContainer">
                     <SearchOutlined />
                     <form onSubmit={onSearchUsers}>
@@ -64,9 +142,9 @@ export default function Sidebar(props) {
             <div className="sidebar__chats">
 
                 {props.rooms.map((room) => (
-                    <Contact 
+                    <Contact
                         switchRoom={props.switchRoom}
-                        roomID = {room.chatroomID}
+                        roomID={room.chatroomID}
                         users={room.users.filter((user) => user !== currentUser)}
                     />
                 ))}

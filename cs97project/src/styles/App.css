@@ -45,6 +45,7 @@ html, body {
   --sidebar-search-container-field: white;
   --sidebar-search-icon: var(--icon-colors);
   --sidebar-search-container-input: black;
+  --sidebar-add-icon: var(--icon-colors);
 
   --contact-hover-color: #ebebeb;
   --contact-border-bottom: solid #f6f6f6;
@@ -86,6 +87,7 @@ html, body {
   --sidebar-search-container-field: rgb(59, 60, 62);
   --sidebar-search-icon: var(--icon-colors);
   --sidebar-search-container-input: white;
+  --sidebar-add-icon: var(--icon-colors);
 
   --contact-hover-color: rgb(59, 60, 62);
   --contact-border-bottom: solid rgb(59, 60, 62);
