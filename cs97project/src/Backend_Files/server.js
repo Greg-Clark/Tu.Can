@@ -232,9 +232,9 @@ app.get("/login", async (req, res) => {
 app.post("/rooms/new", (req,res) => { // post(send) data to server
     const room = req.body;
     const existingRoom = Rooms.findOne({users : room.users});
-    // const existingUser = Users.findOne({username: { $in: room.users }})
+    const existingUser = Users.findOne({username: { $in: room.users }})
     Rooms.create(room, (err, data) => {
-        if (err || existingRoom) {
+        if (err || existingRoom || existingUser) {
             res.status(500).send(err);
         }
         else {

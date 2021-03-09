@@ -39,13 +39,13 @@ export default function Sidebar(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    const handleCreatingRoom = (event,values) => {
+    const handleCreatingRoom = (event) => {
         event.preventDefault();
         console.log(roomUsers);
-        // axios.post("rooms/new", {
-        //     chatroomID: values.roomname,
-        //     users: values.roomusers,
-        // });
+        axios.post("rooms/new", {
+            chatroomID: roomName,
+            users: roomUsers,
+        });
         setOpen(false);
     };
 
@@ -139,7 +139,7 @@ export default function Sidebar(props) {
                                 Cancel
                             </Button>
 
-                            <Button onClick={e => handleCreatingRoom(e,values)} color="primary">
+                            <Button onClick={e => handleCreatingRoom(e)} color="primary">
                                 Create Room
                             </Button>
                         </DialogActions>
