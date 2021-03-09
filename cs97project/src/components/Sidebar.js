@@ -27,6 +27,8 @@ export default function Sidebar(props) {
     const [foundUser, setFoundUser] = useState("");
     // form dialog
     const [open, setOpen] = useState(false);
+    const [ roomName, setRoomName ] = useState("");
+    const [ roomUsers, setRoomUsers ] = useState([]);
     const [values, setValues] = useState({
         roomname: '',
         roomusers: [],
@@ -39,18 +41,28 @@ export default function Sidebar(props) {
     };
     const handleCreatingRoom = (event,values) => {
         event.preventDefault();
-        // console.log(values.roomsusers.split(" "))
-        axios.post("rooms/new", {
-            chatroomID: values.roomname,
-            users: values.roomusers,
-        });
+        console.log(roomUsers);
+        // axios.post("rooms/new", {
+        //     chatroomID: values.roomname,
+        //     users: values.roomusers,
+        // });
         setOpen(false);
     };
 
-    const handleTextFieldInput = (event) => {
+    const handleNameTextFieldInput = (event) => {
         event.preventDefault();
-        setValues({...values, [event.target.id]:event.target.value});
+        setRoomName(event.target.value);
     }
+
+    const handleUsersTextFieldInput = (event) => {
+        event.preventDefault();
+        setRoomUsers(event.target.value.split(" "));
+    }
+
+    // const handleTextFieldInput = (event) => {
+    //     event.preventDefault();
+    //     setValues({...values, [event.target.id]:event.target.value});
+    // }
 
     const onSearchUsers = (e) => {
         e.preventDefault();
@@ -107,8 +119,8 @@ export default function Sidebar(props) {
                                 id="roomname"
                                 label="Room Name"
                                 type="text"
-                                value = {values.roomname}
-                                onChange = {e=> handleTextFieldInput(e)}
+                                // value = {roomName}
+                                onChange = {e => handleNameTextFieldInput(e)}
                                 fullWidth
                             />
                             <TextField
@@ -116,8 +128,8 @@ export default function Sidebar(props) {
                                 margin="dense"
                                 id="roomusers"
                                 label="Users"
-                                value = {values.roomusers}
-                                onChange = {e => handleTextFieldInput(e)}
+                                // value = {roomUsers}
+                                onChange = {e => handleUsersTextFieldInput(e)}
                                 fullWidth
                             />
                     </DialogContent>

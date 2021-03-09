@@ -269,7 +269,6 @@ app.get("/rooms/sync", (req,res) => { // post(send) data to server
 
 });
 
-
 app.get("/rooms/userrooms", (req,res) => { // post(send) data to server
     const user = req.query.target
 
