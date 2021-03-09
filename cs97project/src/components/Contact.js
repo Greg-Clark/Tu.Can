@@ -7,7 +7,7 @@ import '../styles/Contact.css';
 function Contact (props) {
     const handleClick = () => {
         // console.log(props.roomID);
-        props.switchRoom(props.roomID);
+        props.switchRoom(props.roomID, props.users.join(", "));
     }
     
     return (

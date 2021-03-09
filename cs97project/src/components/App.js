@@ -21,6 +21,7 @@ function App() {
 	const [rooms, setRooms] = useState([]);
 	const [error, setError] = useState("");
 	const [currentRoom, setCurrentRoom] = useState("");
+	const [currentUsers, setCurrentUsers ] = useState("");
 	const history = useHistory();
 	const { signout, currentUser } = useUserContext();
 	// const { signOut, currentUser } = useAuth();
@@ -93,9 +94,10 @@ function App() {
 		}
 	}
 
-	const switchRoom = (newRoomID) => {
+	const switchRoom = (newRoomID, newRoomUsers) => {
 		setCurrentRoom(newRoomID);
-		console.log(currentRoom);
+		setCurrentUsers(newRoomUsers);
+		console.log(currentUsers);
 	}
 
 	// console.log(messages);
@@ -110,6 +112,7 @@ function App() {
 				<Chat
 					messages={messages}
 					currentRoom={currentRoom}
+					currentUsers={currentUsers}
 					parent={document.documentElement}
 				/>
 			</div>
