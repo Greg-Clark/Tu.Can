@@ -60,7 +60,7 @@ function App() {
 				console.log(response.data);
 				setRooms(response.data);
 			})
-	}, []);
+	}, [rooms]);
 
 	// ==================makes rooms in mongo real time======================
 	useEffect(() => {
