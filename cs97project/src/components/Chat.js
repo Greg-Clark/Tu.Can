@@ -173,9 +173,6 @@ function Chat(props) {
                     />
                 </IconButton>
 
-                <IconButton>
-                    <AttachFile className='chat_footerAttachFile' />
-                </IconButton>
                 <form onSubmit={sendMessage}>
                     <fieldset disabled={props.currentRoom !== ""} />
                     <input
