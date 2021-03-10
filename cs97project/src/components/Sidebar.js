@@ -70,6 +70,7 @@ export default function Sidebar(props) {
                 }
                 else {
                     setFoundUser(response.data.username);
+                    alert(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username+ '.')
                 }
             }
             )
@@ -134,7 +135,7 @@ export default function Sidebar(props) {
                     <SearchOutlined />
                     <form onSubmit={onSearchUsers}>
                         <input
-                            placeholder="Find chat"
+                            placeholder="Find user"
                             type="text"
                             onChange={e => setSearchQuery(e.target.value)}
                             className="sidebar_searchContainerInput"
