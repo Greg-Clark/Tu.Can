@@ -177,6 +177,7 @@ function Chat(props) {
                     <AttachFile className='chat_footerAttachFile' />
                 </IconButton>
                 <form onSubmit={sendMessage}>
+                    <fieldset disabled={props.currentRoom !== ""} />
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
