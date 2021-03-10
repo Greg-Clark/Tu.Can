@@ -35,8 +35,6 @@ html, body {
      colors indivually then replace where this is assigned
      to the desired color that you want */
   --icon-colors: gray;
-  
-  --chat-footer-form-input: white;
 
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid lightgray;
@@ -52,7 +50,6 @@ html, body {
   --contact-text-color: black;
 
   --chat-header-info-color: black;
-
   --chat-header-search-outlined: var(--icon-colors);
   --chat-header-palete-icon: var(--icon-colors);
   --chat-header-exit-to-app: var(--icon-colors);
@@ -64,13 +61,11 @@ html, body {
   --chat-receiver-text-color: white;
   --chat-receiver-background-color: #147efb;
 
+  --chat-footer-form-input: white;
   --chat-footer-input-field: black;
   --chat-footer-insert-emoji-icon: var(--icon-colors);
   --chat-footer-attach-file: var(--icon-colors);
   --chat-footer-send-icon: var(--icon-colors);
-
-
-
 }
 
 .theme-gc {
@@ -139,15 +134,9 @@ html, body {
 
 .theme-rf {
   --color-background: #fad9d9;
-
   --icon-colors: #617eff;
-  
-  --chat-footer-form-input: rgb(59, 60, 62);
-
-  /* borders are in multiple components: chat and sidebar */
   --border-colors: solid #d8bbff;
   
-  /* --sidebar-search-container: ; */
   --sidebar-search-container-field:  #d8bbff;
   --sidebar-search-icon: var(--icon-colors);
   --sidebar-search-container-input: #2e2e2e;
@@ -169,7 +158,8 @@ html, body {
   --chat-receiver-text-color: (83, 132, 231);
   --chat-receiver-background-color:   #c4cff8;
 
-  --chat-footer-input-field: white;
+  --chat-footer-form-input:  #d8bbff;
+  --chat-footer-input-field:  #2e2e2e;
   --chat-footer-insert-emoji-icon: #4063ff;
   --chat-footer-attach-file:  #4063ff;
   --chat-footer-send-icon: #4063ff;

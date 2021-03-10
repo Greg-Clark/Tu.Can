@@ -4,7 +4,6 @@ Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
     * To-do list - updated as of 3/10:
 
         * Checking if a user exists when creating a room
-        * Themes
         * Deploying/making it public
         * Themes
             * https://windowsterminalthemes.dev/
