@@ -12,14 +12,13 @@ Remainder: From greatest to least priority
         * 3. Meaningfully search through server-side data...:  - Search if a user is registered, so you can create a chatroom with them
 
         * Unique features:
-        1. Ability to create a group chat with multiple people
-        2. Emoji dropdown menu to send emojis
-        3. Change between 6 unique themes for the messaging page
-        4. (Maybe) files/images upload
+        * 1. Ability to create a group chat with multiple people
+        * 2. Emoji popup menu to send emojis
+        * 3. Change between 6 unique themes for the messaging page
+        * 4. (Maybe) files/images upload
  
     * To-do list - updated as of 3/9:
 
-        * Searching content
         * Uploading files
         * Fix register page so it doesn't accept duplicates and takes you somewhere
         * Deploying
