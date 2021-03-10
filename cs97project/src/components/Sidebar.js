@@ -27,8 +27,8 @@ export default function Sidebar(props) {
     const [foundUser, setFoundUser] = useState("");
     // form dialog
     const [open, setOpen] = useState(false);
-    const [ roomName, setRoomName ] = useState("");
-    const [ roomUsers, setRoomUsers ] = useState([]);
+    const [roomName, setRoomName] = useState("");
+    const [roomUsers, setRoomUsers] = useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -41,22 +41,59 @@ export default function Sidebar(props) {
     const handleCreatingRoom = (event) => {
         event.preventDefault();
         // console.log(roomUsers);
-        axios.get(`/users/search?target=${searchQuery}`)
-        .then(response => {
-            if (response.data.username == null) {
-                setFoundUser(null);
-                setOpen(true);
-                alert('User does not exist');
-            }
-            else{
-                axios.post("rooms/new", {
-                    chatroomID: roomName,
-                    users: roomUsers,
-                });
-            }
-        }
-        )
-        
+
+        // idea here is to test each room user against the array of 
+        // all users in the data base. If all users in the room match
+        // to a user in the users database then go ahead and create the room
+        // for(let i = 0; i < roomUsers.length; i++)
+        // {
+        //     if(roomUsers[i] == some valid user)
+        //     {
+        //         axios.get(`/user/sync`).then()
+        //     }
+        // }
+
+        // axios.get(`/rooms/search?target=${roomName}`)
+        // .then(response => {
+        //     if (response.data.chatroomID == null) {
+        //         setFoundUser(null);
+        //         setOpen(true);
+        //         alert('User does not exist');
+        //     }
+        //     else{
+        //         axios.post("rooms/new", {
+        //             chatroomID: roomName,
+        //             users: roomUsers,
+        //         });
+        //     }
+        // }
+        // )
+
+        // let breakcondition = 0;
+        // for (let i = 0; i < roomUsers.length; i++) {
+        //     axios.get(`/rooms/userrooms?target=${roomUsers[i]}`)
+        //         .then(response => {
+        //             if (!response.data && !breakcondition) {
+        //                 setFoundUser(null);
+        //                 setOpen(true);
+        //                 alert('User does not exist');
+        //                 breakcondition = 1;
+        //             }
+        //         })
+        // }
+
+        // if (!breakcondition) {
+        //     axios.post("rooms/new", {
+        //         chatroomID: roomName,
+        //         users: roomUsers,
+        //     });
+        // }
+
+        axios.post("rooms/new", {
+            chatroomID: roomName,
+            users: roomUsers,
+        });
+
         setOpen(false);
     };
 
@@ -66,7 +103,6 @@ export default function Sidebar(props) {
 
     const handleTextFieldInput = (event) => {
         event.preventDefault();
-        setSearchQuery(event.target.value)
         setRoomUsers(event.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
         handleRoomName();
     }
@@ -83,7 +119,7 @@ export default function Sidebar(props) {
                 }
                 else {
                     setFoundUser(response.data.username);
-                    alert(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username+ '.')
+                    alert(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username + '.')
                 }
             }
             )
@@ -118,9 +154,9 @@ export default function Sidebar(props) {
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Create a new room</DialogTitle>
                         <DialogContent >
-                        
+
                             <DialogContentText>
-                                To create a room, simply specify what users (excluding yourself) 
+                                To create a room, simply specify what users (excluding yourself)
                                 you want include in this chat room each seperated by a space
                             </DialogContentText>
                             <TextField
@@ -128,10 +164,10 @@ export default function Sidebar(props) {
                                 margin="dense"
                                 id="roomusers"
                                 label="Users"
-                                onChange = {e => handleTextFieldInput(e)}
+                                onChange={e => handleTextFieldInput(e)}
                                 fullWidth
                             />
-                    </DialogContent>
+                        </DialogContent>
 
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">

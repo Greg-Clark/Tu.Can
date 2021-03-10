@@ -38,7 +38,13 @@ export default function Signup() {
         await axios.post("/users/new", {
             username: emailRef.current.value,
             password: passwordRef.current.value,
-        });
+        }).then(response => {
+            if(!response.data) {
+                alert("you messed up");
+            }
+
+        }
+        );
         login(emailRef.current.value);
         history.push("/messaging"); 
 

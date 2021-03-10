@@ -165,16 +165,16 @@ app.post("/messages/new", (req,res) => { // post(send) data to server
 
 app.post("/users/new", async (req,res) => { // post(send) data to server
     const user = req.body;
-    const existing = Users.findOne({username : user.username});
-    Users.create(user, (err, data) => {
-        if (err || existing) {
+    const update = {};
+    const options = {upsert: true, new:true};
+    Users.findOneAndUpdate({username : user.username}, update, options, (err, data) => {
+        if (err) {
             res.status(500).send(err);
         }
         else {
             res.status(201).send(data);
         }
     });
-
 });
 
 app.get("/users/sync", (req,res) => { // post(send) data to server
@@ -187,7 +187,6 @@ app.get("/users/sync", (req,res) => { // post(send) data to server
             res.status(200).send(data);
         }
     });
-
 });
 
 app.get("/users/search", async (req, res) => {
@@ -229,10 +228,11 @@ app.get("/login", async (req, res) => {
     });
 });
 
-app.post("/rooms/new", (req,res) => { // post(send) data to server
+app.post("/rooms/new", async (req,res) => { // post(send) data to server
     const room = req.body;
-    const existingRoom = Rooms.find({chatroomID : room.chatroomID});
-    const existingUser = Users.find({username: { $in: [room.users] }});
+    const existingRoom = Rooms.findOne({chatroomID : room.chatroomID});
+    const existingUser = Users.findOne({username: { $in: [room.users] }});
+
     Rooms.create(room, (err, data) => {
         if (err || existingRoom || existingUser) {
             res.status(500).send(err);
@@ -281,6 +281,7 @@ app.get("/rooms/userrooms", (req,res) => { // post(send) data to server
     });
 
 });
+
 
 
 
