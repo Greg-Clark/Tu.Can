@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useAuth } from '../services/Auth';
 import { useUserContext } from '../contexts/UserProvider';
 import { Link, useHistory } from 'react-router-dom';
 import axios from './axios';
@@ -14,13 +13,18 @@ export default function Signup() {
     const { login, currentUser } = useUserContext();
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
+    const [ usernameDoesntExists, setUsernameDoesntExists ] = useState(false);
     const history = useHistory();
     const [users, setUsers] = useState([]);
     //const [searchQuery, setSearchQuery] = useState("");
 
     const [input, setInput] = useState("");
 
-    const createUser = async (e) => {
+    const postUser = async () => {
+
+    };
+
+    const createUser = (e) => {
         e.preventDefault();
         if (passwordRef.current.value !== passwordConfirmRef.current.value) // Checks if passwords and password confirmation matches
         {
@@ -31,23 +35,42 @@ export default function Signup() {
         {
             return setError('Password must between 4 and 50 characters');
         }  
-
         setError('');
         setLoading(true);
-        // need to check if user already exists
-        await axios.post("/users/new", {
-            username: emailRef.current.value,
-            password: passwordRef.current.value,
-        });
-        login(emailRef.current.value);
-        history.push("/messaging"); 
+        axios.get(`/users/search?target=${emailRef.current.value}`)
+        .then(response => {
+            if (response.data.username == null) {
+                setUsernameDoesntExists(true);
+            }
+            else {
+                setUsernameDoesntExists(false);
+                setError("User already exists");
+            }
+        })
+        
+        // await axios.post("/users/new", {
+        //     username: emailRef.current.value,
+        //     password: passwordRef.current.value,
+        // });
+        // login(emailRef.current.value);
+        // history.push("/messaging"); 
 
         setLoading(false);
         
         setInput('');
     };
 
-
+    useEffect(() => {
+        if(usernameDoesntExists) {
+            console.log(`Username exists: ${usernameDoesntExists}`)
+            axios.post("/users/new", {
+                username: emailRef.current.value,
+                password: passwordRef.current.value,
+            }); 
+            login(emailRef.current.value);
+            history.push("/messaging");
+        }
+    }, [usernameDoesntExists]);
 
 	// ==================makes users in mongo real time========================
 	useEffect(() => {
