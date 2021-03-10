@@ -108,24 +108,42 @@ html, body {
 }
 
 .theme-ks {
-  --color-background: rgba(2, 19, 29, 0.849);
+  --color-background: #0e193a;
+
+  --icon-colors: white;
   
-  --chat-footer-form-input: white;
+  --chat-footer-form-input: ;
 
   /* borders are in multiple components: chat and sidebar */
-  --border-colors: solid lightgray;
+  --border-colors: solid#545b89;
   
-  --sidebar-search-container: white;
-  --sidebar-search-icon: gray;
+  --sidebar-search-container: #545b89;
+  --sidebar-search-container-field: #545b89;
+  --sidebar-search-icon: var(--icon-colors);
+  --sidebar-search-container-input: white;
+  --sidebar-add-icon: var(--icon-colors);
 
-  --contact-hover-color: #ebebeb;
-  --contact-border-bottom: solid #f6f6f6;
+  --contact-hover-color: #545b89;
+  --contact-border-bottom: solid ;
+  --contact-text-color: white;
 
-  --chat-header-info-color: black;
+  --chat-header-info-color: white;
+
+  --chat-header-search-outlined: var(--icon-colors);
+  --chat-header-palete-icon: var(--icon-colors);
+  --chat-header-exit-to-app: var(--icon-colors);
+
   --chat-message-color: white;
+  --chat-message-background-color: #545b89;
+  --chat-message-name-color: white;
+
   --chat-receiver-text-color: white;
-  --chat-receiver-background-color: #147efb;
-  --chat-footer-form-icon: red;
+  --chat-receiver-background-color: #545b89;
+
+  --chat-footer-input-field: white;
+  --chat-footer-insert-emoji-icon: var(--icon-colors);
+  --chat-footer-attach-file: var(--icon-colors);
+  --chat-footer-send-icon: var(--icon-colors);
 }
 
 .theme-mx {
