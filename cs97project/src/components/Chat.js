@@ -123,7 +123,7 @@ function Chat(props) {
                             <MenuItem onClick={e => setTheme(e, 'theme-gc')}>Greg</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-ks')}>Karim</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-mx')}>Michelle</MenuItem>
-                            <MenuItem onClick={e => setTheme(e, 'theme-rf')}>Roye</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-rf')}>Pastel Pink</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-tc')}>Terry</MenuItem>
                         </Menu>
                     </div>
