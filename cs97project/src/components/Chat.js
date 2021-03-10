@@ -28,6 +28,7 @@ function Chat(props) {
     const { signout, currentUser } = useUserContext();
     const currentDate = new Date().toLocaleString();
     const [input, setInput] = useState("");
+    const [searchMessage, setSearchMessage] = useState("");
 
     const handleEmojis = (event) => {
         event.preventDefault();
@@ -44,6 +45,24 @@ function Chat(props) {
             />
         );
     }
+
+    const searchMessages = (event) => {
+        event.preventDefault();
+        axios.get(`/messages/search?currentContent=${searchMessage}&currentRoom=${props.currentRoom}`)
+            .then(response => {
+                if(response.data === null) {
+                    console.log(searchMessage);
+                    alert("Could not find message");
+                }
+                else {
+                    //handleFoundMEssage();
+                    console.log(JSON.stringify(response))
+                    alert(JSON.stringify(response));
+                }
+            })
+    };
+
+    // const handleFoundMessage = () => {};
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -94,11 +113,22 @@ function Chat(props) {
                     <h3>&nbsp; {props.currentUsers} </h3> {/*place chat name here? */}
                 </div>
                 <div className="chat__headerRight">
-                    <Tooltip title="Search Messages">
+                    {/* <Tooltip title="Search Messages">
                         <IconButton>
                             <SearchOutlined className='chat_headerSearchOutlined' />
                         </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
+                    <div className="sidebar__searchContainer">
+                        <SearchOutlined />
+                        <form onSubmit={searchMessages}>
+                            <input
+                                placeholder="Search Messages"
+                                type="text"
+                                onChange={e => setSearchMessage(e.target.value)}
+                                className="sidebar_searchContainerInput"
+                            />
+                        </form>
+                    </div>
 
 
                     <div>
@@ -164,7 +194,7 @@ function Chat(props) {
             <div className="chat_emoji">
                 {emojis}
             </div>
-            
+
             <div className="chat__footer">
                 <IconButton>
                     <InsertEmoticonIcon

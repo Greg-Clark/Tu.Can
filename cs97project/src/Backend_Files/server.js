@@ -163,6 +163,22 @@ app.post("/messages/new", (req,res) => { // post(send) data to server
 
 });
 
+app.get("/messages/search", async (req, res) => {
+    const currentRoom = req.query.room;
+    const currentContent = req.query.content;
+    Messages.findOne({
+        chatroomID: currentRoom,
+        content : currentContent
+    }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+});
+
 app.post("/users/new", async (req,res) => { // post(send) data to server
     const user = req.body;
     const existing = Users.findOne({username : user.username});
