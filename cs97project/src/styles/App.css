@@ -36,7 +36,6 @@ html, body {
      to the desired color that you want */
   --icon-colors: gray;
   
-  --chat-footer-form-input: white;
 
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid lightgray;
@@ -64,6 +63,7 @@ html, body {
   --chat-receiver-text-color: white;
   --chat-receiver-background-color: #147efb;
 
+  --chat-footer-form-input: white;
   --chat-footer-input-field: black;
   --chat-footer-insert-emoji-icon: var(--icon-colors);
   --chat-footer-attach-file: var(--icon-colors);
@@ -78,7 +78,7 @@ html, body {
 
   --icon-colors: lightgray;
   
-  --chat-footer-form-input: rgb(59, 60, 62);
+  
 
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid rgb(59, 60, 62);
@@ -106,6 +106,7 @@ html, body {
   --chat-receiver-text-color: white;
   --chat-receiver-background-color: #147efb;
 
+  --chat-footer-form-input: rgb(59, 60, 62);
   --chat-footer-input-field: white;
   --chat-footer-insert-emoji-icon: yellow;
   --chat-footer-attach-file: var(--icon-colors);
@@ -115,7 +116,6 @@ html, body {
 .theme-ks {
   --color-background: rgba(2, 19, 29, 0.849);
   
-  --chat-footer-form-input: white;
 
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid lightgray;
@@ -130,7 +130,8 @@ html, body {
   --chat-message-color: white;
   --chat-receiver-text-color: white;
   --chat-receiver-background-color: #147efb;
-  --chat-footer-form-icon: red;
+
+  --chat-footer-form-input: white;
 }
 
 .theme-mx {
@@ -142,7 +143,6 @@ html, body {
 
   --icon-colors: #617eff;
   
-  --chat-footer-form-input: rgb(59, 60, 62);
 
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid #d8bbff;
@@ -169,6 +169,7 @@ html, body {
   --chat-receiver-text-color: (83, 132, 231);
   --chat-receiver-background-color:   #c4cff8;
 
+  --chat-footer-form-input: #d8bbff;
   --chat-footer-input-field: white;
   --chat-footer-insert-emoji-icon: #4063ff;
   --chat-footer-attach-file:  #4063ff;
