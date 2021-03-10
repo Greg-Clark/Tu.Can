@@ -12,6 +12,9 @@ Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
         * Deploying/making it public
         * Themes (also rename it pls)
             * https://windowsterminalthemes.dev/
+        * How are we going to submit? Make the repo public too?
+        * Record presentation video
+        * Create a detailed README
 
     * Low priority tasks    
 
