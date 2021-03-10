@@ -13,7 +13,8 @@ html, body {
 
 .app_body {
   display: flex;
-  background-color: var(--color-background);
+  background: var(--color-background);
+  /* background-image: var(--image-background); */
   /* margin-top: -50px; */
   height: 100vh;
   width: 100vw;
@@ -29,6 +30,8 @@ html, body {
       -Greg and Karim
   */
   --color-background: rgb(235, 238, 240);
+
+  --image-background: ;
 
   /* This can be used to easily changethe color of all
      the icons at once. If you want to change the icon
@@ -147,7 +150,39 @@ html, body {
 }
 
 .theme-mx {
+  /* --color-background: rgb(251,255,181); */
+  --color-background: linear-gradient(#ffebf5, #eeebf5, #ddebf5, #ccebf5, #bbebf5);	
+  --icon-colors:#C4BFDB;
+  --border-colors: black;
+
+  --sidebar-search-container: white;
+  --sidebar-search-container-field: white;
+  --sidebar-search-icon: var(--icon-colors);
+  --sidebar-search-container-input: black;
+  --sidebar-add-icon: var(--icon-colors);
+
+  --contact-hover-color: #ebebeb;
+  --contact-border-bottom: solid #f6f6f6;
+  --contact-text-color: black;
+
+  --chat-header-info-color: black;
+  --chat-header-search-outlined: var(--icon-colors);
+  --chat-header-palete-icon: var(--icon-colors);
+  --chat-header-exit-to-app: var(--icon-colors);
+
+  --chat-message-color: black;
+  --chat-message-background-color: #FAF9F6;
+  --chat-message-name-color: #796d6e;
   
+  --chat-receiver-text-color: white;
+  --chat-receiver-background-color: rgba(1,1,1,0.1);;
+
+  --chat-footer-form-input: white;
+  --chat-footer-input-field: black;
+  --chat-footer-insert-emoji-icon: var(--icon-colors);
+  --chat-footer-attach-file: var(--icon-colors);
+  --chat-footer-send-icon: var(--icon-colors);
+
 }
 
 .theme-rf {
