@@ -152,3 +152,7 @@
     /* margin-bottom: 31%; */
 
 }
+
+.chat_fieldset {
+    border: none;
+}

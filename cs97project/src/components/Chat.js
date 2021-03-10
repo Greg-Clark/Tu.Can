@@ -174,13 +174,14 @@ function Chat(props) {
                 </IconButton>
 
                 <form onSubmit={sendMessage}>
-                    <fieldset disabled={props.currentRoom !== ""} />
+                    <fieldset className="chat_fieldset" disabled={props.currentRoom !== ""} />
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         placeholder="Type a message"
                         type="text"
                         className="chat_footerInput"
+
                     />
                     {/* <button type="submit" onClick={sendMessage}>
                         Send a message
