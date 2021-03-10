@@ -140,13 +140,9 @@ html, body {
 
 .theme-rf {
   --color-background: #fad9d9;
-
   --icon-colors: #617eff;
-  
-
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid #d8bbff;
-  
   /* --sidebar-search-container: ; */
   --sidebar-search-container-field:  #d8bbff;
   --sidebar-search-icon: var(--icon-colors);
@@ -166,11 +162,11 @@ html, body {
   --chat-message-background-color:#b0ffe2;
   --chat-message-name-color: #2e2e2e;
 
-  --chat-receiver-text-color: (83, 132, 231);
+  --chat-receiver-text-color: #2e2e2e;
   --chat-receiver-background-color:   #c4cff8;
 
   --chat-footer-form-input: #d8bbff;
-  --chat-footer-input-field: white;
+  --chat-footer-input-field: #2e2e2e;
   --chat-footer-insert-emoji-icon: #4063ff;
   --chat-footer-attach-file:  #4063ff;
   --chat-footer-send-icon: #4063ff;

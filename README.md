@@ -2,6 +2,20 @@
 Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
 
 Remainder: From greatest to least priority
+
+
+    * Currently planned features
+
+        * Core features:
+        * 1. Display dynamic data to the user...: - Create a private chatroom/privately message other registered users
+        * 2. Upload data from the client to the back-end...:  - Ability to register and create a unique user account
+        * 3. Meaningfully search through server-side data...:  - Search if a user is registered, so you can create a chatroom with them
+
+        * Unique features:
+        1. Ability to create a group chat with multiple people
+        2. Emoji dropdown menu to send emojis
+        3. Change between 6 unique themes for the messaging page
+        4. (Maybe) files/images upload
  
     * To-do list - updated as of 3/9:
 

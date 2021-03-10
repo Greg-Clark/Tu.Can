@@ -41,10 +41,22 @@ export default function Sidebar(props) {
     const handleCreatingRoom = (event) => {
         event.preventDefault();
         // console.log(roomUsers);
-        axios.post("rooms/new", {
-            chatroomID: roomName,
-            users: roomUsers,
-        });
+        axios.get(`/users/search?target=${searchQuery}`)
+        .then(response => {
+            if (response.data.username == null) {
+                setFoundUser(null);
+                setOpen(true);
+                alert('User does not exist');
+            }
+            else{
+                axios.post("rooms/new", {
+                    chatroomID: roomName,
+                    users: roomUsers,
+                });
+            }
+        }
+        )
+        
         setOpen(false);
     };
 
@@ -54,6 +66,7 @@ export default function Sidebar(props) {
 
     const handleTextFieldInput = (event) => {
         event.preventDefault();
+        setSearchQuery(event.target.value)
         setRoomUsers(event.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
         handleRoomName();
     }
@@ -107,7 +120,8 @@ export default function Sidebar(props) {
                         <DialogContent >
                         
                             <DialogContentText>
-                                To create a room, simply give a room name and specify what users (excluding yourself) you want include in this chat room
+                                To create a room, simply specify what users (excluding yourself) 
+                                you want include in this chat room each seperated by a space
                             </DialogContentText>
                             <TextField
                                 autoFocus
@@ -155,7 +169,7 @@ export default function Sidebar(props) {
                 ))}
             </div>
 
-            {foundUser && <p>{foundUser}</p>}
+            {/* {foundUser && <p>{foundUser}</p>} */}
         </div>
     );
 }
