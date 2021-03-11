@@ -3,7 +3,7 @@ import { useUserContext } from '../contexts/UserProvider';
 import { Link, useHistory } from 'react-router-dom';
 import axios from './axios';
 import Pusher from 'pusher-js';
-import tucanOnEgg from '../images/tucanOnEgg.png';
+import tucanOnEgg from '../images/tucanOnEgg2.png';
 
 export default function Signup() {
     
