@@ -8,7 +8,6 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-import { AuthProvider } from "../services/Auth";
 import { UserProvider } from "../contexts/UserProvider";
 import PrivateRoute from "../components/PrivateRoute";
 

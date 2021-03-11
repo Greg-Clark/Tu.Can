@@ -27,7 +27,7 @@ $ npm install
 
 ### Run
 ```
-$ npm run app
+$ npm run dev
 ```
 
 ## Demo

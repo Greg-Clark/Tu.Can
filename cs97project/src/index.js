@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import AppRouter from './routing/AppRouter'
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
-import axios from './components/axios'
+
 ReactDOM.render(
   <React.StrictMode>
     <AppRouter />

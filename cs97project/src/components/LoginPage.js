@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import axios from './axios';
-import { useAuth } from '../services/Auth';
 import { useUserContext } from '../contexts/UserProvider';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/LoginPage.css';

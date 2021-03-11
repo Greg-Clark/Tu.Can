@@ -4,7 +4,6 @@ import Sidebar from './Sidebar';
 import '../styles/App.css';
 import Pusher from 'pusher-js';
 import axios from './axios';
-import { useAuth } from '../services/Auth';
 import { useUserContext } from '../contexts/UserProvider';
 import { useHistory } from 'react-router-dom';
 
