@@ -32,6 +32,7 @@ $ npm run dev
 
 ## Demo
 ![demopic1](./cs97project/src/images/demo/demopic1.JPG) | ![demopic2](./cs97project/src/images/demo/demopic2.JPG)
+<br/>
 ![demopic3](./cs97project/src/images/demo/demopic3.jpg) | ![demopic4](./cs97project/src/images/demo/demopic4.JPG)
 
 ## About
