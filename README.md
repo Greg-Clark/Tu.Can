@@ -31,7 +31,8 @@ $ npm run dev
 ```
 
 ## Demo
-insert some screenshots and the presentation video here
+![demopic1](./cs97project/src/images/demo/demopic1.JPG) ![demopic2](./cs97project/src/images/demo/demopic2.JPG)
+![demopic3](./cs97project/src/images/demo/demopic3.JPG) ![demopic4](./cs97project/src/images/demo/demopic4.JPG)
 
 ## About
 Tu.Can is a simple messaging application built for UCLA CS 97. We were inspired to create a messaging application due to the circumstances of COVID-19. Due to the lack of in-person interaction, we believed a messaging application would help others connect in a remote setting.<br/>
