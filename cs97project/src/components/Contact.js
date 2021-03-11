@@ -12,7 +12,7 @@ function Contact (props) {
     
     return (
         <div className="contact" onClick={handleClick}>
-            <Avatar src="https://i.stack.imgur.com/34AD2.jpg"/>
+            <Avatar>{props.users.join("").charAt(0).toUpperCase()}</Avatar>
             <div className="contact__info">
                 <h2>
                     {props.users.join(", ")}
