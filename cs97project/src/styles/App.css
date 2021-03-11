@@ -221,6 +221,32 @@ html, body {
   --icon-colors: #000000;
   --border-colors: solid #000000;
   
+  --sidebar-search-container-field:  #ffffff;
+  --sidebar-search-icon: var(--icon-colors);
+  --sidebar-search-container-input: #2e2e2e;
+  --sidebar-add-icon: var(--icon-colors);
+
+  --contact-hover-color: #6fb0ce;
+  --contact-border-bottom: solid #000000;
+  --contact-text-color: #2e2e2e;
+
+  --chat-header-info-color: #2e2e2e;
+  --chat-header-search-outlined: var(--icon-colors);
+  --chat-header-palete-icon: var(--icon-colors);
+  --chat-header-exit-to-app: var(--icon-colors);
+
+  --chat-message-color: #000000;
+  --chat-message-background-color:#b0ffe2;
+  --chat-message-name-color: #2e2e2e;
+
+  --chat-receiver-text-color: (0, 0, 0);
+  --chat-receiver-background-color:   #50bba0;
+
+  --chat-footer-form-input:  #ffffff;
+  --chat-footer-input-field:  #000000;
+  --chat-footer-insert-emoji-icon: #428169;
+  --chat-footer-attach-file:  #428169;
+  --chat-footer-send-icon: #428169;
 }
 
 .theme-ks2 {
