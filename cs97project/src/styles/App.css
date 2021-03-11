@@ -113,7 +113,7 @@ html, body {
 
   --icon-colors: white;
   
-  --chat-footer-form-input: ;
+  --chat-footer-form-input: #545b89;
 
   /* borders are in multiple components: chat and sidebar */
   /* --border-colors: solid#545b89; */
@@ -224,7 +224,7 @@ html, body {
 }
 
 .theme-ks2 {
-  --color-background:linear-gradient(#870000, #190a05);;
+  --color-background:linear-gradient(#cc5656, #190a05);;
 
   --icon-colors: white;
   

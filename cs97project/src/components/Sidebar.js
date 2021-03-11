@@ -38,17 +38,15 @@ export default function Sidebar(props) {
 
     const handleCreatingRoom = async (event) => {
         event.preventDefault();
-        await axios.post("users/gc", {
+
+        axios.post("rooms/new", {
+            chatroomID: roomName,
             users: roomUsers,
         }).then(response => {
-            console.log(response.data);
+            if (response.data == "1") {
+                alert("Could Not Create Room");
+            }
         });
-        
-        // console.log(roomUsers);
-        // axios.post("rooms/new", {
-        //     chatroomID: roomName,
-        //     users: roomUsers,
-        // });
         setOpen(false);
     };
 
