@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from './axios';
 import Contact from './Contact';
-import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import '../styles/Sidebar.css';

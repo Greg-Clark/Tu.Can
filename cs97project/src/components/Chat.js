@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import Message from './Message';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
-import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import SendIcon from '@material-ui/icons/Send';
-import { AttachFile, MoreVert, SearchOutlined } from '@material-ui/icons';
+import { SearchOutlined } from '@material-ui/icons';
 import { Avatar, IconButton } from '@material-ui/core';
 import '../styles/Chat.css';
 import axios from './axios'
 import ScrollableFeed from 'react-scrollable-feed'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserProvider';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
