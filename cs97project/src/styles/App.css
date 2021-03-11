@@ -250,7 +250,7 @@ html, body {
 }
 
 .theme-ks2 {
-  --color-background:linear-gradient(#cc5656, #190a05);;
+  --color-background:linear-gradient(#d3ba4c, #190a05);;
 
   --icon-colors: white;
   
@@ -259,14 +259,14 @@ html, body {
   /* borders are in multiple components: chat and sidebar */
   /* --border-colors: solid#545b89; */
   
-  --sidebar-search-container: #895454;
-  --sidebar-search-container-field: #895454;
+  --sidebar-search-container: #d3ba4c;
+  --sidebar-search-container-field: #d3ba4c;
   --sidebar-search-icon: var(--icon-colors);
   --sidebar-search-container-input: white;
   --sidebar-add-icon: var(--icon-colors);
 
-  --contact-hover-color: #895454;
-  --contact-border-bottom: solid #895454;
+  --contact-hover-color: #d3ba4c;
+  --contact-border-bottom: solid #d3ba4c;
   --contact-text-color: white;
 
   --chat-header-info-color: white;
@@ -276,11 +276,11 @@ html, body {
   --chat-header-exit-to-app: var(--icon-colors);
 
   --chat-message-color: white;
-  --chat-message-background-color: #895454;
+  --chat-message-background-color: #d3ba4c;
   --chat-message-name-color: white;
 
   --chat-receiver-text-color: white;
-  --chat-receiver-background-color: #895454;
+  --chat-receiver-background-color: #d3ba4c;
 
   --chat-footer-input-field: white;
   --chat-footer-insert-emoji-icon: var(--icon-colors);
