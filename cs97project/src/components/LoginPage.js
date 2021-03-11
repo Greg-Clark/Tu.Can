@@ -3,7 +3,7 @@ import axios from './axios';
 import { useUserContext } from '../contexts/UserProvider';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/LoginPage.css';
-import tucanInFront from '../images/tucanInFront.png';
+import tucanInFront from '../images/tucanInFront2.png';
 
 export default function LoginPage() {
 
