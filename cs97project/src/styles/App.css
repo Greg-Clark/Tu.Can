@@ -219,6 +219,9 @@ html, body {
 }
 
 .theme-tc {
+  --color-background: linear-gradient(#56a084, #8fdfcb, #aef7e1, #d9faf4);
+  --icon-colors: #000000;
+  --border-colors: solid #000000;
   
 }
 
