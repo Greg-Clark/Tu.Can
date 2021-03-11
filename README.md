@@ -1,30 +1,45 @@
-# CS97Project
-Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
+# Tu.Can 🐦
+Tu.Can is a messaging web application designed for simplicity and minimalism.
 
-    * To-do list - updated as of 3/10:
+## Features
+* Registering a unique user account
+* Creating private or group chatrooms
+* Emoji dropdown menu
+* 6+ unique themes</br>
 
-        * Add "Tu.Can" text to login/register page picture
-        * Fix searching messages
-        * Checking if a user exists when creating a room
-        * Make the repo public too?
-        * Record presentation video
-        * Finish README
+## Technology Stack
+* React 
+* Node/Express
+* MongoDB
 
-    * Low priority tasks    
+## Getting Started
 
-        * Profile management (deleting account, changing username, etc.)
-        * Take underline out of buttons
-        * Animations with CSS (fading, etc.)
-        * Make pop ups/dialog box/emoji box theme-able
+### Requirements
 
-    * Currently planned features
+[Node.js 14.16.0 LTS](https://nodejs.org/en/)
 
-        * Core features:
-        * 1. Display dynamic data to the user...: - Create a private chatroom/privately message other registered users
-        * 2. Upload data from the client to the back-end...:  - Ability to register and create a unique user account
-        * 3. Meaningfully search through server-side data...:  - Search if a user is registered, so you can create a chatroom with them
+### Build
+```
+$ git clone https://github.com/Greg-Clark/CS97Project.git
+$ cd CS97Project/cs97project
+$ npm install
+```
 
-        * Unique features:
-        * 1. Ability to create a group chat with multiple people
-        * 2. Emoji popup menu to send emojis
-        * 3. Change between 6 unique themes for the messaging page
+### Run
+```
+$ npm run app
+```
+
+## Demo
+insert some screenshots and the presentation video here
+
+## About
+Tu.Can is a simple messaging application built for UCLA CS 97. We were inspired to create a messaging application due to the circumstances of COVID-19. Due to the lack of in-person interaction, we believed a messaging application would help others connect in a remote setting.<br/>
+
+The name is inspired by the traditional use of birds as messengers, and that "Tu.Can" talk with the application.<br/>
+
+Some challenges we came across during the project included registering unique users, excluding unregistered users from chatrooms, and having to learn technologies on our own. Aside from technical challenges, we also faced logistical challenges including time management, communication with group members, and leveraging version control.</br>
+
+Future improvements include enforcing safer passwords, notifications when receiving a message, and general code optimizations.<br/>
+
+Created by Karim Saraipour 🌯, Michelle Xie 🐐, Gregory Clark 🍎, Roye Fang 🥛, and Terry Chen 🍳
