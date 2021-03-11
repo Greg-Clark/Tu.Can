@@ -220,29 +220,6 @@ app.get("/users/search", async (req, res) => {
     });
 });
 
-app.get("/users/gc", async (req, res) => {
-    const target = req.body;
-    Users.find({
-        username: { $in: target.users }
-    }, (err, data) => {
-        if (err) {
-            res.status(500).send(err);
-        }
-        else {
-            const arr = data;
-            const length = Object.keys(arr).length;
-            // res.status(200).send(`${target.users.length}`);
-            if(length !== target.users.length)
-            {
-                res.status(200).send("0"); // can't create room
-            }
-            else
-            {
-                res.status(200).send("1"); // can create room
-            }
-        }
-    });
-});
 
 app.get("/login", async (req, res) => {
     const userlogin = req.query.username;
@@ -269,29 +246,36 @@ app.get("/login", async (req, res) => {
 
 app.post("/rooms/new", (req, res) => { // post(send) data to server
     const room = req.body;
-    const existingRoom = Rooms.find({ chatroomID: room.chatroomID });
-    const existingUser = Users.find({ username: { $in: [room.users] } });
-    Rooms.create(room, (err, data) => {
-        if (err || existingRoom || existingUser) {
-            res.status(500).send(err);
+    Rooms.find({ chatroomID: room.chatroomID }, (err, foundRoom) => {
+        if (err) {
+            res.status(501).send(err);
+        }
+        else if (foundRoom === room.chatroomID) {
+            res.send("rip room");
         }
         else {
-            res.status(201).send(data);
+            Users.find({ username: { $in: room.users } }, (err, foundUser) => {
+                if (err) {
+                    res.status(502).send(err);
+                }
+                else if (Object.keys(foundUser).length !== room.users.length) {
+                    res.send("rip user");
+                }
+                else {
+                    Rooms.create(room, (err, data) => {
+                        if (err) {
+                            res.status(503).send(err);
+                        }
+                        else {
+                            res.status(201).send(data);
+                        }
+                    });
+                }
+            });
         }
     });
 });
 
-// app.post("/rooms/new", (req,res) => { // post(send) data to server
-//     const user = req.body;
-//     Rooms.create(user, (err, data) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         }
-//         else {
-//             res.status(201).send(data);
-//         }
-//     });
-// });
 
 app.get("/rooms/sync", (req, res) => { // post(send) data to server
 
