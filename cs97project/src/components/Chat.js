@@ -127,7 +127,7 @@ function Chat(props) {
                                 placeholder="Search Messages"
                                 type="text"
                                 onChange={e => setSearchMessage(e.target.value)}
-                                className="sidebar_searchContainerInput"
+                                className="chat_searchContainerInput"
                             />
                         </form>
                     </div>

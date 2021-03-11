@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PageNotFound from '../images/PageNotFound.png'
+import '../styles/LoginPage.css';
 
 
 function NotFoundPage() {
@@ -22,6 +23,5 @@ function NotFoundPage() {
 		</div>
 	);
 } 
-
 
 export default NotFoundPage;
