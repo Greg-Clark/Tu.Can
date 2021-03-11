@@ -90,17 +90,24 @@ function Chat(props) {
     };
 
     const sendMessage = async (e) => {
-        e.preventDefault();
-        await axios.post("/messages/new", {
-            content: input,
-            // get current user
-            sender: currentUser,
-            // get timestamp
-            timestamp: currentDate,
-            received: false,
-            // get current room
-            chatroomID: props.currentRoom
-        });
+        e.preventDefault(); //without calling this the page will refresh
+        if(props.currentRoom == "")
+        {
+            alert("You cannot send messages in this room")
+        }
+        else
+        {
+            await axios.post("/messages/new", {
+                content: input,
+                // get current user
+                sender: currentUser,
+                // get timestamp
+                timestamp: currentDate,
+                received: false,
+                // get current room
+                chatroomID: props.currentRoom
+            });
+        }
 
         setInput('');
 
@@ -205,7 +212,6 @@ function Chat(props) {
                 </IconButton>
 
                 <form onSubmit={sendMessage}>
-                    <fieldset className="chat_fieldset" disabled={props.currentRoom !== ""} />
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
@@ -217,11 +223,13 @@ function Chat(props) {
                     {/* <button type="submit" onClick={sendMessage}>
                         Send a message
                     </button> */}
-                    <IconButton>
-                        <SendIcon type="submit" onClick={sendMessage}
-                            className='chat_footerSendIcon'
-                        />
-                    </IconButton>
+                    <Tooltip title="Send Message">
+                        <IconButton>
+                            <SendIcon type="submit" onClick={sendMessage}
+                                className='chat_footerSendIcon'
+                            />
+                        </IconButton>
+                    </Tooltip>
                 </form>
 
             </div>

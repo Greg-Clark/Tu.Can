@@ -31,8 +31,6 @@ html, body {
   */
   --color-background: rgb(235, 238, 240);
 
-  --image-background: ;
-
   /* This can be used to easily changethe color of all
      the icons at once. If you want to change the icon
      colors indivually then replace where this is assigned
@@ -76,7 +74,6 @@ html, body {
 
   --icon-colors: lightgray;
   
-  --chat-footer-form-input: rgb(59, 60, 62);
 
   /* borders are in multiple components: chat and sidebar */
   --border-colors: solid rgb(59, 60, 62);
@@ -104,6 +101,7 @@ html, body {
   --chat-receiver-text-color: white;
   --chat-receiver-background-color: #147efb;
 
+  --chat-footer-form-input: rgb(59, 60, 62);
   --chat-footer-input-field: white;
   --chat-footer-insert-emoji-icon: yellow;
   --chat-footer-attach-file: var(--icon-colors);
