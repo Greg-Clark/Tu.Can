@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import useStateRef from 'react-usestateref';
 import axios from './axios';
 import Contact from './Contact';
 import { SearchOutlined } from "@material-ui/icons";
@@ -26,7 +27,9 @@ export default function Sidebar(props) {
     // form dialog
     const [open, setOpen] = useState(false);
     const [roomName, setRoomName] = useState("");
-    const [roomUsers, setRoomUsers] = useState([]);
+    
+    //const [roomUsers, setRoomUsers] = useState([]);
+    const[roomUsers, setRoomUsers, currentRoomUsers] = useStateRef("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -38,10 +41,11 @@ export default function Sidebar(props) {
 
     const handleCreatingRoom = async (event) => {
         event.preventDefault();
-
+        console.log(roomName);
+        console.log(currentRoomUsers.current);
         axios.post("rooms/new", {
             chatroomID: roomName,
-            users: roomUsers,
+            users: currentRoomUsers.current,
         }).then(response => {
             if (response.data == "1") {
                 alert("Could Not Create Room");
@@ -51,12 +55,18 @@ export default function Sidebar(props) {
     };
 
     const handleRoomName = () => {
-        setRoomName(roomUsers.sort((a, b) => (a.localeCompare(b))).map((name) => name).join(""));
+        // setRoomName(roomUsers.sort((a, b) => (a.localeCompare(b))).map((name) => name).join(""));
+        setRoomName(currentRoomUsers.current.sort((a, b) => (a.localeCompare(b))).map((name) => name).join(""));
     }
 
-    const handleTextFieldInput = (event) => {
-        event.preventDefault();
-        setRoomUsers(event.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
+    // const handleTextFieldInput = (event) => {
+    //     event.preventDefault();
+    //     setRoomUsers(event.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
+    //     handleRoomName();
+    // }
+    const handleTextFieldInput = (e) => {
+        e.preventDefault();
+        setRoomUsers(e.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
         handleRoomName();
     }
 
