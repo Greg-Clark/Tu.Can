@@ -108,7 +108,7 @@ function Chat(props) {
     return (
         <div className="chat">
             <div className="chat__header">
-                <Avatar />
+            <Avatar>{props.currentUsers.charAt(0).toUpperCase()}</Avatar>
                 <div className="chat__headerInfo">
                     <h3>&nbsp; {props.currentUsers} </h3> {/*place chat name here? */}
                 </div>
