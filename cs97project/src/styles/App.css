@@ -118,7 +118,7 @@ html, body {
   --chat-footer-form-input: ;
 
   /* borders are in multiple components: chat and sidebar */
-  --border-colors: solid#545b89;
+  /* --border-colors: solid#545b89; */
   
   --sidebar-search-container: #545b89;
   --sidebar-search-container-field: #545b89;
@@ -188,7 +188,7 @@ html, body {
 .theme-rf {
   --color-background: #fad9d9;
   --icon-colors: #617eff;
-  --border-colors: solid #d8bbff;
+  /* --border-colors: solid #d8bbff; */
   
   --sidebar-search-container-field:  #d8bbff;
   --sidebar-search-icon: var(--icon-colors);
@@ -196,7 +196,7 @@ html, body {
   --sidebar-add-icon: var(--icon-colors);
 
   --contact-hover-color: #ced8fd;
-  --contact-border-bottom: solid #d8bbff;
+  /* --contact-border-bottom: solid #d8bbff; */
   --contact-text-color: #2e2e2e;
 
   --chat-header-info-color: #2e2e2e;
@@ -239,7 +239,7 @@ html, body {
 
   --contact-hover-color: #ebebeb;
   --contact-border-bottom: solid #f6f6f6;
-  --contact-text-color: black;
+  --contact-text-color: white;
 
   --chat-header-info-color: black;
   --chat-header-search-outlined: var(--icon-colors);

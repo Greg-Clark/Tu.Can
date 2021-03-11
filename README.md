@@ -4,17 +4,11 @@ Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
     * To-do list - updated as of 3/10:
 
         * Add "Tu.Can" text to login/register page picture
-        * Remove file symbol on messaging page
-        * Remove search messages if we don't implement 
-        * Change the chat icon picture
+        * Fix searching messages
         * Checking if a user exists when creating a room
-        * Login landing page
-        * Deploying/making it public
-        * Themes (also rename it pls)
-            * https://windowsterminalthemes.dev/
-        * How are we going to submit? Make the repo public too?
+        * Make the repo public too?
         * Record presentation video
-        * Create a detailed README
+        * Finish README
 
     * Low priority tasks    
 
@@ -34,4 +28,3 @@ Created by Terry Chen, Gregory Clark, Roye Fang, Karim Saraipour, Michelle Xie
         * 1. Ability to create a group chat with multiple people
         * 2. Emoji popup menu to send emojis
         * 3. Change between 6 unique themes for the messaging page
-        * 4. (Maybe) files/images upload
