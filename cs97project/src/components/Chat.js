@@ -150,11 +150,11 @@ function Chat(props) {
                             onClose={handleClose}
                         >
                             <MenuItem onClick={e => setTheme(e, 'theme-default')}>Default</MenuItem>
-                            <MenuItem onClick={e => setTheme(e, 'theme-gc')}>Greg</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-gc')}>Dark Mode</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-ks')}>Midnight</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-mx')}>Cotton Candy</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-rf')}>Pastel Pink</MenuItem>
-                            <MenuItem onClick={e => setTheme(e, 'theme-tc')}>Terry</MenuItem>
+                            <MenuItem onClick={e => setTheme(e, 'theme-tc')}>Minty Green</MenuItem>
                             <MenuItem onClick={e => setTheme(e, 'theme-ks2')}>Sunset</MenuItem>
                         </Menu>
                     </div>
