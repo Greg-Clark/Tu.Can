@@ -14,7 +14,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 
@@ -26,6 +31,20 @@ function Chat(props) {
     const currentDate = new Date().toLocaleString();
     const [input, setInput] = useState("");
     const [searchMessage, setSearchMessage] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+        setOpen(false);
+    };
 
     const handleEmojis = (event) => {
         event.preventDefault();
@@ -60,13 +79,6 @@ function Chat(props) {
 
     
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     const setTheme = (event, themeName) => {
         setAnchorEl(event.currentTarget);
@@ -83,7 +95,8 @@ function Chat(props) {
                     alert("Your account has been deleted")
                     signout();
                 }
-            })
+            });
+        setOpen(false);
     };
 
     const history = useHistory();
@@ -172,11 +185,32 @@ function Chat(props) {
                                 aria-label="more"
                                 aria-controls="long-menu"
                                 aria-haspopup="true"
-                                onClick={deleteAccount}
+                                onClick={handleClickOpen}
                             >
                                 <DeleteIcon className='chat_trashIcon' />
                             </IconButton>
                         </Tooltip>
+
+                        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Delete Account</DialogTitle>
+                        <DialogContent >
+
+                            <DialogContentText>
+                                WARNING: You are about to delete your account on Tu.Can. If you delete your account by accident, we can recover your messages if you recreate your account with the exact same username. Note the same password is not necessary if you recreate
+                            </DialogContentText>
+                        </DialogContent>
+
+                        <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                                Cancel
+                            </Button>
+
+                            <Button onClick={e => deleteAccount(e)} color="primary">
+                                Delete Account
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+
                     </div>
 
                     <div>
