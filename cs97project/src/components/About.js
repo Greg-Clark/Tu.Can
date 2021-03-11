@@ -12,10 +12,12 @@ class About extends React.Component {
                     <div className="About">
                     <h2>About Tu.can</h2>
                     <br></br>
-                        <p>Tu.Can is a simple messaging app designed to amplify communication. 
-                            Built amid the COVID-19 pandemic, we recognized the lack of human contact 
-                            and face-to-face interaction with remote learning. Therefore, we decided 
-                            to help people settle for the next best thing: messaging.
+                        <p>Tu.Can is a simple messaging application built for UCLA CS 97. We were inspired to create a messaging application due to the circumstances of COVID-19. Due to the lack of in-person interaction, 
+                            we believed a messaging application would help others connect in a remote setting.
+                        </p>
+                        <br></br>
+                        <p>The name is inspired by the traditional use 
+                            of birds as messengers, and that "Tu.Can" talk with the application.
                         </p>
                         <br></br>
                         <p>Created by Terry Chen, Gregory Clark, 
