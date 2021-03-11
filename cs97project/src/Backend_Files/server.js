@@ -249,28 +249,28 @@ app.get("/login", async (req, res) => {
 
 app.post("/rooms/new", (req, res) => { // post(send) data to server
     const room = req.body;
-    Rooms.find({ chatroomID: room.chatroomID }, (err, foundRoom) => {
+    Rooms.findOne({ chatroomID: room.chatroomID }, (err, foundRoom) => {
         if (err) {
-            res.status(501).send(err);
+            res.status(501).send("1");
         }
-        else if (foundRoom === room.chatroomID) {
-            res.send("1");
+        else if (foundRoom) {
+            res.status(200).send("1");
         }
         else {
             Users.find({ username: { $in: room.users } }, (err, foundUser) => {
                 if (err) {
-                    res.status(502).send(err);
+                    res.status(502).send("1");
                 }
                 else if (Object.keys(foundUser).length !== room.users.length) {
-                    res.send("1");
+                    res.status(200).send("1");
                 }
                 else {
                     Rooms.create(room, (err, data) => {
                         if (err) {
-                            res.status(503).send(err);
+                            res.status(503).send("1");
                         }
                         else {
-                            res.status(201).send(data);
+                            res.status(201).send("0");
                         }
                     });
                 }
