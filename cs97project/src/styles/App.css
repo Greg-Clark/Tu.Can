@@ -188,12 +188,12 @@ html, body {
   --icon-colors: #617eff;
   /* --border-colors: solid #d8bbff; */
   
-  --sidebar-search-container-field:  #d8bbff;
+  --sidebar-search-container-field: #ffa3a8;
   --sidebar-search-icon: var(--icon-colors);
   --sidebar-search-container-input: #2e2e2e;
   --sidebar-add-icon: var(--icon-colors);
 
-  --contact-hover-color: #ced8fd;
+  --contact-hover-color:#d8bbff;
   /* --contact-border-bottom: solid #d8bbff; */
   --contact-text-color: #2e2e2e;
 
@@ -209,7 +209,7 @@ html, body {
   --chat-receiver-text-color: (83, 132, 231);
   --chat-receiver-background-color:   #c4cff8;
 
-  --chat-footer-form-input:  #d8bbff;
+  --chat-footer-form-input:  #ffa3a8;
   --chat-footer-input-field:  #2e2e2e;
   --chat-footer-insert-emoji-icon: #4063ff;
   --chat-footer-attach-file:  #4063ff;
