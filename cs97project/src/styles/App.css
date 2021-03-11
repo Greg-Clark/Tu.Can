@@ -125,7 +125,7 @@ html, body {
   --sidebar-add-icon: var(--icon-colors);
 
   --contact-hover-color: #545b89;
-  --contact-border-bottom: solid ;
+  --contact-border-bottom: solid #0e193a;
   --contact-text-color: white;
 
   --chat-header-info-color: white;
