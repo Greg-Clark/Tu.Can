@@ -20,7 +20,7 @@ Tu.Can is a messaging web application designed for simplicity and minimalism.
 
 ### Build
 ```
-$ git clone https://github.com/Greg-Clark/CS97Project.git
+$ git clone https://github.com/Greg-Clark/Tu.Can.git
 $ cd CS97Project/cs97project
 $ npm install
 ```
@@ -31,10 +31,10 @@ $ npm run dev
 ```
 
 ## Demo
-![demopic1](./cs97project/src/images/demo/demopic1.JPG) | ![demopic2](./cs97project/src/images/demo/demopic2.jpg)
+![demopic1](./cs97project/src/images/demo/pic1.jpg) | ![demopic2](./cs97project/src/images/demo/pic2.jpg)
 |:---:|:---:|
-![demopic3](./cs97project/src/images/demo/demopic3.JPG) | ![demopic4](./cs97project/src/images/demo/demopic4.jpg)
-![demopic5](./cs97project/src/images/demo/demopic5.jpg) | ![demopic6](./cs97project/src/images/demo/demopic6.JPG)
+![demopic3](./cs97project/src/images/demo/pic3.jpg) | ![demopic4](./cs97project/src/images/demo/pic4.jpg)
+![demopic5](./cs97project/src/images/demo/pic5.jpg) | ![demopic6](./cs97project/src/images/demo/pic6.jpg)
 
 ## About
 Tu.Can is a simple messaging application built for UCLA CS 97. We were inspired to create a messaging application due to the circumstances of COVID-19. Due to the lack of in-person interaction, we believed a messaging application would help others connect in a remote setting.<br/>
