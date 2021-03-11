@@ -50,7 +50,11 @@ html,body {
     right:0;
     margin-top: 10px;
     margin-right: 10px;
-    
+}
+
+.loginButton:visited{
+    text-decoration: none; 
+    color: black; 
 }
 
 .box1 {

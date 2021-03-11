@@ -7,7 +7,7 @@ import tucanOnEgg from '../images/tucanlogoonegg.png';
 
 export default function Signup() {
 
-    const emailRef = useRef(); // ref for email captures form input
+    const usernameRef = useRef(); // ref for email captures form input
     const passwordRef = useRef(); // captures password form input
     const passwordConfirmRef = useRef();
     const { login, currentUser } = useUserContext();
@@ -16,28 +16,26 @@ export default function Signup() {
     const [usernameDoesntExists, setUsernameDoesntExists] = useState(false);
     const history = useHistory();
     const [users, setUsers] = useState([]);
-    //const [searchQuery, setSearchQuery] = useState("");
-
     const [input, setInput] = useState("");
-
-    const postUser = async () => {
-
-    };
 
     const createUser = (e) => {
         e.preventDefault();
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) // Checks if passwords and password confirmation matches
-        {
+
+        // Checks if username is under 25 characters
+        if (usernameRef.current.value.length < 1 || usernameRef.current.value.length > 25) {
+            return setError('Username must be under 25 characters');
+        }
+        // Checks if passwords and password confirmation matches
+        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match');
         }
-
-        if (passwordRef.current.value.length < 4 || passwordRef.current.value.length > 50) // Checks if passwords and password confirmation matches
-        {
-            return setError('Password must between 4 and 50 characters');
+        // Checks if passwords length is valid
+        if (passwordRef.current.value.length < 4 || passwordRef.current.value.length > 20) {
+            return setError('Password must between 4 and 20 characters');
         }
         setError('');
         setLoading(true);
-        axios.get(`/users/search?target=${emailRef.current.value}`)
+        axios.get(`/users/search?target=${usernameRef.current.value}`)
             .then(response => {
                 if (response.data.username == null) {
                     setUsernameDoesntExists(true);
@@ -48,13 +46,6 @@ export default function Signup() {
                 }
             })
 
-        // await axios.post("/users/new", {
-        //     username: emailRef.current.value,
-        //     password: passwordRef.current.value,
-        // });
-        // login(emailRef.current.value);
-        // history.push("/messaging"); 
-
         setLoading(false);
 
         setInput('');
@@ -63,10 +54,10 @@ export default function Signup() {
     useEffect(() => {
         if (usernameDoesntExists) {
             axios.post("/users/new", {
-                username: emailRef.current.value,
+                username: usernameRef.current.value,
                 password: passwordRef.current.value,
             });
-            login(emailRef.current.value);
+            login(usernameRef.current.value);
             history.push("/messaging");
         }
     }, [usernameDoesntExists]);
@@ -118,7 +109,7 @@ export default function Signup() {
                                 className="input"
                                 type="text"
                                 data-test="username"
-                                ref={emailRef}
+                                ref={usernameRef}
                             /><br />
                             <label>Password</label><br />
                             <input
@@ -145,11 +136,11 @@ export default function Signup() {
                                 Register
                             </button>
 
-                            <div className="buttons">
+                            <button className="buttons">
                                 <Link to="/about">
                                     About
                                 </Link>
-                            </div>
+                            </button>
                         </form>
                     </div>
                     <br></br>
@@ -164,4 +155,3 @@ export default function Signup() {
         </div>
     );
 }
-

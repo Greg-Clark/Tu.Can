@@ -5,7 +5,6 @@ import { useUserContext } from '../contexts/UserProvider';
 export default function PrivateRoute({ component: Component, ...rest})
 {
     const { currentUser } = useUserContext();
-    
     return (
         <Route
             {...rest}

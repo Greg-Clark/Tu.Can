@@ -66,10 +66,11 @@ html,body {
     color: black;
     padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
+    text-decoration: underline;
     display: inline-block;
     font-size: 15px;
     margin: 1px 1px;
+    cursor: pointer;
 }
 
 .input {

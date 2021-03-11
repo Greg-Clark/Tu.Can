@@ -78,42 +78,19 @@ export default function LoginPage() {
                                 type="submit"
                             >
                                 Log In
-              </button>
+                            </button>
                             <button className="buttons">
                                 <Link to="/register">Register </Link>
                             </button>
-                            <div className="buttons">
+                            <button className="buttons">
                                 <Link to="/about">
                                     About
-                    </Link>
-                            </div>
+                                </Link>
+                            </button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     );
 }
-
-
-// function SignInWithGoogle () {
-//     //creates google sign in popup window
-//     const signInWithGoogle = () => {
-//       const provider = new firebase.auth.GoogleAuthProvider();
-//       auth.signInWithPopup(provider);
-//     }
-
-//     return (
-//       <button onClick={signInWithGoogle}>Sign In With Google</button>
-//     )
-//   }
-
-
-  // //If there is a current user, this function will sign them out
-  // function SignOut () {
-  //   return auth.currentUser && (
-  //     <button onClick={() => auth.signOut()}>Sign Out</button>
-  //   )
-  // }
-
