@@ -14,6 +14,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 
@@ -25,11 +32,18 @@ function Chat(props) {
     const currentDate = new Date().toLocaleString();
     const [input, setInput] = useState("");
     const [searchMessage, setSearchMessage] = useState("");
+    const [ open, setOpen ] = useState(false);
+    const [ messageFound, setMessageFound ] = useState("");
 
     const handleEmojis = (event) => {
         event.preventDefault();
         SetEmojiPicker(!emojiPickerState);
     }
+
+    const handleCloseMessage = () => {
+        setOpen(false);
+        setMessageFound("");
+    };
 
     let emojis;
     if (emojiPickerState) {
@@ -48,13 +62,14 @@ function Chat(props) {
             .then(response => {
                 if(response.status == "201")
                 {
-                    alert("Message not found");
+                    setMessageFound("Message not found");
                 }
                 else
                 {
-                    alert("Message found");
+                    setMessageFound(`Message sent on ${response.data.timestamp} by ${response.data.sender}`);
                 }
-            })
+                setOpen(true);
+            });
     };
 
     // const handleFoundMessage = () => {};
@@ -73,8 +88,6 @@ function Chat(props) {
         props.parent.setAttribute('class', themeName);
         setAnchorEl(null);
     };
-
-
 
     const history = useHistory();
 
@@ -222,6 +235,26 @@ function Chat(props) {
                     </Tooltip>
                 </form>
 
+            </div>
+
+            <div>
+                <Dialog
+                    open={open}
+                    onClose={handleCloseMessage}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {messageFound}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseMessage} color="primary" autoFocus>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
 
         </div>
