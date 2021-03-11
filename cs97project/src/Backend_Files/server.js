@@ -49,7 +49,7 @@ const db = mongoose.connection;
 // once database is open, start doing stuff
 db.once('open', () => {
     console.log("Database Connected");
-    
+
     // variable representing collection in mongoDB
     const messageCollection = db.collection("msgcollections");
     // user collection in mongoDB
@@ -89,7 +89,7 @@ db.once('open', () => {
 
         if (change.operationType === 'insert') {
             const userDetails = change.fullDocument;
-            pusher.trigger('users', 'inserted', 
+            pusher.trigger('users', 'inserted',
                 {
                     username: userDetails.username,
                     password: userDetails.password,
@@ -101,14 +101,14 @@ db.once('open', () => {
             console.log('Error triggering Pusher');
         }
     });
-    
+
     //==============change stream for rooms============
     changeStream_rooms.on('change', (change) => {
         console.log('Change Happened:', change);
 
         if (change.operationType === 'insert') {
             const roomDetails = change.fullDocument;
-            pusher.trigger('rooms', 'inserted', 
+            pusher.trigger('rooms', 'inserted',
                 {
                     chatroomID: roomDetails.chatroomID,
                     users: roomDetails.users,
@@ -124,7 +124,7 @@ db.once('open', () => {
 // api routes
 app.get("/", (req, res) => res.status(200).send('Hello World!!')); // get data from server
 
-app.get("/messages/sync", (req,res) => { // post(send) data to server
+app.get("/messages/sync", (req, res) => { // post(send) data to server
 
     Messages.find((err, data) => {
         if (err) {
@@ -136,10 +136,10 @@ app.get("/messages/sync", (req,res) => { // post(send) data to server
     });
 
 });
-app.get("/messages/room", async (req,res) => {
+app.get("/messages/room", async (req, res) => {
     const room = req.query.target;
 
-    Messages.find( {chatroomID: room}, (err,data) => {
+    Messages.find({ chatroomID: room }, (err, data) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -149,7 +149,7 @@ app.get("/messages/room", async (req,res) => {
     });
 });
 
-app.post("/messages/new", (req,res) => { // post(send) data to server
+app.post("/messages/new", (req, res) => { // post(send) data to server
     const databaseMessage = req.body;
 
     Messages.create(databaseMessage, (err, data) => {
@@ -168,7 +168,7 @@ app.get("/messages/search", async (req, res) => {
     const currentContent = req.query.content;
     Messages.findOne({
         chatroomID: currentRoom,
-        content : currentContent
+        content: currentContent
     }, (err, data) => {
         if (err) {
             res.status(500).send(err);
@@ -179,9 +179,9 @@ app.get("/messages/search", async (req, res) => {
     });
 });
 
-app.post("/users/new", async (req,res) => { // post(send) data to server
+app.post("/users/new", async (req, res) => { // post(send) data to server
     const user = req.body;
-    const existing = Users.findOne({username : user.username});
+    const existing = Users.findOne({ username: user.username });
     Users.create(user, (err, data) => {
         if (err || existing) {
             res.status(500).send(err);
@@ -193,7 +193,7 @@ app.post("/users/new", async (req,res) => { // post(send) data to server
 
 });
 
-app.get("/users/sync", (req,res) => { // post(send) data to server
+app.get("/users/sync", (req, res) => { // post(send) data to server
 
     Users.find((err, data) => {
         if (err) {
@@ -203,13 +203,26 @@ app.get("/users/sync", (req,res) => { // post(send) data to server
             res.status(200).send(data);
         }
     });
-
 });
 
 app.get("/users/search", async (req, res) => {
     const target = req.query.target;
     Users.findOne({
-        username : target
+        username: target
+    }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+});
+
+app.get("/users/gc", async (req, res) => {
+    const target = req.query.target;
+    await Users.aggregate({
+        username: { $in: target.users }
     }, (err, data) => {
         if (err) {
             res.status(500).send(err);
@@ -226,29 +239,27 @@ app.get("/login", async (req, res) => {
     await Users.findOne({
         username: userlogin
     }, (err, data) => {
-        if(err) {
+        if (err) {
             res.status(500).send("1");
         }
-        else if(!data) {
+        else if (!data) {
             res.status(200).send("1");
         }
         else {
-            if(userpw !== data.password)
-            {
+            if (userpw !== data.password) {
                 res.status(200).send("1");
             }
-            else
-            {
+            else {
                 res.status(200).send("0");
             }
         }
     });
 });
 
-app.post("/rooms/new", (req,res) => { // post(send) data to server
+app.post("/rooms/new", (req, res) => { // post(send) data to server
     const room = req.body;
-    const existingRoom = Rooms.find({chatroomID : room.chatroomID});
-    const existingUser = Users.find({username: { $in: [room.users] }});
+    const existingRoom = Rooms.find({ chatroomID: room.chatroomID });
+    const existingUser = Users.find({ username: { $in: [room.users] } });
     Rooms.create(room, (err, data) => {
         if (err || existingRoom || existingUser) {
             res.status(500).send(err);
@@ -271,7 +282,7 @@ app.post("/rooms/new", (req,res) => { // post(send) data to server
 //     });
 // });
 
-app.get("/rooms/sync", (req,res) => { // post(send) data to server
+app.get("/rooms/sync", (req, res) => { // post(send) data to server
 
     Rooms.find((err, data) => {
         if (err) {
@@ -284,10 +295,10 @@ app.get("/rooms/sync", (req,res) => { // post(send) data to server
 
 });
 
-app.get("/rooms/userrooms", (req,res) => { // post(send) data to server
+app.get("/rooms/userrooms", (req, res) => { // post(send) data to server
     const user = req.query.target
 
-    Rooms.find( {users: user}, (err, data) => {
+    Rooms.find({ users: user }, (err, data) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -301,4 +312,4 @@ app.get("/rooms/userrooms", (req,res) => { // post(send) data to server
 
 
 // listen
-app.listen(port, ()=>console.log(`Listening on localhost:${port}`));
+app.listen(port, () => console.log(`Listening on localhost:${port}`));

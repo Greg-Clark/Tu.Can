@@ -27,8 +27,8 @@ export default function Sidebar(props) {
     const [foundUser, setFoundUser] = useState("");
     // form dialog
     const [open, setOpen] = useState(false);
-    const [ roomName, setRoomName ] = useState("");
-    const [ roomUsers, setRoomUsers ] = useState([]);
+    const [roomName, setRoomName] = useState("");
+    const [roomUsers, setRoomUsers] = useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -38,13 +38,18 @@ export default function Sidebar(props) {
         setOpen(false);
     };
 
-    const handleCreatingRoom = (event) => {
+    const handleCreatingRoom = async (event) => {
         event.preventDefault();
-        // console.log(roomUsers);
-        axios.post("rooms/new", {
-            chatroomID: roomName,
+        await axios.post("users/gc", {
             users: roomUsers,
-        });
+        }).then(response => {
+            console.log(response.data);
+        })
+        // console.log(roomUsers);
+        // axios.post("rooms/new", {
+        //     chatroomID: roomName,
+        //     users: roomUsers,
+        // });
         setOpen(false);
     };
 
@@ -70,7 +75,7 @@ export default function Sidebar(props) {
                 }
                 else {
                     setFoundUser(response.data.username);
-                    alert(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username+ '.')
+                    alert(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username + '.')
                 }
             }
             )
@@ -105,7 +110,7 @@ export default function Sidebar(props) {
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Create a new room</DialogTitle>
                         <DialogContent >
-                        
+
                             <DialogContentText>
                                 To create a room, simply give a room name and specify what users (excluding yourself) you want include in this chat room
                             </DialogContentText>
@@ -114,10 +119,10 @@ export default function Sidebar(props) {
                                 margin="dense"
                                 id="roomusers"
                                 label="Users"
-                                onChange = {e => handleTextFieldInput(e)}
+                                onChange={e => handleTextFieldInput(e)}
                                 fullWidth
                             />
-                    </DialogContent>
+                        </DialogContent>
 
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">
@@ -148,6 +153,7 @@ export default function Sidebar(props) {
 
                 {props.rooms.map((room) => (
                     <Contact
+                        key={room.chatroomID}
                         switchRoom={props.switchRoom}
                         roomID={room.chatroomID}
                         users={room.users.filter((user) => user !== currentUser)}
