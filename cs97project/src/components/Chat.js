@@ -46,13 +46,13 @@ function Chat(props) {
         event.preventDefault();
         axios.get(`/messages/search?currentContent=${searchMessage}&currentRoom=${props.currentRoom}`)
             .then(response => {
-                if(response.data === null) {
-                    console.log(searchMessage);
+                if (response.data === null) {
+                    // console.log(searchMessage);
                     alert("Could not find message");
                 }
                 else {
-                    //handleFoundMEssage();
-                    console.log(JSON.stringify(response))
+                    // handleFoundMEssage();
+                    // console.log(JSON.stringify(response));
                     alert(JSON.stringify(response));
                 }
             })
@@ -166,14 +166,14 @@ function Chat(props) {
 
                     <div>
                         <Tooltip title="Logout">
-                            <IconButton
+                            <button
                                 aria-label="more"
                                 aria-controls="long-menu"
                                 aria-haspopup="true"
                                 onClick={handleLogout}
                             >
                                 <ExitToAppIcon className='chat_headerExitToApp' />
-                            </IconButton>
+                            </button>
                         </Tooltip>
                     </div>
                 </div>
