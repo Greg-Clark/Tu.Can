@@ -174,20 +174,23 @@ app.get("/messages/search", async (req, res) => {
             res.status(500).send(err);
         }
         else {
-            res.status(200).send(data);
+            if (data) {
+                res.status(200).send(data);
+            }
+            else {
+                res.status(201).send("1");
+            }
         }
     });
 });
 
 app.post("/users/new", async (req, res) => { // post(send) data to server
     const user = req.body;
-    const existing = Users.findOne({ username: user.username });
     Users.create(user, (err, data) => {
-        if (err || existing) {
+        if (err) {
             res.status(500).send(err);
         }
         else {
-            data
             res.status(201).send(data);
         }
     });
@@ -251,7 +254,7 @@ app.post("/rooms/new", (req, res) => { // post(send) data to server
             res.status(501).send(err);
         }
         else if (foundRoom === room.chatroomID) {
-            res.send("rip room");
+            res.send("1");
         }
         else {
             Users.find({ username: { $in: room.users } }, (err, foundUser) => {
@@ -259,7 +262,7 @@ app.post("/rooms/new", (req, res) => { // post(send) data to server
                     res.status(502).send(err);
                 }
                 else if (Object.keys(foundUser).length !== room.users.length) {
-                    res.send("rip user");
+                    res.send("1");
                 }
                 else {
                     Rooms.create(room, (err, data) => {
