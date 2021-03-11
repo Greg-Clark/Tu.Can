@@ -1,5 +1,5 @@
 import React from 'react';
-import tucanOnEgg from '../images/tucanOnEgg2.png';
+import tucanOnEgg from '../images/tucanlogoonegg.png';
 import { Link, useHistory } from 'react-router-dom';
 import '../styles/About.css';
 
