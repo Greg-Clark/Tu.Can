@@ -138,7 +138,23 @@ function Chat(props) {
                                 className="sidebar_searchContainerInput"
                             />
                         </form>
+
+
                     </div>
+                        <Dialog onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Message Found</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {messageFound}
+                            </DialogContentText>
+                        </DialogContent>
+
+                        <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                                Okay
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
 
 
                     <div>
