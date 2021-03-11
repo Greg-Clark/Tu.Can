@@ -10,9 +10,11 @@ function NotFoundPage() {
 				<img src={PageNotFound}  />
 			</p>
 			<p style={{ textAlign: "center" }}>
+				<br/>
 				<h1>Sorry this page was not found</h1>
 			</p>
 			<p style={{ textAlign: "center" }}>
+			<br/>
 				<Link to="/">Return to Home </Link>
 			</p>
 		</div>
