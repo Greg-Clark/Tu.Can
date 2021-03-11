@@ -46,8 +46,13 @@ function Chat(props) {
         event.preventDefault();
         axios.get(`/messages/search?currentContent=${searchMessage}&currentRoom=${props.currentRoom}`)
             .then(response => {
-                if(response.data != "1") { 
-                    alert(JSON.stringify(response));
+                if(response.status == "201")
+                {
+                    alert("Message not found");
+                }
+                else
+                {
+                    alert("Message found");
                 }
             })
     };

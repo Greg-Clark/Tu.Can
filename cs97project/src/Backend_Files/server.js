@@ -178,7 +178,7 @@ app.get("/messages/search", async (req, res) => {
                 res.status(200).send(data);
             }
             else {
-                res.status(201).send("1");
+                res.status(201).send(data);
             }
         }
     });
