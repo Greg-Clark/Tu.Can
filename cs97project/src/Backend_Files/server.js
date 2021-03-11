@@ -187,6 +187,7 @@ app.post("/users/new", async (req, res) => { // post(send) data to server
             res.status(500).send(err);
         }
         else {
+            data
             res.status(201).send(data);
         }
     });
@@ -220,15 +221,25 @@ app.get("/users/search", async (req, res) => {
 });
 
 app.get("/users/gc", async (req, res) => {
-    const target = req.query.target;
-    await Users.aggregate({
+    const target = req.body;
+    Users.find({
         username: { $in: target.users }
     }, (err, data) => {
         if (err) {
             res.status(500).send(err);
         }
         else {
-            res.status(200).send(data);
+            const arr = data;
+            const length = Object.keys(arr).length;
+            // res.status(200).send(`${target.users.length}`);
+            if(length !== target.users.length)
+            {
+                res.status(200).send("0"); // can't create room
+            }
+            else
+            {
+                res.status(200).send("1"); // can create room
+            }
         }
     });
 });

@@ -23,7 +23,7 @@ export default function Sidebar(props) {
     const roomRef = useRef();
     const { currentUser } = useUserContext();
     const [searchQuery, setSearchQuery] = useState("");
-    // const [currentRoom, switchRoom] = useState("");
+    const [ error, setError] = useState("");
     const [foundUser, setFoundUser] = useState("");
     // form dialog
     const [open, setOpen] = useState(false);
@@ -44,7 +44,8 @@ export default function Sidebar(props) {
             users: roomUsers,
         }).then(response => {
             console.log(response.data);
-        })
+        });
+        
         // console.log(roomUsers);
         // axios.post("rooms/new", {
         //     chatroomID: roomName,
