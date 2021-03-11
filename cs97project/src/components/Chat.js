@@ -115,11 +115,6 @@ function Chat(props) {
                     <h3>&nbsp; {props.currentUsers} </h3> {/*place chat name here? */}
                 </div>
                 <div className="chat__headerRight">
-                    {/* <Tooltip title="Search Messages">
-                        <IconButton>
-                            <SearchOutlined className='chat_headerSearchOutlined' />
-                        </IconButton>
-                    </Tooltip> */}
                     <div className="sidebar__searchContainer">
                         <SearchOutlined />
                         <form onSubmit={searchMessages}>
@@ -127,7 +122,7 @@ function Chat(props) {
                                 placeholder="Search Messages"
                                 type="text"
                                 onChange={e => setSearchMessage(e.target.value)}
-                                className="chat_searchContainerInput"
+                                className="sidebar_searchContainerInput"
                             />
                         </form>
                     </div>
