@@ -5,7 +5,7 @@ Tu.Can is a messaging web application designed for simplicity and minimalism.
 * Registering a unique user account
 * Creating private or group chatrooms
 * Emoji dropdown menu
-* 6+ unique themes</br>
+* 5+ unique themes</br>
 
 ## Technology Stack
 * React 
@@ -16,7 +16,7 @@ Tu.Can is a messaging web application designed for simplicity and minimalism.
 
 ### Requirements
 
-[Node.js 14.16.0 LTS](https://nodejs.org/en/)
+[Node.js 14.16.0 LTS](https://nodejs.org/en/) or higher
 
 ### Build
 ```
