@@ -36,6 +36,10 @@
     color: var(--chat-header-exit-to-app);
 }
 
+.chat_trashIcon {
+    color: var(--chat-header-exit-to-app);
+}
+
 /* .chat__headerInfo > p {
     color: gray;
 } */

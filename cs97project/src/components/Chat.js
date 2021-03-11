@@ -13,6 +13,7 @@ import { useUserContext } from '../contexts/UserProvider';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaletteIcon from '@material-ui/icons/Palette';
 import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
@@ -57,7 +58,7 @@ function Chat(props) {
             })
     };
 
-    // const handleFoundMessage = () => {};
+    
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -74,7 +75,16 @@ function Chat(props) {
         setAnchorEl(null);
     };
 
-
+    const deleteAccount = (event) => {
+        event.preventDefault();
+        axios.get(`/users/delete?target=${currentUser}`)
+            .then(response => {
+                if(response) {
+                    alert("Your account has been deleted")
+                    signout();
+                }
+            })
+    };
 
     const history = useHistory();
 
@@ -156,7 +166,18 @@ function Chat(props) {
                         </Menu>
                     </div>
 
-
+                    <div>
+                        <Tooltip title="Delete Account">
+                            <IconButton
+                                aria-label="more"
+                                aria-controls="long-menu"
+                                aria-haspopup="true"
+                                onClick={deleteAccount}
+                            >
+                                <DeleteIcon className='chat_trashIcon' />
+                            </IconButton>
+                        </Tooltip>
+                    </div>
 
                     <div>
                         <Tooltip title="Logout">

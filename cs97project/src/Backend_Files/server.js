@@ -223,6 +223,19 @@ app.get("/users/search", async (req, res) => {
     });
 });
 
+app.get("/users/delete", async (req, res) => {
+    const target = req.query.target;
+    Users.findOneAndDelete({
+        username: target
+    }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+});
 
 app.get("/login", async (req, res) => {
     const userlogin = req.query.username;
