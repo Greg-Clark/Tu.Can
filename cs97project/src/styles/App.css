@@ -250,7 +250,16 @@ html, body {
 }
 
 .theme-ks2 {
-  --color-background:linear-gradient(#d3ba4c, #190a05);;
+  --color-background:linear-gradient(to top,
+   #040308,
+   #AD4A28,
+   #DD723C,
+   #FC7001,
+   #DCB698,
+   #9BA5AE,
+   #3E5879,
+   #020B1A
+  );
 
   --icon-colors: white;
   
