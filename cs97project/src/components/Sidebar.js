@@ -25,7 +25,8 @@ export default function Sidebar(props) {
     const [foundUser, setFoundUser] = useState("");
     const [open, setOpen] = useState(false);
     const [roomName, setRoomName] = useState("");
-    const[roomUsers, setRoomUsers, currentRoomUsers] = useStateRef("");
+    const [roomUsers, setRoomUsers, currentRoomUsers] = useStateRef("");
+    const [error, setError] = useState("");
 
     // Open modal
     const handleClickOpen = () => {
@@ -35,6 +36,7 @@ export default function Sidebar(props) {
     // Close modal
     const handleClose = () => {
         setOpen(false);
+        setError("");
     };
 
     // Create room handler
@@ -47,10 +49,14 @@ export default function Sidebar(props) {
             users: currentRoomUsers.current,
         }).then(response => {
             if (response.data == "1") {
-                alert("Could Not Create Room");
+                setError("Could not create room");
+            }
+            else
+            {
+                setError("");
+                setOpen(false);
             }
         });
-        setOpen(false);
     };
 
     // Room name handler
@@ -99,8 +105,13 @@ export default function Sidebar(props) {
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Create a new room</DialogTitle>
                         <DialogContent >
-                            <DialogContentText>
-                                To create a room, simply give a room name and specify what users (excluding yourself) you want include in this chat room
+                            <DialogContentText disableTypography="true">
+                                <span>
+                                    To create a room, simply give a room name and specify what users (excluding yourself) you
+                                    want include in this chat room
+                                </span>
+                                <br />
+                                {error && <span style={{color: "red"}}>{error}</span>}
                             </DialogContentText>
                             <TextField
                                 autoFocus
