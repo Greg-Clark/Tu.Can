@@ -7,24 +7,21 @@ import tucanInFront from '../images/tucanlogoonegg.png';
 
 export default function LoginPage() {
 
+    // Hooks
     const emailRef = useRef();
     const passwordRef = useRef();
-    // const { login, SignInWithGoogle } = useAuth();
     const { login } = useUserContext();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
-
+    // Submit handler for login
     async function handleFormSubmit(e) {
-        e.preventDefault()
 
-
-
+        e.preventDefault();
         setError("");
         setLoading(true);
         e.preventDefault();
-        // console.log(searchQuery);
         axios.get(`/login?username=${emailRef.current.value}&password=${passwordRef.current.value}`)
             .then(response => {
                 // console.log(response.data);
@@ -37,19 +34,20 @@ export default function LoginPage() {
                     setError("Failed to login");
                 }
             });
-
         setLoading(false);
     }
 
-
     return (
         <div className="grid">
+            {/* Logo */}
             <div className="box1">
                 <div className="Logo"><img src={tucanInFront} alt={"tucanInFront"} /></div>
             </div>
+            {/* Black line */}
             <div class="box2">
                 <div className="VerticalBlackLine"></div>
             </div>
+            {/* Login box */}
             <div class="box3">
                 <div className="LoginBox">
                     <h2>Login</h2>

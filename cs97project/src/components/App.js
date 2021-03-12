@@ -1,40 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useUserContext } from '../contexts/UserProvider';
+import axios from './axios';
 import Chat from './Chat';
 import Sidebar from './Sidebar';
-import '../styles/App.css';
 import Pusher from 'pusher-js';
-import axios from './axios';
-import { useUserContext } from '../contexts/UserProvider';
-import { useHistory } from 'react-router-dom';
-
-// import { render } from '@testing-library/react';
-
+import '../styles/App.css';
 
 function App() {
-    // document.documentElement.style.setProperty("--color-background", "red");
-    if (localStorage.getItem('theme') === null) {
-        localStorage.setItem('theme', 'theme-default');
-    }
-    document.documentElement.setAttribute('class', localStorage.getItem('theme'));
+
+    // Hooks
     const [messages, setMessages] = useState([]);
     const [rooms, setRooms] = useState([]);
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
     const [currentRoom, setCurrentRoom] = useState("");
     const [currentUsers, setCurrentUsers] = useState("");
     const history = useHistory();
     const { signout, currentUser } = useUserContext();
-    // const { signOut, currentUser } = useAuth();
-    // axios is just another way to handle get, post and so on
+
+    // Default theme
+    if (localStorage.getItem('theme') === null) {
+        localStorage.setItem('theme', 'theme-default');
+    }
+    document.documentElement.setAttribute('class', localStorage.getItem('theme'));
+
+    // makes messages real time
     useEffect(() => {
-        //room?target=${Sidebar.currentRoom}`
         axios.get(`/messages/room?target=${currentRoom}`)
             .then(response => {
-                // console.log(response.data);
                 setMessages(response.data);
             })
     }, [messages]);
 
-    // ==================makes messages in mongo real time======================
     useEffect(() => {
         const pusher = new Pusher('8cdc3d1a07077d29caf4', {
             cluster: 'us3'
@@ -53,7 +50,6 @@ function App() {
         };
     }, [messages]); // captures messages since it is a dependency
 
-    // axios is just another way to handle get, post and so on
     useEffect(() => {
         axios.get(`/rooms/userrooms?target=${currentUser}`)
             .then(response => {
@@ -62,7 +58,7 @@ function App() {
             })
     }, [rooms]);
 
-    // ==================makes rooms in mongo real time======================
+    // makes rooms in mongo real time
     useEffect(() => {
         const pusher = new Pusher('8cdc3d1a07077d29caf4', {
             cluster: 'us3'
@@ -81,27 +77,24 @@ function App() {
         };
     }, [rooms]); // captures rooms since it is a dependency
 
-    async function handleSignOut() {
-        setError("");
+    // async function handleSignOut() {
+    //     setError("");
 
-        try {
-            await signout();
-            history.push("/");
-        }
-        catch {
-            setError("Cannot log out");
-        }
-    }
+    //     try {
+    //         await signout();
+    //         history.push("/");
+    //     }
+    //     catch {
+    //         setError("Cannot log out");
+    //     }
+    // }
 
     const switchRoom = (newRoomID, newRoomUsers) => {
         setCurrentRoom(newRoomID);
         setCurrentUsers(newRoomUsers);
-        // console.log(currentUsers);
     }
 
-    // console.log(messages);
     return (
-
         <div className="app">
             <div className="app_body">
                 <Sidebar

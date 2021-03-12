@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PageNotFound from '../images/PageNotFound.png'
 import '../styles/LoginPage.css';
 
-
+// For invalid URLs
 function NotFoundPage() {
 	return (
 		<div>

@@ -7,8 +7,9 @@ import tucanOnEgg from '../images/tucanlogoonegg.png';
 
 export default function Signup() {
 
-    const usernameRef = useRef(); // ref for email captures form input
-    const passwordRef = useRef(); // captures password form input
+    // Hooks
+    const usernameRef = useRef();
+    const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const { login, currentUser } = useUserContext();
     const [error, setError] = useState('');
@@ -18,6 +19,7 @@ export default function Signup() {
     const [users, setUsers] = useState([]);
     const [input, setInput] = useState("");
 
+    // Creating user account handler
     const createUser = (e) => {
         e.preventDefault();
 
@@ -45,9 +47,7 @@ export default function Signup() {
                     setError("User already exists");
                 }
             })
-
         setLoading(false);
-
         setInput('');
     };
 
@@ -62,7 +62,7 @@ export default function Signup() {
         }
     }, [usernameDoesntExists]);
 
-    // ==================makes users in mongo real time========================
+    // makes users real time
     useEffect(() => {
         axios.get('/users/sync')
             .then(response => {
@@ -86,17 +86,20 @@ export default function Signup() {
             channel.unbind_all();
             channel.unsubscribe();
         };
-    }, [users]); // captures messages since it is a dependency
+    }, [users]);
 
 
     return (
         <div class="grid">
+            {/* Logo */}
             <div class="box1">
                 <div className="Logo"><img src={tucanOnEgg} alt={"tucanOnEgg"} /></div>
             </div>
+            {/* Black line */}
             <div class="box2">
                 <div className="VerticalBlackLine"></div>
             </div>
+            {/* Register box */}
             <div class="box3">
                 <div className="RegisterBox">
                     <h2>Register</h2>

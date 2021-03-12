@@ -4,10 +4,8 @@ import axios from './axios';
 import Contact from './Contact';
 import { SearchOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
-import '../styles/Sidebar.css';
 import { useUserContext } from '../contexts/UserProvider';
 import AddIcon from '@material-ui/icons/Add';
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -16,29 +14,30 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
+import '../styles/Sidebar.css';
 
 
 export default function Sidebar(props) {
-    const roomRef = useRef();
+
+    // Hooks
     const { currentUser } = useUserContext();
     const [searchQuery, setSearchQuery] = useState("");
-    const [ error, setError] = useState("");
     const [foundUser, setFoundUser] = useState("");
-    // form dialog
     const [open, setOpen] = useState(false);
     const [roomName, setRoomName] = useState("");
-    
-    //const [roomUsers, setRoomUsers] = useState([]);
     const[roomUsers, setRoomUsers, currentRoomUsers] = useStateRef("");
 
+    // Open modal
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+    // Close modal
     const handleClose = () => {
         setOpen(false);
     };
 
+    // Create room handler
     const handleCreatingRoom = async (event) => {
         event.preventDefault();
         console.log(roomName);
@@ -54,26 +53,21 @@ export default function Sidebar(props) {
         setOpen(false);
     };
 
+    // Room name handler
     const handleRoomName = () => {
-        // setRoomName(roomUsers.sort((a, b) => (a.localeCompare(b))).map((name) => name).join(""));
         setRoomName(currentRoomUsers.current.sort((a, b) => (a.localeCompare(b))).map((name) => name).join(""));
     }
 
-    // const handleTextFieldInput = (event) => {
-    //     event.preventDefault();
-    //     setRoomUsers(event.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
-    //     handleRoomName();
-    // }
+    // Modal input handler
     const handleTextFieldInput = (e) => {
         e.preventDefault();
         setRoomUsers(e.target.value.split(" ").concat(currentUser).sort((a, b) => (a < b)));
         handleRoomName();
     }
 
-
+    // Search if users exist
     const onSearchUsers = (e) => {
         e.preventDefault();
-        // console.log(searchQuery);
         axios.get(`/users/search?target=${searchQuery}`)
             .then(response => {
                 if (response.data.username == null) {
@@ -88,23 +82,11 @@ export default function Sidebar(props) {
             )
     };
 
-
     return (
         <div className="sidebar">
-            {/* <div className="sidebar__header">
-                <div className="sidebar__headerRight">
-                    <IconButton onClick={() => { alert('clicked') }}>
-                        <ChatIcon />
-                    </IconButton>
-                    <IconButton onClick={() => { alert('clicked') }}>
-                        <MoreVertIcon />
-                    </IconButton>
-                </div>
-            </div> */}
-
-
             <div className="sidebar__search">
                 <div>
+                    {/* Create new room */}
                     <Tooltip title="Add a User or Group">
                         <IconButton>
                             <AddIcon
@@ -113,11 +95,10 @@ export default function Sidebar(props) {
                             />
                         </IconButton>
                     </Tooltip>
-
+                    {/* Create new room modal */}
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Create a new room</DialogTitle>
                         <DialogContent >
-
                             <DialogContentText>
                                 To create a room, simply give a room name and specify what users (excluding yourself) you want include in this chat room
                             </DialogContentText>
@@ -130,19 +111,19 @@ export default function Sidebar(props) {
                                 fullWidth
                             />
                         </DialogContent>
-
                         <DialogActions>
+                            {/* Close modal */}
                             <Button onClick={handleClose} color="primary">
                                 Cancel
                             </Button>
-
+                            {/* Create room */}
                             <Button onClick={e => handleCreatingRoom(e)} color="primary">
                                 Create Room
                             </Button>
                         </DialogActions>
                     </Dialog>
                 </div>
-
+                {/* Search for user  */}
                 <div className="sidebar__searchContainer">
                     <SearchOutlined />
                     <form onSubmit={onSearchUsers}>
@@ -155,9 +136,8 @@ export default function Sidebar(props) {
                     </form>
                 </div>
             </div>
-
+            {/* List of chats */}
             <div className="sidebar__chats">
-
                 {props.rooms.map((room) => (
                     <Contact
                         key={room.chatroomID}
@@ -167,8 +147,6 @@ export default function Sidebar(props) {
                     />
                 ))}
             </div>
-
-            {foundUser && <p>{foundUser}</p>}
         </div>
     );
 }
