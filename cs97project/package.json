@@ -35,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "nodemon ./src/Backend_Files/server.js",
+    "serve": "nodemon ./src/backend/server.js",
     "dev": "concurrently \"npm run serve\" \"npm start\""
   },
   "eslintConfig": {
