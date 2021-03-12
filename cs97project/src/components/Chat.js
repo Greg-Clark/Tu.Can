@@ -51,6 +51,11 @@ function Chat(props) {
         SetEmojiPicker(!emojiPickerState);
     }
 
+    const handleCloseMessage = () => {
+        setOpen(false);
+        setMessageFound("");
+    };
+
     let emojis;
     if (emojiPickerState) {
         emojis = (
@@ -68,13 +73,14 @@ function Chat(props) {
             .then(response => {
                 if(response.status == "201")
                 {
-                    alert("Message not found");
+                    setMessageFound("Message not found");
                 }
                 else
                 {
-                    alert("Message found");
+                    setMessageFound(`Message sent on ${response.data.timestamp} by ${response.data.sender}`);
                 }
-            })
+                setOpen(true);
+            });
     };
 
     
@@ -148,7 +154,23 @@ function Chat(props) {
                                 className="sidebar_searchContainerInput"
                             />
                         </form>
+
+
                     </div>
+                        <Dialog onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Message Found</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {messageFound}
+                            </DialogContentText>
+                        </DialogContent>
+
+                        <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                                Okay
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
 
 
                     <div>
@@ -277,6 +299,26 @@ function Chat(props) {
                     </Tooltip>
                 </form>
 
+            </div>
+
+            <div>
+                <Dialog
+                    open={open}
+                    onClose={handleCloseMessage}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {messageFound}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseMessage} color="primary" autoFocus>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
 
         </div>

@@ -163,9 +163,31 @@ app.post("/messages/new", (req, res) => { // post(send) data to server
 
 });
 
+
 app.get("/messages/search", async (req, res) => {
-    const currentRoom = req.query.room;
-    const currentContent = req.query.content;
+    // const target = req.body;
+    // await Messages.findOne({
+    //     chatroomID: target.chatroomID,
+    //     content: target.content,
+    // }, (err, data) => {
+    //     if (err) {
+    //         res.status(500).send(err);
+    //     }
+    //     else 
+    //     {
+    //         if (data)
+    //         {
+    //             res.status(200).send(data);
+    //         }
+    //         else
+    //         {
+    //             res.status(200).send("1");
+    //         }
+    //     }
+    // });
+
+    const currentRoom = req.query.currentRoom;
+    const currentContent = req.query.currentContent;
     Messages.findOne({
         chatroomID: currentRoom,
         content: currentContent
