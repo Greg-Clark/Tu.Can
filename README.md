@@ -33,10 +33,15 @@ $ npm run dev
 ```
 
 ## Demo
+### Screenshots
 ![demopic1](./cs97project/src/images/demo/pic1.jpg) | ![demopic2](./cs97project/src/images/demo/pic2.jpg)
 |:---:|:---:|
 ![demopic3](./cs97project/src/images/demo/pic3.jpg) | ![demopic4](./cs97project/src/images/demo/pic4.jpg)
 ![demopic5](./cs97project/src/images/demo/pic5.jpg) | ![demopic6](./cs97project/src/images/demo/pic6.jpg)
+### Video Presentation
+https://youtu.be/t7RV7U7LsmI
+### Presentation Slides
+https://docs.google.com/presentation/d/1BlY_B0Fb6Cd-i1PQsdRxoLT2V0xuoGL5hBk8WTfep-M/edit?usp=sharing
 
 ## About
 Tu.Can is a simple messaging application built for UCLA CS 97. We were inspired to create a 
