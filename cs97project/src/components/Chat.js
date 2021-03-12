@@ -31,10 +31,10 @@ function Chat(props) {
     const currentDate = new Date().toLocaleString();
     const [input, setInput] = useState("");
     const [searchMessage, setSearchMessage] = useState("");
-    const [open, setOpen] = useState(false);
+    const [deleteOpen, deleteSetOpen] = useState(false);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        deleteSetOpen(true);
     };
 
     const handleClick = (event) => {
@@ -43,7 +43,7 @@ function Chat(props) {
 
     const handleClose = () => {
         setAnchorEl(null);
-        setOpen(false);
+        deleteSetOpen(false);
     };
 
     const handleEmojis = (event) => {
@@ -96,7 +96,7 @@ function Chat(props) {
                     signout();
                 }
             });
-        setOpen(false);
+        deleteSetOpen(false);
     };
 
     const history = useHistory();
@@ -191,7 +191,7 @@ function Chat(props) {
                             </IconButton>
                         </Tooltip>
 
-                        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <Dialog open={deleteOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Delete Account</DialogTitle>
                         <DialogContent >
 
