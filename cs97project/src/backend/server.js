@@ -102,10 +102,10 @@ db.once('open', () => {
     });
 });
 
-// API routes
+// REST API routes
 // app.get("/", (req, res) => res.status(200).send('Hello World!!')); 
 
-// sync messages
+// sync messages (get all messages)
 app.get("/messages/sync", (req, res) => { 
     Messages.find((err, data) => {
         if (err) {
@@ -118,7 +118,7 @@ app.get("/messages/sync", (req, res) => {
 
 });
 
-// get messages from a room
+// get messages from a specific room
 app.get("/messages/room", async (req, res) => {
     const room = req.query.target;
     Messages.find({ chatroomID: room }, (err, data) => {
@@ -131,7 +131,7 @@ app.get("/messages/room", async (req, res) => {
     });
 });
 
-// post new messages
+// post a new messages to the server
 app.post("/messages/new", (req, res) => { // post(send) data to server
     const databaseMessage = req.body;
     Messages.create(databaseMessage, (err, data) => {
@@ -145,7 +145,8 @@ app.post("/messages/new", (req, res) => { // post(send) data to server
 
 });
 
-// search/get messages for 'search messages' features
+// search for a message in the current room the current user is in
+// api route for the 'search messages' features
 app.get("/messages/search", async (req, res) => {
     const currentRoom = req.query.currentRoom;
     const currentContent = req.query.currentContent;
@@ -167,7 +168,7 @@ app.get("/messages/search", async (req, res) => {
     });
 });
 
-// post new users
+// post a new user
 app.post("/users/new", async (req, res) => { 
     const user = req.body;
     Users.create(user, (err, data) => {
@@ -181,7 +182,7 @@ app.post("/users/new", async (req, res) => {
 
 });
 
-// sync users
+// sync users (get all users)
 app.get("/users/sync", (req, res) => { 
     Users.find((err, data) => {
         if (err) {
@@ -193,7 +194,8 @@ app.get("/users/sync", (req, res) => {
     });
 });
 
-// search/get users for 'search users' feature
+// search for a user
+// api route for the 'search users' feature
 app.get("/users/search", async (req, res) => {
     const target = req.query.target;
     Users.findOne({
@@ -293,7 +295,7 @@ app.post("/rooms/new", (req, res) => {
     });
 });
 
-// search/get rooms
+// search/get rooms that a specific user is in
 app.get("/rooms/userrooms", (req, res) => {
     const user = req.query.target
     Rooms.find({ users: user }, (err, data) => {
