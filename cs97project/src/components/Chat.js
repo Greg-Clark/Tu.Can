@@ -32,11 +32,27 @@ function Chat(props) {
     const [input, setInput] = useState("");
     const [searchMessage, setSearchMessage] = useState("");
     const [deleteOpen, deleteSetOpen] = useState(false);
+    const [messageFound, setMessageFound] = useState("");
+    const [open, setOpen] = useState(false);
 
+    /* event handlers for delete acct icon */
     const handleClickOpen = () => {
         deleteSetOpen(true);
     };
 
+    const deleteAccount = (event) => {
+        event.preventDefault();
+        axios.get(`/users/delete?target=${currentUser}`)
+            .then(response => {
+                if(response) {
+                    alert("Your account has been deleted")
+                    signout();
+                }
+            });
+        deleteSetOpen(false);
+    };
+
+    /* event handlers for theme setting */
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -46,15 +62,18 @@ function Chat(props) {
         deleteSetOpen(false);
     };
 
+    const setTheme = (event, themeName) => {
+        setAnchorEl(event.currentTarget);
+        localStorage.setItem('theme', themeName);
+        props.parent.setAttribute('class', themeName);
+        setAnchorEl(null);
+    };
+
+    /* event handlers for emojis button */
     const handleEmojis = (event) => {
         event.preventDefault();
         SetEmojiPicker(!emojiPickerState);
     }
-
-    const handleCloseMessage = () => {
-        setOpen(false);
-        setMessageFound("");
-    };
 
     let emojis;
     if (emojiPickerState) {
@@ -66,6 +85,12 @@ function Chat(props) {
             />
         );
     }
+
+    /* event handler for searching message dialogue */
+    const handleCloseMessage = () => {
+        setOpen(false);
+        setMessageFound("");
+    };
 
     const searchMessages = (event) => {
         event.preventDefault();
@@ -83,28 +108,7 @@ function Chat(props) {
             });
     };
 
-    
-
-
-    const setTheme = (event, themeName) => {
-        setAnchorEl(event.currentTarget);
-        localStorage.setItem('theme', themeName);
-        props.parent.setAttribute('class', themeName);
-        setAnchorEl(null);
-    };
-
-    const deleteAccount = (event) => {
-        event.preventDefault();
-        axios.get(`/users/delete?target=${currentUser}`)
-            .then(response => {
-                if(response) {
-                    alert("Your account has been deleted")
-                    signout();
-                }
-            });
-        deleteSetOpen(false);
-    };
-
+    /* event handlers for logging out */
     const history = useHistory();
 
     const handleLogout = () => {
@@ -113,6 +117,7 @@ function Chat(props) {
         window.alert("You have been successfully logged out")
     };
 
+    /* sending messages */
     const sendMessage = async (e) => {
         e.preventDefault(); //without calling this the page will refresh
         if(props.currentRoom == "")
@@ -132,16 +137,16 @@ function Chat(props) {
                 chatroomID: props.currentRoom
             });
         }
-
         setInput('');
-
     };
+
+    /* layout */
     return (
         <div className="chat">
             <div className="chat__header">
             <Avatar>{props.currentUsers.charAt(0).toUpperCase()}</Avatar>
                 <div className="chat__headerInfo">
-                    <h3>&nbsp; {props.currentUsers} </h3> {/*place chat name here? */}
+                    <h3>&nbsp; {props.currentUsers} </h3> {/* chat name header */}
                 </div>
                 <div className="chat__headerRight">
                     <div className="sidebar__searchContainer">
@@ -155,7 +160,7 @@ function Chat(props) {
                             />
                         </form>
 
-
+                    {/* dialog pop-up for message searching */}
                     </div>
                         <Dialog onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Message Found</DialogTitle>
@@ -172,7 +177,7 @@ function Chat(props) {
                         </DialogActions>
                     </Dialog>
 
-
+                    {/* themes */}
                     <div>
                         <Tooltip title="Theme">
                             <IconButton
@@ -201,7 +206,9 @@ function Chat(props) {
                         </Menu>
                     </div>
 
+                    {/* delete acct icon */}
                     <div>
+                        {/* button */}
                         <Tooltip title="Delete Account">
                             <IconButton
                                 aria-label="more"
@@ -213,28 +220,30 @@ function Chat(props) {
                             </IconButton>
                         </Tooltip>
 
+                        {/* dialog */}
                         <Dialog open={deleteOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Delete Account</DialogTitle>
-                        <DialogContent >
+                            <DialogTitle id="form-dialog-title">Delete Account</DialogTitle>
+                            <DialogContent >
 
-                            <DialogContentText>
-                                WARNING: You are about to delete your account on Tu.Can. If you delete your account by accident, we can recover your messages if you recreate your account with the exact same username. Note the same password is not necessary if you recreate
+                                <DialogContentText>
+                                    WARNING: You are about to delete your account on Tu.Can. If you delete your account by accident, we can recover your messages if you recreate your account with the exact same username. 
+                                    Note that you do not need to use the same password if you recreate your account
                             </DialogContentText>
-                        </DialogContent>
+                            </DialogContent>
 
-                        <DialogActions>
-                            <Button onClick={handleClose} color="primary">
-                                Cancel
+                            <DialogActions>
+                                <Button onClick={handleClose} color="primary">
+                                    Cancel
                             </Button>
 
-                            <Button onClick={e => deleteAccount(e)} color="primary">
-                                Delete Account
+                                <Button onClick={e => deleteAccount(e)} color="primary">
+                                    Delete Account
                             </Button>
-                        </DialogActions>
-                    </Dialog>
-
+                            </DialogActions>
+                        </Dialog>
                     </div>
 
+                    {/* logout button */}
                     <div>
                         <Tooltip title="Logout">
                             <IconButton
@@ -248,9 +257,9 @@ function Chat(props) {
                         </Tooltip>
                     </div>
                 </div>
-
             </div>
 
+            {/* individual messages */}
             <div className="chat__full">
                 <ScrollableFeed>
                     <div className="chat__body">
@@ -287,9 +296,6 @@ function Chat(props) {
                         className="chat_footerInput"
 
                     />
-                    {/* <button type="submit" onClick={sendMessage}>
-                        Send a message
-                    </button> */}
                     <Tooltip title="Send Message">
                         <IconButton>
                             <SendIcon type="submit" onClick={sendMessage}
