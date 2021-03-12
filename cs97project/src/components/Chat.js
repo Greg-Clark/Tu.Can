@@ -45,7 +45,7 @@ function Chat(props) {
         axios.get(`/users/delete?target=${currentUser}`)
             .then(response => {
                 if(response) {
-                    alert("Your account has been deleted")
+                    window.alert("Your account has been deleted");
                     signout();
                 }
             });
@@ -297,7 +297,7 @@ function Chat(props) {
 
                     />
                     <Tooltip title="Send Message">
-                        <IconButton>
+                        <IconButton disabled={props.currentRoom == ""}>
                             <SendIcon type="submit" onClick={sendMessage}
                                 className='chat_footerSendIcon'
                             />
