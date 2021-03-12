@@ -27,6 +27,12 @@ export default function Sidebar(props) {
     const [roomName, setRoomName] = useState("");
     const [roomUsers, setRoomUsers, currentRoomUsers] = useStateRef("");
     const [error, setError] = useState("");
+    const [searchOpen, setSearchOpen] = useState(false);
+
+    const handleCloseSearch = () => {
+        setSearchOpen(false);
+        setFoundUser("");
+    }
 
     // Open modal
     const handleClickOpen = () => {
@@ -77,12 +83,14 @@ export default function Sidebar(props) {
         axios.get(`/users/search?target=${searchQuery}`)
             .then(response => {
                 if (response.data.username == null) {
-                    setFoundUser(null);
-                    alert('User does not exist');
+                    setFoundUser(searchQuery + ' is not a registered user.');
+                    setSearchOpen(true);
+                    // alert('User does not exist');
                 }
                 else {
-                    setFoundUser(response.data.username);
-                    alert(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username + '.')
+                    // setFoundUser(response.data.username);
+                    setFoundUser(response.data.username + ' is registered! Feel free to create a chatroom with ' + response.data.username + '.')
+                    setSearchOpen(true);
                 }
             }
             )
@@ -158,6 +166,23 @@ export default function Sidebar(props) {
                     />
                 ))}
             </div>
+            <Dialog
+                open={searchOpen}
+                onClose={handleCloseSearch}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {foundUser}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseSearch} color="primary" autoFocus>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
